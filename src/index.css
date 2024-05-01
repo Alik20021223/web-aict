@@ -1,0 +1,105 @@
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap");
+
+.visible-active {
+  --fontSizeXs: 14px;
+  --fontLeading: 20px;
+  --fontSizeSm: 16px;
+  --fontLeadingSm: 24px;
+  --fontSizeBase: 18px;
+  --fontLeadingBase: 28px;
+  --fontSizeLg: 20px;
+  --fontLeadingLg: 28px;
+  --fontSizeXl: 24px;
+  --fontLeadingXl: 32px;
+  --fontSize2xl: 30px;
+  --fontLeading2xl: 36px;
+  --fontSize3xl: 36px;
+  --fontLeading3xl: 40px;
+  --fontSize4xl: 48px;
+  --fontLeading4xl: 1;
+  --fontSize5xl: 60px;
+  --fontLeading: 1;
+}
+
+#root {
+  --fontSizeXs: 12px;
+  --fontLeading: 16px;
+  --fontSizeSm: 14px;
+  --fontLeadingSm: 20px;
+  --fontSizeBase: 16px;
+  --fontLeadingBase: 24px;
+  --fontSizeLg: 18px;
+  --fontLeadingLg: 28px;
+  --fontSizeXl: 20px;
+  --fontLeadingXl: 28px;
+  --fontSize2xl: 24px;
+  --fontLeading2xl: 32px;
+  --fontSize3xl: 30px;
+  --fontLeading3xl: 36px;
+  --fontSize4xl: 36px;
+  --fontLeading4xl: 40px;
+  --fontSize5xl: 48px;
+  --fontLeading: 1;
+}
+
+p {
+  color: #53585e;
+  font-family: "Manrope", sans-serif;
+}
+
+:root {
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  
+}
+
+img {
+  
+}
+
+img,
+video {
+  max-width: fit-content;
+  width: auto;
+  height: auto;
+}
+
+body {
+  background-color: #f7f7f7;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+a {
+  text-decoration: none;
+}
+
+.icon {
+  filter: brightness(0) saturate(100%) invert(0%) sepia(7%) saturate(98%)
+    hue-rotate(346deg) brightness(100%) contrast(86%);
+  transition: fill 0.3s ease; /* Анимация перехода цвета */
+}
+
+.icon-active {
+  filter: brightness(100) saturate(100%) invert(0%) sepia(7%) saturate(98%)
+    hue-rotate(346deg) brightness(95%) contrast(86%);
+}
+
+@layer components {
+  .text-describe-xl {
+    @apply font-normal text-sm text-[#777B80];
+  }
+  .text-describe-lg {
+    @apply font-normal text-xs text-[#777B80];
+  }
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
