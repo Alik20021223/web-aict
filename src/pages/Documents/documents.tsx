@@ -5,6 +5,8 @@ import { RootState } from "../../state/store"
 import { DecreesDoc } from "./_components/DecreesDoc"
 import { useTranslation } from "react-i18next"
 import { RegulationsDoc } from "./_components/RegulationsDoc"
+import { useEffect } from "react"
+import api from "../../api"
 
 
 
@@ -14,6 +16,9 @@ export const Documents = () => {
     const { t } = useTranslation();
     const DocsPage = useSelector((state: RootState) => state.aict.DocsPage);
 
+    useEffect(() => {
+        api.get('')
+    })
 
     
 

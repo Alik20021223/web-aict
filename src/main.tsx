@@ -19,14 +19,15 @@ import { Documents } from './pages/Documents/documents.tsx';
 import { Activity } from './pages/Activity/activity.tsx';
 import { Policy } from './pages/PrivacyPolicy/policy.tsx';
 import { Blog } from './pages/Blog/blog.tsx';
-// import { Projects } from './pages/Projects/projects.tsx';
+import { Projects } from './pages/Projects/projects.tsx';
 import { Events } from './pages/Events/Events.tsx';
 import { BlogDescribe } from './widgets/Blog/BlogDescribe.tsx';
-// import { ProjectDescribe } from './pages/Projects/_components/projectDescribe.tsx';
+import { ProjectDescribe } from './pages/Projects/_components/projectDescribe.tsx';
 import { ErrorBlock } from './core/Error.tsx';
-// import { Partners } from './pages/Partners/partners.tsx';
+import { Partners } from './pages/Partners/partners.tsx';
 import { Questions } from './pages/Questions/questions.tsx';
 import { EventDescribe } from './pages/Events/EventDescribe.tsx';
+import { Gallery } from './pages/PhotoAndVideo/PhotoAndVideo.tsx';
 
 
 
@@ -35,7 +36,7 @@ const router = createBrowserRouter([
   {
     path: '/',
     element: <App />,
-    errorElement: <ErrorBlock />,
+    // errorElement: <ErrorBlock />,
     children: [
       {
         path: '/',
@@ -85,18 +86,18 @@ const router = createBrowserRouter([
         path: 'blog/:category/:slug',
         element: <BlogDescribe />
       },
-      // {
-      //   path: 'projects/:slug',
-      //   element: <ProjectDescribe />
-      // },
-      // {
-      //   path: 'projects',
-      //   element: <Projects />
-      // },
-      // {
-      //   path: 'partners',
-      //   element: <Partners />
-      // },
+      {
+        path: 'projects/:time/:slug',
+        element: <ProjectDescribe />
+      },
+      {
+        path: 'projects',
+        element: <Projects />
+      },
+      {
+        path: 'partners',
+        element: <Partners />
+      },
       {
         path: 'questions',
         element: <Questions />,
@@ -108,6 +109,10 @@ const router = createBrowserRouter([
       {
         path: 'events/:time/:slug',
         element: <EventDescribe />
+      },
+      {
+        path: 'gallery',
+        element: <Gallery/>
       },
     ]
   }

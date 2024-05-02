@@ -1,20 +1,24 @@
 export type activityApp = {
-    mainActivity: {
-        describe: string
-    },
-    activityBlocks: blockActivity[],
-}
+  mainActivity: {
+    descriptionTj: string;
+    descriptionRu: string;
+    descriptionEn: string;
+  };
+  activityBlocks: blockActivity[];
+};
 
 export type blockActivity = {
-    id: number,
-    name: string,
-    describe: string,
-    imgBlocks?: {
-        img_1: string,
-        img_2: string,
-        img_3: string
-    },
-    blockIcon?: string,
-}
-
-
+  id: number,
+  titleTj: string,
+  titleRu: string,
+  titleEn: string,
+  descriptionTj: string,
+  descriptionRu: string,
+  descriptionEn: string,
+  iconPath: string,
+  imagePath1: string,
+  imagePath2: string,
+  imagePath3: string,
+  created_at: string,
+  updated_at: string,
+};

@@ -9,11 +9,11 @@ import { EventsAll } from "./_components/eventsAll";
 export const Events = () => {
   const { t } = useTranslation();
   const [searchParams, setSearchParams] = useSearchParams();
-  const categories = (['2024', '2023'])
+  const [categories, setCategories] = useState([])
   const [selected, setSelected] = React.useState(searchParams.get('filter') || 'all');
   const [data, setData] = useState([]);
   const [currentPage, setCurrentPage] = React.useState<number>(1);
-  const [totalPage, setTotalPage] = React.useState<number>(2);
+  const [totalPage, setTotalPage] = React.useState<number>(1);
 
 
   const { width } = useResize();
@@ -23,6 +23,11 @@ export const Events = () => {
 
   const pageAdaptive = maxLg ? 6 : (maxMd ? 4 : 9)
 
+  useEffect(() => {
+    api.get('events/years').then((res) => {
+      setCategories(res.data)
+    }).catch(err => console.log(err))
+  }, [])
 
 
 

@@ -15,11 +15,13 @@ interface SliderPersonalApp {
 
 export const SliderPersonal: React.FC<SliderPersonalApp> = ({ data }) => {
 
+    console.log(data.length);
+    
+
     const { width } = useResize()
 
     const mobileWidth = width <= 1024
 
-    console.log(width, mobileWidth);
 
 
     return (

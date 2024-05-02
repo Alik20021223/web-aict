@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from "react"
-import { PartnersBlock } from "./_compents/partnersBlock"
 import api from "../../api"
 import { useResize } from "../../hook/useWidthSize";
 import { useTranslation } from "react-i18next";
-import { PartnersAll } from "./_compents/partnersAll";
 import { useSearchParams } from "react-router-dom";
+import { PhotoAll } from "./_components/PhotoAll";
 
 
 
-export const Partners = () => {
+export const Gallery = () => {
 
     const [isData, setData] = useState([])
     const [searchParams, setSearchParams] = useSearchParams();
@@ -27,7 +26,7 @@ export const Partners = () => {
         const pageParam = searchParams.get("page") || 1;
         setCurrentPage(Number(pageParam));
 
-        api.get(`partners/per-page/${pageAdaptive}?page=${pageParam}`).then(res => {
+        api.get(`galleries/per-page/${pageAdaptive}?page=${pageParam}`).then(res => {
             setData(res.data.data)
             setTotalPage(res.data.last_page)
         }
@@ -40,13 +39,12 @@ export const Partners = () => {
         setSearchParams({ page: newPage.toString() });
     };
 
-    
 
     return (
         <div className="container m-auto sm:px-5 max-sm:px-5 mt-10">
             <div className="space-y-10">
-                <h1 className="font-bold text-4xl">{t('ourPartners')}</h1>
-                <PartnersAll data={isData} handleChangePage={handleChangePage} total={totalPage} currentPage={currentPage} />
+                <h1 className="font-bold text-4xl">{t('PhotoVideo')}</h1>
+                <PhotoAll data={isData} handleChangePage={handleChangePage} total={totalPage} currentPage={currentPage} />
             </div>
         </div>
     )

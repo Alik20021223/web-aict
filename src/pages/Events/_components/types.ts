@@ -1,6 +1,5 @@
 export type EventBlockType = {
     id: number;
-    category: string,
     slug: string;
     titleTj: string;
     titleRu: string;

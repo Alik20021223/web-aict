@@ -1,39 +1,112 @@
-// import { ProjectBlock } from "./_components/projectBlock"
+import { Tab, Tabs } from "@nextui-org/react"
+import { ProjectsAll } from "./_components/projectsAll"
+import { useTranslation } from "react-i18next"
+import { useSearchParams } from "react-router-dom"
+import React, { Key, useEffect, useState } from "react"
+import { useResize } from "../../hook/useWidthSize"
+import api from "../../api"
 
 
 
-// export const Projects = () => {
+export const Projects = () => {
 
-//   const item = {
-//     title: 'Регистрация IMEI в единной системе',
-//     describe: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled.',
-//     img: '/projectImg/project-1.png',
-//     slug: 'bernardo-friesen-iiisasa',
-//   }
+  const { t } = useTranslation()
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [categories, setCategories] = useState([])
+  const [selected, setSelected] = React.useState(searchParams.get('filter') || 'all');
+  const [data, setData] = React.useState([]);
+  const [currentPage, setCurrentPage] = React.useState<number>(1);
+  const [totalPage, setTotalPage] = React.useState<number>(1);
 
-//   const dataMain = {
-//     title: 'Наши проекты',
-//     describe: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled.',
-//   }
+  const { width } = useResize();
+  const maxLg = width < 1280 && width > 768;
+  const maxMd = width < 768;
 
-//   return (
-//     <div className="container m-auto sm:px-5 max-sm:px-5">
-//       <div className="space-y-20">
-//         <div className="rounded-xl bg-white shadow-md">
-//           <div className='p-20 flex w-full items-start justify-between'>
-//             <div className="w-[40%]">
-//               <img src='/projectImg/projectMain.png' alt='project-img' className='object-cover w-full  overflow-hidden' />
-//             </div>
-//             <div className="space-y-12 w-[50%]">
-//               <h1 className="font-bold text-4xl">{dataMain.title}</h1>
-//               <p className="font-normal text-xl">{dataMain.describe}</p>
-//             </div>
-//           </div>
-//         </div>
-//         <div className="space-y-20">
-//           <ProjectBlock data={item} />
-//         </div>
-//       </div>
-//     </div>
-//   )
-// }
+
+  const pageAdaptive = maxLg ? 6 : (maxMd ? 4 : 9)
+
+  useEffect(() => {
+    api
+      .get('http://ferma.ru.swtest.ru/api/projects/years')
+      .then((res) => {
+        setCategories((res.data))
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, [])
+
+  useEffect(() => {
+    const pageParam = searchParams.get("page") || 1;
+    setCurrentPage(Number(pageParam));
+
+    let apiUrl = "";
+
+    switch (selected) {
+      case "all":
+        apiUrl = `/projects/per-page/${pageAdaptive}?page=${pageParam}`;
+        break;
+      default:
+        apiUrl = `/projects/per-page/${pageAdaptive}/${selected}?page=${pageParam}`;
+        break;
+    }
+
+    console.log(apiUrl);
+    
+
+    api
+      .get(apiUrl)
+      .then((res) => {
+        setData(res.data.data);
+        setTotalPage(res.data.last_page)
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, [currentPage, searchParams, selected]);
+
+
+  const handleSelectionChange = (key: Key) => {
+    setSelected(key as string);
+
+    setSearchParams({ filter: key as string, page: "1" });
+  };
+
+  const handleChangePage = (newPage: number) => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    setCurrentPage(newPage);
+    if (selected === "all") {
+      setSearchParams({ filter: selected, page: newPage.toString() });
+    } else {
+      const params: { [key: string]: string } = { filter: selected, page: newPage.toString() }; // Specify type for params
+      setSearchParams(params);
+    }
+  };
+
+  return (
+    <div className="container m-auto sm:px-5 max-sm:px-5 mt-11">
+      <div className="space-y-10">
+        <h1 className="font-bold text-4xl 2xl:text-5xl">{t("ourProjects")}</h1>
+        <div>
+          <Tabs
+            key="light"
+            color="primary"
+            selectedKey={selected}
+            radius="full"
+            variant="light"
+            size="lg"
+            classNames={{ tab: ["!bg-[#FFFFFF]", "py-5", "px-8", "2xl:py-8", "2xl:px-10", "2xl:text-2xl"] }}
+            aria-label="Tabs variants"
+            onSelectionChange={handleSelectionChange}
+          >
+            <Tab key='all' title={t('allFilter')} />
+            {categories.map((item) => (
+              <Tab key={item} title={item} />
+            ))}
+          </Tabs>
+        </div>
+        <ProjectsAll data={data} total={totalPage} currentPage={currentPage} handleChangePage={handleChangePage} />
+      </div>
+    </div>
+  )
+}

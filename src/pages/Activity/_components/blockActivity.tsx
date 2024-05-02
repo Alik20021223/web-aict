@@ -1,6 +1,7 @@
-import React from "react"
+import React, { useEffect } from "react"
 import { blockActivity } from "./types"
 import { Image } from "@nextui-org/react"
+import api from "../../../api"
 
 interface BlockActivityApp {
     data: blockActivity
@@ -13,6 +14,9 @@ export type imgBlock = {
 }
 
 export const BlockActivity: React.FC<BlockActivityApp> = ({ data }) => {
+
+
+    
 
     const renderBlocksImg = (imgBlocks: imgBlock) => {
         return (
@@ -43,11 +47,10 @@ export const BlockActivity: React.FC<BlockActivityApp> = ({ data }) => {
                         <p className="font-normal text-[#53585E] max-sm:text-base max-lg:text-base max-md:text-lg xl:text-xl 2xl:text-2xl">{data.describe}</p>
                     </div>
                     {data.blockIcon && (
-                        <div className="w-[38%] max-md:w-full max-md:h-[50%] flex justify-center">
-                            <Image src={data.blockIcon} className="max-w-full h-auto" alt="icon" />
+                        <div className="w-[38%] max-md:w-[50%] item max-md:h-[20%] flex justify-center">
+                            <Image src={data.blockIcon} className="max-w-full h-full object-cover" alt="icon" />
                         </div>
                     )}
-
                     {data.imgBlocks && <div className="w-[38%] max-md:w-full max-md:h-[50%]  overflow-hidden flex md:justify-center">
                         {renderBlocksImg(data.imgBlocks)}
                     </div>}

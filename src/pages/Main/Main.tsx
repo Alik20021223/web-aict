@@ -16,9 +16,9 @@ export const Main = () => {
             <AictMainBlock />
             <PresidentBlock />
             <Activity />
-            <MediaCom data={PressData} name='PressCenter' linkTxt='allNews' link='#' />
+            <MediaCom data={PressData} name='PressCenter' linkTxt='allNews' link='/blog' />
             <ProjectsCom />
-            <MediaCom data={MediaData} name='PhotoVideo' linkTxt='allMedia' link='#' />
+            <MediaCom data={MediaData} name='PhotoVideo' linkTxt='allMedia' link='/gallery' />
         </div>
     )
 }

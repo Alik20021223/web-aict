@@ -4,9 +4,8 @@ import api from "../../api"
 import { useTranslation } from "react-i18next";
 import { DescribeBlock } from "../../widgets/DescribeBlock";
 
-interface BlogDescribeApp {
+interface EventDescribeApp {
   id: number;
-  category: string,
   slug: string;
   titleTj: string;
   titleRu: string;
@@ -20,9 +19,8 @@ interface BlogDescribeApp {
   updated_at: string;
 }
 
-const initialData: BlogDescribeApp = {
+const initialData: EventDescribeApp = {
   id: 0,
-  category: '',
   slug: '',
   titleTj: '',
   titleRu: '',
@@ -40,7 +38,7 @@ const initialData: BlogDescribeApp = {
 
 export const EventDescribe = () => {
 
-    const [data, setData] = useState<BlogDescribeApp>(
+    const [data, setData] = useState<EventDescribeApp>(
         initialData
     );
 
