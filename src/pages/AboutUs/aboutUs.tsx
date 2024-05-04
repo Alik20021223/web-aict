@@ -26,7 +26,7 @@ export const AboutUs = () => {
     );
     const [isDataPerson, setPersonData] = useState([]);
     const currentLang = useSelector((state: RootState) => state.aict.currentLang);
-    const [isLoading, setLoading] = useState<boolean>(true);
+    const [isLoading, setLoading] = useState<boolean>(false);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -66,7 +66,7 @@ export const AboutUs = () => {
     return (
         isLoading ? (<div>Loading...</div>) : (<div className="container space-y-[88px] m-auto sm:px-5 max-sm:px-5">
             <AboutAgency data={isData.about} />
-            < HistoryAgency data={isData.history} />
+            <HistoryAgency data={isData.history} />
             <PowerAgency data={isData.power} />
             <PositionAgency data={isData.position} />
             <PersonalAgency data={isDataPerson} />

@@ -29,7 +29,7 @@ export const MainBlock_1: React.FC<PropsMainApp> = ({ data }) => {
 
 
     return (
-        <div className='bg-white shadow-md w-full rounded-2xl'>
+        <div className='bg-white dark:bg-dark shadow-md w-full rounded-2xl'>
             <div className='p-[25px] flex max-md:flex-col-reverse  justify-between'>
                 <div className='flex w-[45%] max-md:w-full max-md:mt-8 max-sm:mt-4 flex-col justify-between'>
                     <BlockTxt data={data} currentPoint={isIndex} />
@@ -38,10 +38,10 @@ export const MainBlock_1: React.FC<PropsMainApp> = ({ data }) => {
                             <ExpandLess className="rotate-90 !fill-primary" />
                         </Link>
                         <div className=''>
-                            <Button onClick={handlePrevClick} className='!p-2 2xl:!p-4 !mr-4 !bg-[#F7F8F9] !min-w-0 !rounded-full'>
+                            <Button onClick={handlePrevClick} className='!p-2 2xl:!p-4 !mr-4 !bg-[#F7F8F9] dark:!bg-darkBg !min-w-0 !rounded-full'>
                                 <ExpandMore className='rotate-90 2xl:scale-125 !fill-primary' />
                             </Button>
-                            <Button onClick={handleNextClick} className='!p-2 2xl:!p-4 !bg-[#F7F8F9] !min-w-0 !rounded-full'>
+                            <Button onClick={handleNextClick} className='!p-2 2xl:!p-4 !bg-[#F7F8F9] dark:!bg-darkBg !min-w-0 !rounded-full'>
                                 <ExpandLess className="rotate-90 2xl:scale-125 !fill-primary" />
                             </Button>
                         </div>

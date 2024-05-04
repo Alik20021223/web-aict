@@ -1,10 +1,11 @@
 import React from 'react'
-import { Navbar, NavbarBrand, NavbarContent, NavbarMenuToggle, NavbarMenu, NavbarMenuItem, Link, Button } from "@nextui-org/react";
+import { Navbar, NavbarBrand, NavbarContent, NavbarMenuToggle, NavbarMenu, NavbarMenuItem, Link } from "@nextui-org/react";
 import { useSelector } from 'react-redux';
 import { RootState } from '../../state/store';
 import { SearchInput } from '../../core/searchInput';
 import { useTranslation } from 'react-i18next';
 import { ExpandLess } from '@mui/icons-material';
+import ModalVisibleBtn from '../../core/ModalVisibleBtn';
 
 export const HeaderMobile = () => {
 
@@ -24,7 +25,7 @@ export const HeaderMobile = () => {
 
     return (
         <div className='m-auto container lg:hidden'>
-            <Navbar shouldHideOnScroll classNames={{ wrapper: ['px-0'] }} onMenuOpenChange={setIsMenuOpen} className='bg-[#f7f7f7]'>
+            <Navbar shouldHideOnScroll classNames={{ wrapper: ['px-0'], menu: ['dark:bg-dark'] }} onMenuOpenChange={setIsMenuOpen} className='bg-[#f7f7f7] dark:bg-darkBg'>
                 <NavbarContent justify='start'>
                     <NavbarBrand>
                         <Link href='/'>
@@ -45,17 +46,17 @@ export const HeaderMobile = () => {
                 <NavbarContent justify='end'>
                     <NavbarMenuToggle
                         aria-label={isMenuOpen ? "Close menu" : "Open menu"}
-                        className="lg:hidden"
+                        className="lg:hidden text-foreground"
                     />
                 </NavbarContent>
-                <NavbarMenu className='border-b-2'>
-                    <div className='mx-auto container sm:px-5 max-sm:px-5'>
+                <NavbarMenu>
+                    <div className='mx-auto  container sm:px-5 max-sm:px-5'>
                         <NavbarMenuItem className='mb-5'>
                             <div className='my-2'>
                                 <SearchInput txt='SearchForSite' />
                             </div>
-                            <div className='w-1/2 max-sm:w-full'>
-                                <Button color='primary' className='w-full' size='lg'>{t('visuallyText')}</Button>
+                            <div className='w-full'>
+                                <ModalVisibleBtn />
                             </div>
                         </NavbarMenuItem>
                         {data.map((item, index) => (
@@ -77,9 +78,9 @@ export const HeaderMobile = () => {
                             <h1 className='font-normal text-xl text-[#73787D]'>Выбор языка</h1>
                             <div className='border-2 mt-5 rounded-xl bg-white  w-full'>
                                 <div className='p-1 flex justify-between w-full'>
-                                    <div onClick={() => handleChangeLang('ru')} className={`w-full transition-all text-center px-6 py-2.5 ${language === 'ru' ? 'bg-primary text-white' : ''} rounded-xl`}>Русский</div>
-                                    <div onClick={() => handleChangeLang('tj')} className={`w-full transition-all text-center px-6 py-2.5 ${language === 'tj' ? 'bg-primary text-white' : ''} rounded-xl`}>Тоҷикӣ</div>
-                                    <div onClick={() => handleChangeLang('en')} className={`w-full transition-all text-center px-6 py-2.5 ${language === 'en' ? 'bg-primary text-white' : ''} rounded-xl`}>English</div>
+                                    <div onClick={() => handleChangeLang('ru')} className={`w-full transition-all text-center px-6 py-2.5 ${language === 'ru' ? 'bg-primary text-white' : 'dark:text-white'} rounded-xl`}>Русский</div>
+                                    <div onClick={() => handleChangeLang('tj')} className={`w-full transition-all text-center px-6 py-2.5 ${language === 'tj' ? 'bg-primary text-white' : 'dark:text-white'} rounded-xl`}>Тоҷикӣ</div>
+                                    <div onClick={() => handleChangeLang('en')} className={`w-full transition-all text-center px-6 py-2.5 ${language === 'en' ? 'bg-primary text-white' : 'dark:text-white'} rounded-xl`}>English</div>
                                 </div>
                             </div>
                         </div>

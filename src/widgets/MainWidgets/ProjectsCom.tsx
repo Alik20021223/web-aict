@@ -14,7 +14,7 @@ export const ProjectsCom = () => {
     return (
         <div className='pt-16 w-full pb-16'>
             <div className='flex justify-between'>
-                <h1 className='font-bold xl:text-4xl 2xl:text-5xl lg:text-2xl md:text-xl'>
+                <h1 className='font-bold xl:text-4xl 2xl:text-5xl lg:text-2xl md:text-xl text-foreground'>
                     {t("realizeProject")}
                 </h1>
                 <Link to="#" className='text-primary 2xl:text-2xl xl:text-[18px] lg:text-base font-semibold md:text-base'>

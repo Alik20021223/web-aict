@@ -1,4 +1,3 @@
-import { useTranslation } from "react-i18next"
 import { Link } from "react-router-dom"
 import { projectBlockType } from "./types"
 import { useSelector } from "react-redux"

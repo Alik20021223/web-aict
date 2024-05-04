@@ -5,12 +5,25 @@ import { Header } from './widgets/Header/Header'
 import { ExtraQuestion } from './widgets/extraQuestion'
 import { useSelector } from 'react-redux'
 import { RootState } from './state/store'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 
 
 function App() {
   const location = useLocation();
-  const VisibleBtn = useSelector((state: RootState) => state.aict.VisibleBtn);
+  const [DarkMode, setDarkMode] = useState<boolean>(false)
+  const sizeText = useSelector((state: RootState) => state.aict.sizeText);
+  const DarkModeState = useSelector((state: RootState) => state.aict.DarkMode)
+
+  useEffect(() => {
+    const localDarkMode = localStorage.getItem('DarkMode')
+    setDarkMode(localDarkMode === 'true' ? true : DarkModeState)
+  }, [DarkModeState])
+
+  const sizeTextClassName = `text_${sizeText.toString().replace('.', '')}`;
+  const bodyElement = document.body;
+  bodyElement.classList.toggle('dark', DarkMode);
+
+
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -18,7 +31,7 @@ function App() {
 
   return (
     <>
-      <div className={VisibleBtn ? 'visible-active' : ''}>
+      <div className={`${sizeText ? sizeTextClassName : ''} bg-[#F7F7F7] dark:bg-darkBg`}>
         <Header />
         <Outlet />
         <ExtraQuestion />

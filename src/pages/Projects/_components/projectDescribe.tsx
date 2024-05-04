@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { DescribeBlock } from "../../../widgets/DescribeBlock"
 import { useTranslation } from "react-i18next";
 import { Link, NavLink, useParams } from "react-router-dom";
+import api from "../../../api";
 
 
 interface ProjectDescribeApp {
@@ -35,10 +36,24 @@ const initialData: ProjectDescribeApp = {
 };
 
 export const ProjectDescribe = () => {
+    const { t } = useTranslation()
+
+    const { time, slug } = useParams();
+    console.log(time, slug);
 
     const [data, setData] = useState<ProjectDescribeApp>(
         initialData
     );
+
+
+    useEffect(() => {
+        api.get(`projects/get/${slug}`).then(res => {
+
+            setData(res.data)
+        }).catch(err => {
+            console.log(err);
+        })
+    }, [time, slug])
 
     const formatDate = (dateString: string) => {
         const date = new Date(dateString);
@@ -48,10 +63,7 @@ export const ProjectDescribe = () => {
         return `${day}.${month}.${year}`;
     };
 
-    const { t } = useTranslation()
-
-    const { time, slug } = useParams();
-    console.log(time, slug);
+    
 
     return (
         <div className="container m-auto sm:px-5 max-sm:px-5">

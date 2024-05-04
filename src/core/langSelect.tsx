@@ -22,18 +22,21 @@ export const SelectLanguage = ({ pos }: LangBlock) => {
   const { i18n } = useTranslation();
 
   const languages = useSelector((state: RootState) => state.aict.languages)
-  const currentLang = useSelector((state: RootState) => state.aict.currentLang)
+  const currentLangState = useSelector((state: RootState) => state.aict.currentLang)
+  const currentLangLocal = languages.find((item) => item.code === localStorage.getItem('i18nextLng'))
+  const [currentLang, setCurrentLang] = useState<lang>(
+    currentLangLocal ? currentLangLocal : currentLangState
+  )
   
   const dispatch = useDispatch()
 
   const [showLanguageMenu, setShowLanguageMenu] = useState(false);
 
-
-
   const handleLanguageSelect = (language: lang) => {
     if (showLanguageMenu) {
       i18n.changeLanguage(language.code)
       dispatch(handleChangeLang(language))
+      setCurrentLang(language)
     }
     setShowLanguageMenu(!showLanguageMenu);
   };
@@ -50,14 +53,14 @@ export const SelectLanguage = ({ pos }: LangBlock) => {
             alt={currentLang.name}
             className="xl:w-6 md:w-4 md:h-4 w-4 h-4 xl:h-6 lg:w-4 lg:h-4 2xl:w-8 2xl:h-8 mr-2 lg:mr-1  2xl:mr-4 inline-block"
           />
-          <span className="font-inter 2xl:text-2xl lg:text-base xl:text-lg font-light">{currentLang.name}</span>
+          <span className={`font-inter 2xl:text-2xl lg:text-base xl:text-lg font-light text-foreground ${pos ? 'text-white' : ''}`}>{currentLang.name}</span>
           <ExpandMore
-            className={`!transition-transform 2xl:scale-125 2xl:ml-2 !duration-300 ${showLanguageMenu ? "rotate-180" : ""
+            className={`!transition-transform 2xl:scale-125 2xl:ml-2 !duration-300 dark:fill-white ${showLanguageMenu ? "rotate-180" : ""
               }`}
           />
         </div>
         <ul
-          className={`absolute z-20 right-0 rounded-xl ${pos ? 'bottom-[30px]' : ''} mt-2 w-36 lg:w-32 2xl:w-48 translate-x-0 bg-white border border-gray-200 rounded shadow-md ${showLanguageMenu
+          className={`absolute z-20 right-0 rounded-xl ${pos ? 'bottom-[30px]' : ''} mt-2 w-36 lg:w-32 2xl:w-48 translate-x-0 bg-white dark:bg-dark border border-gray-200 rounded shadow-md ${showLanguageMenu
             ? "opacity-100 translate-y-0"
             : "opacity-0 hidden -translate-y-2"
             } transition duration-300 ease-in-out`}
@@ -69,7 +72,7 @@ export const SelectLanguage = ({ pos }: LangBlock) => {
           {languages.map((language) => (
             <li
               key={language.code}
-              className={`px-4 2xl:px-6 py-2 2xl:py-4 2xl:text-2xl rounded-xl  ${i18n.language === language.code ? 'bg-primary hover:bg-gray-100 text-white' : 'hover:bg-gray-100 text-black'}`}
+              className={`px-4 2xl:px-6 py-2 2xl:py-4 2xl:text-2xl rounded-xl  ${i18n.language === language.code ? 'bg-primary hover:bg-gray-100 dark:hover:bg-success-500 text-foreground' : 'dark:hover:bg-darkBg hover:bg-gray-100 text-foreground'}`}
               onClick={() => handleLanguageSelect(language)}
             >
               <img

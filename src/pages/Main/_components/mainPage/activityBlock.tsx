@@ -29,15 +29,15 @@ export const ActivityBlock = () => {
   };
 
   return (
-    <div className="p-[25px] max-sm:p-4 shadow-md  mt-[40px] flex gap-6 justify-between bg-[#E9EAEF] rounded-lg max-h-[450px] 2xl:max-h-[550px] overflow-hidden">
+    <div className="p-[25px] max-sm:p-4 shadow-md  mt-[40px] flex gap-6 justify-between bg-[#E9EAEF] dark:bg-darkBorder rounded-lg max-h-[450px] 2xl:max-h-[550px] overflow-hidden">
       <motion.div initial={{ x: -1000, opacity: 0 }} animate={{ x: 0, opacity: 1 }} transition={{
         duration: 1,
         delay: 0.25,
-      }} className="flex flex-col items-start max-sm:p-4 justify-start w-[32%] md:w-full sm:w-full max-sm:w-full lg:w-[42%] *:mb-[35px] bg-white p-[25px] rounded-lg">
+      }} className="flex flex-col items-start max-sm:p-4 justify-start w-[32%] md:w-full sm:w-full max-sm:w-full lg:w-[42%] *:mb-[35px] bg-white dark:bg-dark p-[25px] rounded-lg">
         {ActivityButtonData.map((item, i) => (
           <Button
             onClick={() => handleActive(item.name, i)}
-            className={`bg-white last:mb-0 !px-0 w-full 2xl:py-8 flex justify-between  ${isActive === item.name
+            className={`bg-white dark:bg-dark last:mb-0 !px-0 w-full 2xl:py-8 flex justify-between  ${isActive === item.name
               ? "font-semibold text-[#383B43]"
               : "font-medium"
               }`}
@@ -45,7 +45,7 @@ export const ActivityBlock = () => {
           >
             <div className="flex items-center">
               <div
-                className={`p-2 lg:p-1 sm:mr-2 max-sm:mr-2 2xl:p-4 ${isActive === item.name ? "bg-primary" : "bg-[#EEF1F6]"
+                className={`p-2 lg:p-1 sm:mr-2 max-sm:mr-2 2xl:p-4  ${isActive === item.name ? "bg-primary" : "bg-[#EEF1F6] dark:bg-darkBg"
                   } transition duration-300 ease-in-out  rounded-[10px]`}
               >
                 <img
@@ -55,7 +55,7 @@ export const ActivityBlock = () => {
                 />
               </div>
 
-              <p className="2xl:text-2xl xl:text-lg md:text-xl lg:text-base text-[#7D868D]">{item.name}</p>
+              <p className="2xl:text-2xl xl:text-lg md:text-xl lg:text-base dark:text-white">{item.name}</p>
             </div>
             <div className="lg:hidden max-md:block">
               <ExpandLess className="rotate-90 " />

@@ -1,8 +1,9 @@
 export type QuesType = {
-  answer: string,
-  created_at: string;
-  id: number;
-  question: string;
-  updated_at: string;
-  userId: null | number;
+  id: string,
+  questionTj: string,
+  questionRu: string,
+  questionEn: string,
+  answerTj: string,
+  answerRu: string,
+  answerEn: string,
 };

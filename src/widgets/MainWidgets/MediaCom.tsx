@@ -17,7 +17,7 @@ export const MediaCom = ({ data, name, link, linkTxt }: Block) => {
     return (
         <div className='pt-16 lg:pt-14 w-full pb-16 lg:pb-14'>
             <div className='flex justify-between'>
-                <h1 className='font-bold max-sm:text-lg xl:text-4xl lg:text-2xl 2xl:text-5xl'>
+                <h1 className='font-bold max-sm:text-lg xl:text-4xl text-foreground lg:text-2xl 2xl:text-5xl'>
                     {t(name)}
                 </h1>
                 <Link to={link} className='text-primary max-sm:text-sm xl:text-[18px] lg:text-base 2xl:text-2xl font-Manrope font-semibold'>{t(linkTxt)}</Link>

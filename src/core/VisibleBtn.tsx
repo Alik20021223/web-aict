@@ -1,27 +1,58 @@
-import { Switch } from "@nextui-org/react"
+
 import { useTranslation } from "react-i18next"
-import { useDispatch } from 'react-redux'
-import { handleChangeVisible } from "../state/defState/defSlice"
-
-
+import { useDispatch, useSelector } from 'react-redux'
+import { handleChangeBg, handleChangeText } from "../state/defState/defSlice"
+import { Button, Popover, PopoverTrigger, PopoverContent, Slider, Switch} from "@nextui-org/react"
+import { SettingIcon } from "./icons/settingIcon"
+import { SunIcon } from "./icons/SunIcon"
+import { MoonIcon } from "./icons/MoonIcon"
+import { RootState } from "../state/store"
 
 export const VisibleBtn = () => {
-
-    const { t } = useTranslation()
-
-    const dispatch = useDispatch()
-
-    const classSwitch = {
-        base: 'inline-flex flex-row-reverse w-full max-w-md bg-content1  items-center justify-between cursor-pointer rounded-lg gap-2 p-4 border-2 border-content2  data-[selected=true]:border-primary',
-        wrapper: "p-0 h-4 overflow-visible",
-        thumb: "w-6 h-6 border-2 shadow-lg group-data-[hover=true]:border-primary group-data-[selected=true]:ml-6 group-data-[pressed=true]:w-7 group-data-[selected]:group-data-[pressed]:ml-4"
-    }
+    const { t } = useTranslation();
+    const dispatch = useDispatch();
+    const DarkMode = useSelector((state: RootState) => state.aict.DarkMode);
+    const sizeText = useSelector((state: RootState) => state.aict.sizeText);
 
     return (
-        <Switch classNames={classSwitch} onClick={() => dispatch(handleChangeVisible())}>
-            <div>
-                {t("visuallyText")}
-            </div>
-        </Switch>
+        <>
+            <Popover classNames={{ content: `${DarkMode ? "bg-dark" : "bg-white"}` }} placement="bottom-start" >
+                <PopoverTrigger>
+                    <Button
+                        startContent={<SettingIcon />}
+                        variant="bordered"
+                        className="w-full"
+                    >
+                        {t('settingWeb')}
+                    </Button>
+                </PopoverTrigger>
+                <PopoverContent className="space-y-5 p-5 max-md:w-full">
+                    <Slider
+                        label={t('SizeText')}
+                        showTooltip={true}
+                        step={0.25}
+                        formatOptions={{ style: "percent" }}
+                        maxValue={1}
+                        value={sizeText}
+                        onChange={(value) => dispatch(handleChangeText(value))}
+                        minValue={0}
+                        defaultValue={0}
+                        classNames={{ label: `${DarkMode ? 'text-white' : 'text-foreground'}`, value: `${DarkMode ? 'text-white' : 'text-foreground'}` }}
+                        className="max-w-md dark:text-white " />
+
+                    <Switch
+                        size="md"
+                        color="primary"
+                        isSelected={DarkMode}
+                        onValueChange={() => dispatch(handleChangeBg())}
+                        startContent={<MoonIcon />}
+                        endContent={<SunIcon />}
+                        classNames={{ label: `${DarkMode ? 'text-white' : 'text-foreground'}` }}
+                    >
+                        {t('DarkMode')}
+                    </Switch>
+                </PopoverContent>
+            </Popover>
+        </>
     )
 }

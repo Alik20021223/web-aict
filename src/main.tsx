@@ -7,16 +7,16 @@ import { Provider } from 'react-redux';
 import { store } from './state/store.ts';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { Main } from './pages/Main/Main.tsx';
-import { VacancyDescribe } from './pages/Vacancy/VacancyDescribe.tsx';
-import Vacancy from './pages/Vacancy/VacancyMain';
-import { ParentApplyVacancy } from './widgets/VacancyWidgets/VacancyApply.tsx';
+// import { VacancyDescribe } from './pages/Vacancy/VacancyDescribe.tsx';
+// import Vacancy from './pages/Vacancy/VacancyMain';
+// import { ParentApplyVacancy } from './widgets/VacancyWidgets/VacancyApply.tsx';
 import { Contacts } from './pages/Contacts/contacts.tsx';
 import { ParentContactForm } from './widgets/ContactsWidgets/ParentContactForm.tsx';
 import NextTopLoader from 'nextjs-toploader';
 import './i18n.ts'
 import { AboutUs } from './pages/AboutUs/aboutUs.tsx';
 import { Documents } from './pages/Documents/documents.tsx';
-import { Activity } from './pages/Activity/activity.tsx';
+// import { Activity } from './pages/Activity/activity.tsx';
 import { Policy } from './pages/PrivacyPolicy/policy.tsx';
 import { Blog } from './pages/Blog/blog.tsx';
 import { Projects } from './pages/Projects/projects.tsx';
@@ -36,24 +36,24 @@ const router = createBrowserRouter([
   {
     path: '/',
     element: <App />,
-    // errorElement: <ErrorBlock />,
+    errorElement: <ErrorBlock />,
     children: [
       {
         path: '/',
         element: <Main />
       },
-      {
-        path: 'vacancy',
-        element: <Vacancy />,
-      },
-      {
-        path: 'vacancy/:vacancyId',
-        element: <VacancyDescribe />,
-      },
-      {
-        path: 'vacancy/:vacancyId/apply',
-        element: <ParentApplyVacancy />
-      },
+      // {
+      //   path: 'vacancy',
+      //   element: <Vacancy />,
+      // },
+      // {
+      //   path: 'vacancy/:vacancyId',
+      //   element: <VacancyDescribe />,
+      // },
+      // {
+      //   path: 'vacancy/:vacancyId/apply',
+      //   element: <ParentApplyVacancy />
+      // },
       {
         path: 'contact',
         element: <Contacts />
@@ -70,10 +70,10 @@ const router = createBrowserRouter([
         path: 'document',
         element: <Documents />
       },
-      {
-        path: 'activity',
-        element: <Activity />
-      },
+      // {
+      //   path: 'activity',
+      //   element: <Activity />
+      // },
       {
         path: 'PrivacyPolicy',
         element: <Policy />,

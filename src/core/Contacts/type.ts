@@ -1,14 +1,19 @@
 export type ContactBlock = {
-  id: number;
-  img: {
-    alt: string;
-    url: string;
-  };
-  value: string;
-  describe: string
-  link: string
+  id: number,
+  coordination: string,
+  addressTj: string,
+  addressRu: string,
+  addressEn: string,
+  fullAddressTj: string,
+  fullAddressRu: string,
+  fullAddressEn: string,
+  phone:string,
+  phoneScheduleTj: string,
+  phoneScheduleRu: string,
+  phoneScheduleEn: string,
+  email: string,
+  emailScheduleTj: string,
+  emailScheduleRu: string,
+  emailScheduleEn: string,
 };
 
-export type ContactApp = {
-    data: ContactBlock[]
-}

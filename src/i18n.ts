@@ -9,7 +9,6 @@ i18n
   .use(Backend)
   .init({
     debug: true,
-    fallbackLng: "ru",
     returnObjects: true,
     saveMissing: true,
     backend: {

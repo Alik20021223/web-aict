@@ -1,27 +1,111 @@
 @import url("https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap");
 
-.visible-active {
-  --fontSizeXs: 14px;
-  --fontLeading: 20px;
-  --fontSizeSm: 16px;
-  --fontLeadingSm: 24px;
-  --fontSizeBase: 18px;
-  --fontLeadingBase: 28px;
-  --fontSizeLg: 20px;
-  --fontLeadingLg: 28px;
-  --fontSizeXl: 24px;
-  --fontLeadingXl: 32px;
-  --fontSize2xl: 30px;
-  --fontLeading2xl: 36px;
-  --fontSize3xl: 36px;
-  --fontLeading3xl: 40px;
-  --fontSize4xl: 48px;
-  --fontLeading4xl: 1;
-  --fontSize5xl: 60px;
-  --fontLeading: 1;
+.text_1 {
+  --fontSizeXs: calc(var(--baseFontSizeXs) * 1.4);
+  --fontLeading: calc(var(--baseFontLeading) * 1.4);
+  --fontSizeSm: calc(var(--baseFontSizeSm) * 1.4);
+  --fontLeadingSm: calc(var(--baseFontLeadingSm) * 1.4);
+  --fontSizeBase: calc(var(--baseFontSizeBase) * 1.4);
+  --fontLeadingBase: calc(var(--baseFontLeadingBase) * 1.4);
+  --fontSizeLg: calc(var(--baseFontSizeLg) * 1.4);
+  --fontLeadingLg: calc(var(--baseFontLeadingLg) * 1.4);
+  --fontSizeXl: calc(var(--baseFontSizeXl) * 1.4);
+  --fontLeadingXl: calc(var(--baseFontLeadingXl) * 1.4);
+  --fontSize2xl: calc(var(--baseFontSize2xl) * 1.4);
+  --fontLeading2xl: calc(var(--baseFontLeading2xl) * 1.4);
+  --fontSize3xl: calc(var(--baseFontSize3xl) * 1.4);
+  --fontLeading3xl: calc(var(--baseFontLeading3xl) * 1.4);
+  --fontSize4xl: calc(var(--baseFontSize4xl) * 1.4);
+  --fontLeading4xl: calc(var(--baseFontLeading4xl) * 1.4);
+  --fontSize5xl: calc(var(--baseFontSize5xl) * 1.4);
+  --fontLeading: calc(var(--baseFontLeading) * 1.4);
 }
 
+.text_025 {
+  --fontSizeXs: calc(var(--baseFontSizeXs) * 1.10);
+  --fontLeading: calc(var(--baseFontLeading) * 1.10);
+  --fontSizeSm: calc(var(--baseFontSizeSm) * 1.10);
+  --fontLeadingSm: calc(var(--baseFontLeadingSm) * 1.10);
+  --fontSizeBase: calc(var(--baseFontSizeBase) * 1.10);
+  --fontLeadingBase: calc(var(--baseFontLeadingBase) * 1.10);
+  --fontSizeLg: calc(var(--baseFontSizeLg) * 1.10);
+  --fontLeadingLg: calc(var(--baseFontLeadingLg) * 1.10);
+  --fontSizeXl: calc(var(--baseFontSizeXl) * 1.10);
+  --fontLeadingXl: calc(var(--baseFontLeadingXl) * 1.10);
+  --fontSize2xl: calc(var(--baseFontSize2xl) * 1.10);
+  --fontLeading2xl: calc(var(--baseFontLeading2xl) * 1.10);
+  --fontSize3xl: calc(var(--baseFontSize3xl) * 1.10);
+  --fontLeading3xl: calc(var(--baseFontLeading3xl) * 1.10);
+  --fontSize4xl: calc(var(--baseFontSize4xl) * 1.10);
+  --fontLeading4xl: calc(var(--baseFontLeading4xl) * 1.10);
+  --fontSize5xl: calc(var(--baseFontSize5xl) * 1.10);
+  --fontLeading: calc(var(--baseFontLeading) * 1.10);
+}
+
+.text_05 {
+  --fontSizeXs: calc(var(--baseFontSizeXs) * 1.2);
+  --fontLeading: calc(var(--baseFontLeading) * 1.2);
+  --fontSizeSm: calc(var(--baseFontSizeSm) * 1.2);
+  --fontLeadingSm: calc(var(--baseFontLeadingSm) * 1.2);
+  --fontSizeBase: calc(var(--baseFontSizeBase) * 1.2);
+  --fontLeadingBase: calc(var(--baseFontLeadingBase) * 1.2);
+  --fontSizeLg: calc(var(--baseFontSizeLg) * 1.2);
+  --fontLeadingLg: calc(var(--baseFontLeadingLg) * 1.2);
+  --fontSizeXl: calc(var(--baseFontSizeXl) * 1.2);
+  --fontLeadingXl: calc(var(--baseFontLeadingXl) * 1.2);
+  --fontSize2xl: calc(var(--baseFontSize2xl) * 1.2);
+  --fontLeading2xl: calc(var(--baseFontLeading2xl) * 1.2);
+  --fontSize3xl: calc(var(--baseFontSize3xl) * 1.2);
+  --fontLeading3xl: calc(var(--baseFontLeading3xl) * 1.2);
+  --fontSize4xl: calc(var(--baseFontSize4xl) * 1.2);
+  --fontLeading4xl: calc(var(--baseFontLeading4xl) * 1.2);
+  --fontSize5xl: calc(var(--baseFontSize5xl) * 1.2);
+  --fontLeading: calc(var(--baseFontLeading) * 1.2);
+}
+
+.text_075 {
+  --fontSizeXs: calc(var(--baseFontSizeXs) * 1.3);
+  --fontLeading: calc(var(--baseFontLeading) * 1.3);
+  --fontSizeSm: calc(var(--baseFontSizeSm) * 1.3);
+  --fontLeadingSm: calc(var(--baseFontLeadingSm) * 1.3);
+  --fontSizeBase: calc(var(--baseFontSizeBase) * 1.3);
+  --fontLeadingBase: calc(var(--baseFontLeadingBase) * 1.3);
+  --fontSizeLg: calc(var(--baseFontSizeLg) * 1.3);
+  --fontLeadingLg: calc(var(--baseFontLeadingLg) * 1.3);
+  --fontSizeXl: calc(var(--baseFontSizeXl) * 1.3);
+  --fontLeadingXl: calc(var(--baseFontLeadingXl) * 1.3);
+  --fontSize2xl: calc(var(--baseFontSize2xl) * 1.3);
+  --fontLeading2xl: calc(var(--baseFontLeading2xl) * 1.3);
+  --fontSize3xl: calc(var(--baseFontSize3xl) * 1.3);
+  --fontLeading3xl: calc(var(--baseFontLeading3xl) * 1.3);
+  --fontSize4xl: calc(var(--baseFontSize4xl) * 1.3);
+  --fontLeading4xl: calc(var(--baseFontLeading4xl) * 1.3);
+  --fontSize5xl: calc(var(--baseFontSize5xl) * 1.3);
+  --fontLeading: calc(var(--baseFontLeading) * 1.3);
+}
+
+
+
+
 #root {
+  --baseFontSizeXs: 12px;
+  --baseFontLeading: 16px;
+  --baseFontSizeSm: 14px;
+  --baseFontLeadingSm: 20px;
+  --baseFontSizeBase: 16px;
+  --baseFontLeadingBase: 24px;
+  --baseFontSizeLg: 18px;
+  --baseFontLeadingLg: 28px;
+  --baseFontSizeXl: 20px;
+  --baseFontLeadingXl: 28px;
+  --baseFontSize2xl: 24px;
+  --baseFontLeading2xl: 32px;
+  --baseFontSize3xl: 30px;
+  --baseFontLeading3xl: 36px;
+  --baseFontSize4xl: 36px;
+  --baseFontLeading4xl: 40px;
+  --baseFontSize5xl: 48px;
+  --baseFontLeading: 1;
   --fontSizeXs: 12px;
   --fontLeading: 16px;
   --fontSizeSm: 14px;
@@ -42,6 +126,21 @@
   --fontLeading: 1;
 }
 
+
+
+.dark p {
+  color: #dce0e5;
+}
+
+.dark h1, h2, h3, h4, h5, h6 {
+  color: white;
+}
+
+.dark .bg-white{
+  background-color: #3C4554;
+}
+
+
 p {
   color: #53585e;
   font-family: "Manrope", sans-serif;
@@ -52,11 +151,9 @@ p {
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  
 }
 
 img {
-  
 }
 
 img,
@@ -64,10 +161,6 @@ video {
   max-width: fit-content;
   width: auto;
   height: auto;
-}
-
-body {
-  background-color: #f7f7f7;
 }
 
 * {
@@ -83,7 +176,13 @@ a {
 .icon {
   filter: brightness(0) saturate(100%) invert(0%) sepia(7%) saturate(98%)
     hue-rotate(346deg) brightness(100%) contrast(86%);
-  transition: fill 0.3s ease; /* Анимация перехода цвета */
+  transition: fill 0.3s ease;
+}
+
+.dark .icon {
+  filter: brightness(3) saturate(100%) invert(0%) sepia(7%) saturate(98%)
+    hue-rotate(346deg) brightness(100%) contrast(86%);
+  transition: fill 0.3s ease;
 }
 
 .icon-active {

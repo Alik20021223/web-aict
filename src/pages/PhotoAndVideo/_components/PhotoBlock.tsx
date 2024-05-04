@@ -1,6 +1,7 @@
 import { useSelector } from "react-redux"
 import { GaleryBlock } from "./types"
 import { RootState } from "../../../state/store"
+import { VideoPlayer } from "./videoPlayer"
 
 interface PhotoBlockApp {
     data: GaleryBlock
@@ -24,8 +25,8 @@ export const PhotoBlock = ({ data }: PhotoBlockApp) => {
 
     return (
         <div className='flex-col flex h-full'>
-            <div className='rounded-md shadow-md flex justify-center items-center overflow-hidden h-full'>
-                <img src={`${urlHosting}/${data.filePath}`} className='w-full object-cover max-w-full h-full' alt={`${title}-img`} />
+            <div className='rounded-t-md shadow-md flex justify-center items-center overflow-hidden h-[350px]'>
+                {data.type === 'video' ? <VideoPlayer src={data.filePath}/> :<img src={`${urlHosting}/${data.filePath}`} className='w-full object-cover max-w-full h-full' alt={`${title}-img`} />}
             </div>
             <div className='xl:p-[25px] md:p-[15px] max-md:p-6 2xl:p-[30px] lg:p-[15px] space-y-7 h-full flex flex-col bg-white text-textBlackAict shadow-md rounded-b-[10px]'>
                 <div className="space-y-2.5">

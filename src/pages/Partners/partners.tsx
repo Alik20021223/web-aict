@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react"
-import { PartnersBlock } from "./_compents/partnersBlock"
 import api from "../../api"
 import { useResize } from "../../hook/useWidthSize";
 import { useTranslation } from "react-i18next";

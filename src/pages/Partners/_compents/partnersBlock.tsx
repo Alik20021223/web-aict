@@ -12,7 +12,8 @@ export const PartnersBlock = ({ data }: PartnersBlockApp) => {
     const urlHosting = useSelector((state: RootState) => state.aict.urlHosting)
     const currentLang = useSelector((state: RootState) => state.aict.currentLang)
 
-    // const description = currentLang.code === 'ru' ? data.descriptionRu : currentLang.code === 'en' ? data.descriptionEn : data.descriptionTj;
+    const description = currentLang.code === 'ru' ? data.descriptionRu : currentLang.code === 'en' ? data.descriptionEn : data.descriptionTj;
+    const title = currentLang.code === 'ru' ? data.titleRu : currentLang.code === 'en' ? data.titleEn : data.titleTj;
 
     const { t } = useTranslation()
 
@@ -20,12 +21,12 @@ export const PartnersBlock = ({ data }: PartnersBlockApp) => {
         <div className="bg-white rounded-xl border w-full">
             <div className="p-6">
                 <div className="border rounded-lg h-[245px]">
-                    <img src={`${urlHosting}/${data.imagePath}`} alt={`${data.title}-img`} className="w-full object-fit rounded-lg h-full max-w-full" />
+                    <img src={`${urlHosting}/${data.imagePath}`} alt={`${title}-img`} className="w-full object-fit rounded-lg h-full max-w-full" />
                 </div>
                 <div className="space-y-10 mt-6">
                     <div className="space-y-5">
-                        <h1 className="font-semibold text-3xl max-md:text-2xl">{data.title}</h1>
-                        <p className="font-semibold text-xl max-md:text-lg">{data.description}</p>
+                        <h1 className="font-semibold text-3xl max-md:text-2xl">{title}</h1>
+                        <p className="font-semibold text-xl max-md:text-lg">{description}</p>
                     </div>
                     <div className="space-y-5">
                         <div>

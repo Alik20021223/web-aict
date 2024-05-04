@@ -14,6 +14,9 @@ export default {
         grayAict: "#F2F6FA",
         textBlackAict: "#2E363E",
         primary: "#00AF66",
+        dark: '#3C4554',
+        darkBg: '#313843',
+        darkBorder: '#444F5F',
       },
       fontSize: {
         xs: ['var(--fontSizeXs)', 'var(--fontLeading)'],

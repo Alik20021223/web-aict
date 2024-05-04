@@ -1,12 +1,17 @@
 import { SearchInput } from "../../core/searchInput"
-import { DocLaw } from "./_components/docLaw"
+
 import { useSelector } from "react-redux"
 import { RootState } from "../../state/store"
-import { DecreesDoc } from "./_components/DecreesDoc"
+
 import { useTranslation } from "react-i18next"
-import { RegulationsDoc } from "./_components/RegulationsDoc"
-import { useEffect } from "react"
+
+import { Key, useEffect, useState } from "react"
 import api from "../../api"
+import { useResize } from "../../hook/useWidthSize"
+import { Tab, Tabs } from "@nextui-org/react"
+import { useSearchParams } from "react-router-dom"
+import { CategoryType, documentBlockType } from "./_components/types"
+import { DocAll } from "./_components/docAll"
 
 
 
@@ -14,25 +19,93 @@ import api from "../../api"
 
 export const Documents = () => {
     const { t } = useTranslation();
-    const DocsPage = useSelector((state: RootState) => state.aict.DocsPage);
+    const [searchParams, setSearchParams] = useSearchParams();
+    const [categories, setCategories] = useState<CategoryType[]>([]);
+    const [data, setData] = useState<documentBlockType[]>([]);
+    const [selected, setSelected] = useState<string | null>(searchParams.get('filter') || null);
+    const currentLang = useSelector((state: RootState) => state.aict.currentLang);
+    const [currentPage, setCurrentPage] = useState<number>(1);
+    const [isLoading, setLoading] = useState<boolean>(true);
+    const [totalPage, setTotalPage] = useState<number>(1);
+
+    const { width } = useResize();
+    const maxLg = width < 1280 && width > 768;
+    const maxMd = width < 768;
+
+    const pageAdaptive = maxLg ? 6 : (maxMd ? 4 : 9)
 
     useEffect(() => {
-        api.get('')
-    })
+        setLoading(false);
+        api.get(`documents/categories`).then(res => {
+            setCategories(res.data);
+            setSelected(searchParams.get('filter') || res.data[0]?.id || null); // Set selected after categories are fetched
+        }).catch(err => {
+            console.log(err);
+            setLoading(false);
+        })
+    }, [])
 
-    
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const res = await api.get(`documents/category/${selected}/per-page/${pageAdaptive}`);
+                setData(res.data.data);
+                setTotalPage(res.data.last_page)
+                setLoading(false);
+            } catch (err) {
+                console.log(err);
+                setLoading(false);
+            }
+        };
 
-return (
-    <div className="container m-auto space-y-[50px] sm:px-5 max-sm:px-5">
-        <h1 className="font-bold text-4xl">{t('Documents')}</h1>
-        <div className="w-full">
-            <SearchInput txt="searchDocuments" />
+        if (selected) {
+            fetchData();
+        }
+    }, [currentPage, selected, searchParams]);
+
+    const handleSelectionChange = (key: Key) => {
+        setSelected(key as string);
+        setSearchParams({ filter: `${key}`, page: "1" });
+    };
+
+    const handleChangePage = (newPage: number) => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        setCurrentPage(newPage);
+        const params: { [key: string]: string } = { filter: `${selected}`, page: newPage.toString() };
+        setSearchParams(params);
+    };
+
+    return (
+        <div className="container m-auto space-y-[50px] sm:px-5 max-sm:px-5">
+            <h1 className="font-bold text-4xl">{t('Documents')}</h1>
+            <div className="w-full">
+                <SearchInput txt="searchDocuments" />
+            </div>
+            {isLoading ? <div>Loading</div> :
+                <div className="space-y-10">
+                    <div>
+                        <Tabs
+                            key="light"
+                            color="primary"
+                            selectedKey={selected}
+                            radius="full"
+                            variant="light"
+                            size="lg"
+                            classNames={{ tab: ["!bg-[#FFFFFF]", "py-5", "px-8", "2xl:py-8", "2xl:px-10", "2xl:text-2xl"] }}
+                            aria-label="Tabs variants"
+                            onSelectionChange={handleSelectionChange}
+                        >
+                            {categories.map((item) => (
+                                <Tab key={item.id} title={currentLang.code === 'ru' ? item.titleRu : currentLang.code === 'en' ? item.titleEn : item.titleTj} />
+                            ))}
+                        </Tabs>
+                    </div>
+                    <div>
+                        <DocAll data={data} currentPage={currentPage} total={totalPage} handleChangePage={handleChangePage} />
+                    </div>
+                </div>
+            }
         </div>
-        <div className="space-y-[88px]">
-            <DocLaw data={DocsPage.DocsLawsBlock} />
-            <DecreesDoc data={DocsPage.DecreesBlock} />
-            <RegulationsDoc data={DocsPage.RegulationsBlock} />
-        </div>
-    </div>
-)
+    )
 }
+

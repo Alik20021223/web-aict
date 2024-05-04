@@ -24,20 +24,22 @@ export const Header = () => {
                                 <div className='flex pl-[15px] 2xl:pl-[30px]'>
                                     <img src="/img/logo.svg" className='2xl:scale-150' alt="logo" />
                                     <div className='ml-[20px] lg:w-[52%] 2xl:ml-[40px] text-xs font-semibold text-wrap'>
-                                        <h1 className='2xl:text-xl lg:text-sm xl:text-base'>{t(`companyName`).toUpperCase()}</h1>
+                                        <h1 className='2xl:text-xl lg:text-sm xl:text-base text-foreground'>{t(`companyName`).toUpperCase()}</h1>
                                     </div>
                                 </div>
                             </div>
                         </Link>
                     </div>
                     <div className='max-lg:hidden'>
-                        <VisibleBtn/>
+                        <VisibleBtn />
                     </div>
                 </div>
                 <div className='my-5'>
                     <SearchInput txt='SearchForSite' />
                 </div>
-                <NavbarCom />
+                <div className=''>
+                    <NavbarCom />
+                </div>
             </div>
         </>
     )

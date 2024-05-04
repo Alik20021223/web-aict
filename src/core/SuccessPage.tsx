@@ -14,7 +14,7 @@ export const SuccessPage: React.FC<successApp> = ({link, btnTxt}) => {
 
     return (
         <div className="container m-auto sm:px-5 max-sm:px-5">
-            <div className="md:bg-white md:shadow-md w-full rounded-xl">
+            <div className="md:bg-white md:dark:bg-dark md:shadow-md w-full rounded-xl">
                 <div className="flex  flex-col items-center justify-center py-[50px]">
                     <div className="flex flex-col items-center">
                         <div className="w-4/5 max-md:w-full text-center flex flex-col items-center">

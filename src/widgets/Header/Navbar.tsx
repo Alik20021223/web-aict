@@ -29,7 +29,7 @@ export const NavbarCom = () => {
 
     return (
         <Navbar
-            className="mb-5 max-lg:hidden "
+            className="mb-5 max-lg:hidden"
             classNames={{
                 item: [
                     "flex",
@@ -47,18 +47,19 @@ export const NavbarCom = () => {
                 ],
                 base: [
                     "justify-between",
-                    "bg-[#F7F7F7]"
+                    "bg-[#F7F7F7]",
+                    "dark:bg-darkBg",
                 ],
                 wrapper: [
                     "max-w-full",
-                    "px-0"
+                    "px-0",
                 ]
             }}
         >
             <NavbarContent className="hidden sm:flex gap-4" justify="center">
                 {data.map((item) => (
-                    <Link  key={item.key} color="foreground" to={item.link}>
-                        <NavbarItem className="2xl:text-xl" isActive={activeItem === item.key}  onClick={() => handleItemClick(item.key)}>
+                    <Link  key={item.key} className="text-foreground " to={item.link}>
+                        <NavbarItem className="2xl:text-xl text-base" isActive={activeItem === item.key}  onClick={() => handleItemClick(item.key)}>
                             {t(item.key)}
                         </NavbarItem>
                     </Link>
