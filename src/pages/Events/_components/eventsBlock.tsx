@@ -37,7 +37,7 @@ export const EventsBlock: React.FC<EventsBlockApp> = ({ data }) => {
                         </div>
                         <p className="font-normal text-sm">{formatDate(data.created_at)}</p>
                         <h1 className="font-semibold text-base">{title}</h1>
-                        <p className="font-normal text-sm overflow-hidden whitespace-normal line-clamp-3" dangerouslySetInnerHTML={{ __html: descriptionWithoutH5 }}></p>
+                        <p className="font-normal text-sm overflow-hidden whitespace-normal line-clamp-3" >{descriptionWithoutH5}</p>
                     </div>
                 </div>
             </div>

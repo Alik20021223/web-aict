@@ -30,14 +30,6 @@ export type BlockTypeOffer = {
   [key: string]: any;
 };
 
-export type BlockDetailVacancy = {
-  // подробная вакансия что я жду
-  describe: string;
-  responsibilities: defaultType[];
-  requirements: defaultType[];
-  additionally: defaultType[];
-  ourOffer: defaultType[];
-};
 
 export type BlockRespond = {
   cityId: BlockTypeOffer;

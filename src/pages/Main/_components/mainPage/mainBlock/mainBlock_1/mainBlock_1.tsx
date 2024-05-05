@@ -34,7 +34,7 @@ export const MainBlock_1: React.FC<PropsMainApp> = ({ data }) => {
                 <div className='flex w-[45%] max-md:w-full max-md:mt-8 max-sm:mt-4 flex-col justify-between'>
                     <BlockTxt data={data} currentPoint={isIndex} />
                     <div className='flex max-md:hidden items-center  justify-between'>
-                        <Link to={data[isIndex].link} className='font-semibold  2xl:text-2xl text-base text-primary'>{t('more')}
+                        <Link to={`/events/`} className='font-semibold  2xl:text-2xl text-base text-primary'>{t('more')}
                             <ExpandLess className="rotate-90 !fill-primary" />
                         </Link>
                         <div className=''>
@@ -47,7 +47,7 @@ export const MainBlock_1: React.FC<PropsMainApp> = ({ data }) => {
                         </div>
                     </div>
                     <div className='hidden max-md:block'>
-                        <Link to=''>
+                        <Link to={`/events/`}>
                             <ButtonCom>{t("learnMore")}</ButtonCom >
                         </Link>
                     </div>

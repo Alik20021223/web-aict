@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { BlogBlockType } from '../../../Blog/_components/types'
+
 import { useSelector } from 'react-redux'
 import { RootState } from '../../../../state/store'
 
@@ -10,9 +10,6 @@ export type PropsPress = {
     titleTj: string;
     titleRu: string;
     titleEn: string;
-    descriptionTj: string;
-    descriptionRu: string;
-    descriptionEn: string;
     addressTj?: string;
     addressRu?: string;
     addressEn?: string;
@@ -29,6 +26,7 @@ type PressApp = {
 
 export const PressBlock: React.FC<PressApp> = ({ data }) => {
     const currentLang = useSelector((state: RootState) => state.aict.currentLang)
+    const urlHosting = useSelector((state: RootState) => state.aict.urlHosting)
 
     const formatDate = (dateString: string) => {
         const date = new Date(dateString);
@@ -38,21 +36,21 @@ export const PressBlock: React.FC<PressApp> = ({ data }) => {
         return `${day}.${month}.${year}`;
     };
 
-    const description = currentLang.code === 'ru' ? data.descriptionRu : currentLang.code === 'en' ? data.descriptionEn : data.descriptionTj;
+    const title = currentLang.code === 'ru' ? data.titleRu : currentLang.code === 'en' ? data.titleEn : data.titleTj;
     const address = currentLang.code === 'ru' ? data.addressRu : currentLang.code === 'en' ? data.addressEn : data.addressTj;
 
     return (
-        <div className='max-sm:w-full max-md:last:mb-0 flex-col flex h-full'>
+        <div className='max-sm:w-full flex-col flex max-h-[512px] overflow-hidden text-ellipsis bg-white dark:bg-dark shadow-md rounded-xl'>
             <Link to={address ? `/gallery` : `/blog/${data.category}/${data.slug}`} className='h-full'>
-                <div className='rounded-md shadow-md flex justify-center items-center overflow-hidden h-[50%]'>
-                    <img src={data.imagePath || data.filePath} className='w-full object-cover max-w-full h-full' alt={data.slug} />
+                <div className="rounded-t-xl shadow-md flex justify-center items-center overflow-hidden h-[50%]">
+                    <img src={`${urlHosting}/${data.filePath || data.imagePath}`} className='w-full object-cover' alt={`${title}-img`} />
                 </div>
-                <div className='xl:p-6 md:p-4 max-md:p-6 2xl:p-7 lg:p-4 space-y-5  flex flex-col  bg-white dark:bg-dark text-textBlackAict dark:text-foreground shadow-md rounded-b-[10px]'>
+                <div className='xl:p-6 md:p-4 max-md:p-6 2xl:p-7 lg:p-4 space-y-5  flex flex-col  text-textBlackAict dark:text-foreground rounded-b-xl'>
                     {data.category && <div className='rounded-[5px] py-2.5 md:py-2 px-4 md:px-3 w-fit bg-grayAict dark:bg-darkBg'>
                         <p className='font-normal max-sm:text-sm max-md:text-lg text-foreground xl:text-sm md:text-xs lg:text-xs 2xl:text-xl'>{data.category}</p>
                     </div>}
-                    <h1 className={`font-bold  2xl:text-4xl max-sm:text-lg text-wrap xl:text-xl max-md:text-xl lg:text-xl md:text-base`}>
-                        {description}
+                    <h1 className={`font-bold  2xl:text-4xl max-sm:text-lg text-wrap xl:text-xl max-md:text-xl lg:text-xl md:text-base line-clamp-3`}>
+                        {title}
                     </h1>
                     {data.addressEn &&
                         <p className='font-normal max-sm:text-sm max-md:text-lg text-primary lg:text-xs xl:text-sm 2xl:text-xl md:text-xs'>{address}</p>

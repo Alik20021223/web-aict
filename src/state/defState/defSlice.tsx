@@ -1,15 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { PropsPress } from "../../pages/Main/_components/mainPage/MediaBlock.js";
-import { PropsProject } from "../../pages/Main/_components/mainPage/projectBlock.js";
-import { PropsMainBlock, PropsMainBlock_2, PropsPresident } from "../../pages/Main/_components/mainPage/mainBlock/types.js";
 import { Tabs } from "../../widgets/Header/types.js";
-import { defaultType, FilterVacancy, FormDataEmpty } from "../../pages/Vacancy/_components/type.js";
-// import { ContactBlock } from "../../core/Contacts/type.js";
-// import { documentBlockType } from "../../pages/Documents/_components/types.js";
-// import { activityApp } from "../../pages/Activity/_components/types.js";
+import { defaultType, FormDataEmpty } from "../../pages/Vacancy/_components/type.js";
 import { blockPrivacy } from "../../pages/PrivacyPolicy/types.js";
 import { lang } from "../../core/langSelect.js";
 import { SliderValue } from "@nextui-org/react";
+import { PropsPresident } from "../../pages/Main/_components/mainPage/mainBlock/types.js";
 
 
 
@@ -37,19 +32,11 @@ export interface defSliceType {
   };
   iconsFooter: footerItem[];
   dataFooter: footerState[];
-  value: number;
-  PressData: PropsPress[];
-  MediaData: PropsPress[];
-  ProjectData: PropsProject[];
   ActivityButtonData: ActivityState[];
-  ActivityBlockData: footerItem[];
-  mainBlock_1: PropsMainBlock[];
-  mainBlock_3: PropsMainBlock_2;
-  mainBlock_2: PropsPresident;
+  value: number;
   HeaderLink: Tabs[],
-  // VacancyBlock: BlockVacancy[],
   ContactForm: defaultType[],
-  // ActivityPage: activityApp,
+  mainBlock_2: PropsPresident,
   PrivacyPolicyData: blockPrivacy[]
   Loading: boolean,
   urlHosting: string,
@@ -117,202 +104,6 @@ const initialState: defSliceType = {
     },
   ],
   value: 0,
-  PressData: [
-    {
-      id: 1,
-      date: "6 февраля, 2024",
-      description: "Форум “Цифровая Экономика”",
-      imgPress: {
-        url: "/img/pressBlock-1.webp",
-        alt: "press-conf",
-      },
-      typePress: "Новости",
-      link: "#",
-    },
-    {
-      id: 2,
-      date: "6 февраля, 2024",
-      description: "Форум “Цифровая Экономика”",
-      imgPress: {
-        url: "/img/pressBlock-2.webp",
-        alt: "press-conf",
-      },
-      typePress: "Новости",
-      link: "#",
-    },
-    {
-      id: 3,
-      date: "6 февраля, 2024",
-      description: "Форум “Цифровая Экономика”",
-      imgPress: {
-        url: "/img/pressBlock-3.webp",
-        alt: "press-conf",
-      },
-      typePress: "Новости",
-      link: "#",
-    },
-  ],
-  MediaData: [
-    {
-      id: 1,
-      date: "6 февраля, 2024",
-      description: "Форум “Цифровая Экономика”",
-      imgPress: {
-        url: "/img/mediaBlock-1.webp",
-        alt: "press-conf",
-      },
-      place: "Таджикистан, Душанбе",
-      link: "#",
-    },
-    {
-      id: 2,
-      date: "6 февраля, 2024",
-      description: "Форум “Цифровая Экономика”",
-      imgPress: {
-        url: "/img/mediaBlock-2.webp",
-        alt: "press-conf",
-      },
-      place: "Таджикистан, Душанбе",
-      link: "#",
-    },
-    {
-      id: 3,
-      date: "6 февраля, 2024",
-      description: "Форум “Цифровая Экономика”",
-      imgPress: {
-        url: "/img/mediaBlock-3.webp",
-        alt: "press-conf",
-      },
-      place: "Таджикистан, Душанбе",
-      link: "#",
-    },
-  ],
-  ProjectData: [
-    {
-      urlImg: "/img/cloud.svg",
-      title: "Электронное правительство Республики Таджикистан",
-      describe:
-        "Lorem Ipsum is simply dummy text of the printing and typesetting ",
-      link: "#",
-    },
-    {
-      urlImg: "/img/imei.svg",
-      title: "Регистрация IMEI в единой системе",
-      describe:
-        "Lorem Ipsum is simply dummy text of the printing and typesetting ",
-      link: "#",
-    },
-    {
-      urlImg: "/img/it-start.svg",
-      title: "Проект “Международный технопарк IT-стартапов”",
-      describe:
-        "Lorem Ipsum is simply dummy text of the printing and typesetting ",
-      link: "#",
-    },
-  ],
-  ActivityButtonData: [
-    {
-      id: 1,
-      name: "Проектное управление",
-      icon: '/img/doc-activity.svg',
-    },
-    {
-      id: 2,
-      name: "Телекоммуникации и связь",
-      icon: '/img/wifi-activity.svg',
-    },
-    {
-      id: 3,
-      name: "Электронная промышленность",
-      icon: '/img/chip-activity.svg',
-    },
-    {
-      id: 4,
-      name: "IT - отрасль",
-      icon: '/img/it-activity.svg',
-    },
-    {
-      id: 5,
-      name: "Электронное производство",
-      icon: '/img/setting-activity.svg',
-    },
-  ],
-  ActivityBlockData: [
-    {
-      txt: 'Проектное управление',
-      link: 'В настоящее время в Таджикистане зарегистрировано 2,5 млн. абонентов фиксированной связи, то есть это те люди, которые пользуются стационарным телефоном.  При этом с каждым годом доля фиксированной связи в  общем  объеме телекоммуникационного  рынка снижается,  уступая  место мобильной связи. Что касается мобильной связи, то количество зарегистрированных абонентов превысило 25,8 млн.',
-    },
-    {
-      txt: 'Телекоммуникации и связь',
-      link: 'В настоящее время в Таджикистане зарегистрировано 2,5 млн. абонентов фиксированной связи, то есть это те люди, которые пользуются стационарным телефоном.  При этом с каждым годом доля фиксированной связи в  общем  объеме телекоммуникационного  рынка снижается,  уступая  место мобильной связи. Что касается мобильной связи, то количество зарегистрированных абонентов превысило 25,8 млн.',
-    },
-    {
-      txt: 'Электронная промышленность',
-      link: 'В настоящее время в Таджикистане зарегистрировано 2,5 млн. абонентов фиксированной связи, то есть это те люди, которые пользуются стационарным телефоном.  При этом с каждым годом доля фиксированной связи в  общем  объеме телекоммуникационного  рынка снижается,  уступая  место мобильной связи. Что касается мобильной связи, то количество зарегистрированных абонентов превысило 25,8 млн.',
-    },
-    {
-      txt: 'IT - отрасль',
-      link: 'В настоящее время в Таджикистане зарегистрировано 2,5 млн. абонентов фиксированной связи, то есть это те люди, которые пользуются стационарным телефоном.  При этом с каждым годом доля фиксированной связи в  общем  объеме телекоммуникационного  рынка снижается,  уступая  место мобильной связи. Что касается мобильной связи, то количество зарегистрированных абонентов превысило 25,8 млн.',
-    },
-    {
-      txt: 'Электронное производство',
-      link: 'В настоящее время в Таджикистане зарегистрировано 2,5 млн. абонентов фиксированной связи, то есть это те люди, которые пользуются стационарным телефоном.  При этом с каждым годом доля фиксированной связи в  общем  объеме телекоммуникационного  рынка снижается,  уступая  место мобильной связи. Что касается мобильной связи, то количество зарегистрированных абонентов превысило 25,8 млн.',
-    },
-  ],
-  mainBlock_2: {
-    imgUrl: {
-      url: '/img/president_1.webp',
-      alt: 'president',
-    },
-    subtitle: 'Оффициальный сайт',
-    title: 'Основатель мира и национального единства - Лидер нации, Президент Республики Таджикистан уважаемый Эмомали Рахмон',
-    describe: 'Для перехода на официальный сайт президента Республики Таджикистан нажмите на кнопку “Перейти на сайт”',
-    Button: {
-      txt: 'Перейти на сайт',
-      link: 'https://president.tj/',
-    }
-  },
-  mainBlock_3: {
-    link: '#',
-    date: 'Июнь 24, 2023',
-    name: 'Цифровизация в госсекторе: итоги 2023',
-    describe: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Perspiciatis, possimus.',
-  },
-  mainBlock_1: [
-    {
-      id: 1,
-      date: 'Июнь 24, 2023',
-      name: 'Таджикистан и Казахстан подписали меморандум о цифровых технологиях',
-      describe: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium eveniet eum culpa optio aperiam esse voluptates possimus minus magnam hic.',
-      link: '#',
-      imgUrl: {
-        url: '/img/aict-main.webp',
-        alt: 'aict-main',
-      },
-    },
-    {
-      id: 2,
-      date: 'Июнь 24, 2023',
-      name: 'Таджикистан и Казахстан подписали меморандум о цифровых технологиях',
-      link: '#',
-      describe: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium eveniet eum culpa optio aperiam esse voluptates possimus minus magnam hic.',
-      imgUrl: {
-        url: '/img/mediaBlock-1.webp',
-        alt: 'aict-main',
-      },
-    },
-    {
-      id: 3,
-      date: 'Июнь 24, 2023',
-      link: '#',
-      name: 'Таджикистан и Казахстан подписали меморандум о цифровых технологиях',
-      describe: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium eveniet eum culpa optio aperiam esse voluptates possimus minus magnam hic.',
-      imgUrl: {
-        url: '/img/pressBlock-1.webp',
-        alt: 'aict-main',
-      },
-    },
-  ],
   HeaderLink: [
     {
       name: 'Главная',
@@ -355,413 +146,6 @@ const initialState: defSliceType = {
       link: '/contact',
     },
   ],
-  // VacancyBlock: [
-  //   {
-  //     id: 1,
-  //     name: 'Специалист по работе с клиентами',
-  //     describe_1: 'Открываем двери для крутых специалистов, желающих присоединиться к отделу по работе с клиентами. Мы ценим и новичков, и профессионалов с опытом.',
-  //     detail: {
-  //       describe: 'Мы в поисках специалиста по работе с государственными органами, мастера дипломатии и переговоров, готового эффективно решать вопросы и вносить вклад в развитие АИЦТ.',
-  //       responsibilities: [
-  //         {
-  //           id: 1,
-  //           value: 'вести переговоры с проблемными клиентами',
-  //         },
-  //         {
-  //           id: 2,
-  //           value: 'тесно работать с государственными органами и судами',
-  //         },
-  //         {
-  //           id: 3,
-  //           value: 'подготавливать заявления и письма;',
-  //         },
-  //         {
-  //           id: 4,
-  //           value: 'рассматривать заявления заёмщиков и другие виды заявлений',
-  //         },
-  //       ],
-  //       requirements: [
-  //         {
-  //           id: 1,
-  //           value: 'юридическое образование',
-  //         },
-  //         {
-  //           id: 2,
-  //           value: 'опыт работы от 1 года в сфере юриспруденции',
-  //         },
-  //         {
-  //           id: 3,
-  //           value: 'свободное владение таджикским и русским языками',
-  //         },
-  //       ],
-  //       additionally: [
-  //         {
-  //           id: 1,
-  //           value: 'честность и скромность',
-  //         },
-  //         {
-  //           id: 2,
-  //           value: 'ответственность и пунктуальность',
-  //         },
-  //         {
-  //           id: 3,
-  //           value: 'энергичность и коммуникабельность',
-  //         },
-  //       ],
-  //       ourOffer: [
-  //         {
-  //           id: 1,
-  //           value: 'пятидневный рабочий график с 09:00-18:00',
-  //         },
-  //         {
-  //           id: 2,
-  //           value: 'конкурентную оплату труда',
-  //         },
-  //         {
-  //           id: 3,
-  //           value: 'карьерный рост',
-  //         },
-  //         {
-  //           id: 4,
-  //           value: 'дружелюбный коллектив и развитие вместе с компанией',
-  //         },
-  //         {
-  //           id: 5,
-  //           value: 'кафетерий льгот и различные тимбилдинги',
-  //         },
-  //       ],
-  //     },
-  //     respond: {
-  //       city: 'Душанбе',
-  //       money: '2000 смн',
-  //       schedule: 'Полный день'
-  //     }
-  //   },
-  //   {
-  //     id: 2,
-  //     name: 'Специалист по работе с клиентами',
-  //     describe_1: 'Открываем двери для крутых специалистов, желающих присоединиться к отделу по работе с клиентами. Мы ценим и новичков, и профессионалов с опытом.',
-  //     detail: {
-  //       describe: 'Мы в поисках специалиста по работе с государственными органами, мастера дипломатии и переговоров, готового эффективно решать вопросы и вносить вклад в развитие АИЦТ.',
-  //       responsibilities: [
-  //         {
-  //           id: 1,
-  //           value: 'вести переговоры с проблемными клиентами',
-  //         },
-  //         {
-  //           id: 2,
-  //           value: 'тесно работать с государственными органами и судами',
-  //         },
-  //         {
-  //           id: 3,
-  //           value: 'подготавливать заявления и письма;',
-  //         },
-  //         {
-  //           id: 4,
-  //           value: 'рассматривать заявления заёмщиков и другие виды заявлений',
-  //         },
-  //       ],
-  //       requirements: [
-  //         {
-  //           id: 1,
-  //           value: 'юридическое образование',
-  //         },
-  //         {
-  //           id: 2,
-  //           value: 'опыт работы от 1 года в сфере юриспруденции',
-  //         },
-  //         {
-  //           id: 3,
-  //           value: 'свободное владение таджикским и русским языками',
-  //         },
-  //       ],
-  //       additionally: [
-  //         {
-  //           id: 1,
-  //           value: 'честность и скромность',
-  //         },
-  //         {
-  //           id: 2,
-  //           value: 'ответственность и пунктуальность',
-  //         },
-  //         {
-  //           id: 3,
-  //           value: 'энергичность и коммуникабельность',
-  //         },
-  //       ],
-  //       ourOffer: [
-  //         {
-  //           id: 1,
-  //           value: 'пятидневный рабочий график с 09:00-18:00',
-  //         },
-  //         {
-  //           id: 2,
-  //           value: 'конкурентную оплату труда',
-  //         },
-  //         {
-  //           id: 3,
-  //           value: 'карьерный рост',
-  //         },
-  //         {
-  //           id: 4,
-  //           value: 'дружелюбный коллектив и развитие вместе с компанией',
-  //         },
-  //         {
-  //           id: 5,
-  //           value: 'кафетерий льгот и различные тимбилдинги',
-  //         },
-  //       ],
-  //     },
-  //     respond: {
-  //       city: 'Душанбе',
-  //       money: '2000 смн',
-  //       schedule: 'Полный день'
-  //     }
-  //   },
-  //   {
-  //     id: 3,
-  //     name: 'Специалист по работе с клиентами',
-  //     describe_1: 'Открываем двери для крутых специалистов, желающих присоединиться к отделу по работе с клиентами. Мы ценим и новичков, и профессионалов с опытом.',
-  //     detail: {
-  //       describe: 'Мы в поисках специалиста по работе с государственными органами, мастера дипломатии и переговоров, готового эффективно решать вопросы и вносить вклад в развитие АИЦТ.',
-  //       responsibilities: [
-  //         {
-  //           id: 1,
-  //           value: 'вести переговоры с проблемными клиентами',
-  //         },
-  //         {
-  //           id: 2,
-  //           value: 'тесно работать с государственными органами и судами',
-  //         },
-  //         {
-  //           id: 3,
-  //           value: 'подготавливать заявления и письма;',
-  //         },
-  //         {
-  //           id: 4,
-  //           value: 'рассматривать заявления заёмщиков и другие виды заявлений',
-  //         },
-  //       ],
-  //       requirements: [
-  //         {
-  //           id: 1,
-  //           value: 'юридическое образование',
-  //         },
-  //         {
-  //           id: 2,
-  //           value: 'опыт работы от 1 года в сфере юриспруденции',
-  //         },
-  //         {
-  //           id: 3,
-  //           value: 'свободное владение таджикским и русским языками',
-  //         },
-  //       ],
-  //       additionally: [
-  //         {
-  //           id: 1,
-  //           value: 'честность и скромность',
-  //         },
-  //         {
-  //           id: 2,
-  //           value: 'ответственность и пунктуальность',
-  //         },
-  //         {
-  //           id: 3,
-  //           value: 'энергичность и коммуникабельность',
-  //         },
-  //       ],
-  //       ourOffer: [
-  //         {
-  //           id: 1,
-  //           value: 'пятидневный рабочий график с 09:00-18:00',
-  //         },
-  //         {
-  //           id: 2,
-  //           value: 'конкурентную оплату труда',
-  //         },
-  //         {
-  //           id: 3,
-  //           value: 'карьерный рост',
-  //         },
-  //         {
-  //           id: 4,
-  //           value: 'дружелюбный коллектив и развитие вместе с компанией',
-  //         },
-  //         {
-  //           id: 5,
-  //           value: 'кафетерий льгот и различные тимбилдинги',
-  //         },
-  //       ],
-  //     },
-  //     respond: {
-  //       city: 'Душанбе',
-  //       money: '2000 смн',
-  //       schedule: 'Полный день'
-  //     }
-  //   },
-  //   {
-  //     id: 4,
-  //     name: 'Специалист по работе с клиентами',
-  //     describe_1: 'Открываем двери для крутых специалистов, желающих присоединиться к отделу по работе с клиентами. Мы ценим и новичков, и профессионалов с опытом.',
-  //     detail: {
-  //       describe: 'Мы в поисках специалиста по работе с государственными органами, мастера дипломатии и переговоров, готового эффективно решать вопросы и вносить вклад в развитие АИЦТ.',
-  //       responsibilities: [
-  //         {
-  //           id: 1,
-  //           value: 'вести переговоры с проблемными клиентами',
-  //         },
-  //         {
-  //           id: 2,
-  //           value: 'тесно работать с государственными органами и судами',
-  //         },
-  //         {
-  //           id: 3,
-  //           value: 'подготавливать заявления и письма;',
-  //         },
-  //         {
-  //           id: 4,
-  //           value: 'рассматривать заявления заёмщиков и другие виды заявлений',
-  //         },
-  //       ],
-  //       requirements: [
-  //         {
-  //           id: 1,
-  //           value: 'юридическое образование',
-  //         },
-  //         {
-  //           id: 2,
-  //           value: 'опыт работы от 1 года в сфере юриспруденции',
-  //         },
-  //         {
-  //           id: 3,
-  //           value: 'свободное владение таджикским и русским языками',
-  //         },
-  //       ],
-  //       additionally: [
-  //         {
-  //           id: 1,
-  //           value: 'честность и скромность',
-  //         },
-  //         {
-  //           id: 2,
-  //           value: 'ответственность и пунктуальность',
-  //         },
-  //         {
-  //           id: 3,
-  //           value: 'энергичность и коммуникабельность',
-  //         },
-  //       ],
-  //       ourOffer: [
-  //         {
-  //           id: 1,
-  //           value: 'пятидневный рабочий график с 09:00-18:00',
-  //         },
-  //         {
-  //           id: 2,
-  //           value: 'конкурентную оплату труда',
-  //         },
-  //         {
-  //           id: 3,
-  //           value: 'карьерный рост',
-  //         },
-  //         {
-  //           id: 4,
-  //           value: 'дружелюбный коллектив и развитие вместе с компанией',
-  //         },
-  //         {
-  //           id: 5,
-  //           value: 'кафетерий льгот и различные тимбилдинги',
-  //         },
-  //       ],
-  //     },
-  //     respond: {
-  //       city: 'Душанбе',
-  //       money: '2000 смн',
-  //       schedule: 'Полный день'
-  //     }
-  //   },
-  //   {
-  //     id: 5,
-  //     name: 'Специалист по работе с клиентами',
-  //     describe_1: 'Открываем двери для крутых специалистов, желающих присоединиться к отделу по работе с клиентами. Мы ценим и новичков, и профессионалов с опытом.',
-  //     detail: {
-  //       describe: 'Мы в поисках специалиста по работе с государственными органами, мастера дипломатии и переговоров, готового эффективно решать вопросы и вносить вклад в развитие АИЦТ.',
-  //       responsibilities: [
-  //         {
-  //           id: 1,
-  //           value: 'вести переговоры с проблемными клиентами',
-  //         },
-  //         {
-  //           id: 2,
-  //           value: 'тесно работать с государственными органами и судами',
-  //         },
-  //         {
-  //           id: 3,
-  //           value: 'подготавливать заявления и письма;',
-  //         },
-  //         {
-  //           id: 4,
-  //           value: 'рассматривать заявления заёмщиков и другие виды заявлений',
-  //         },
-  //       ],
-  //       requirements: [
-  //         {
-  //           id: 1,
-  //           value: 'юридическое образование',
-  //         },
-  //         {
-  //           id: 2,
-  //           value: 'опыт работы от 1 года в сфере юриспруденции',
-  //         },
-  //         {
-  //           id: 3,
-  //           value: 'свободное владение таджикским и русским языками',
-  //         },
-  //       ],
-  //       additionally: [
-  //         {
-  //           id: 1,
-  //           value: 'честность и скромность',
-  //         },
-  //         {
-  //           id: 2,
-  //           value: 'ответственность и пунктуальность',
-  //         },
-  //         {
-  //           id: 3,
-  //           value: 'энергичность и коммуникабельность',
-  //         },
-  //       ],
-  //       ourOffer: [
-  //         {
-  //           id: 1,
-  //           value: 'пятидневный рабочий график с 09:00-18:00',
-  //         },
-  //         {
-  //           id: 2,
-  //           value: 'конкурентную оплату труда',
-  //         },
-  //         {
-  //           id: 3,
-  //           value: 'карьерный рост',
-  //         },
-  //         {
-  //           id: 4,
-  //           value: 'дружелюбный коллектив и развитие вместе с компанией',
-  //         },
-  //         {
-  //           id: 5,
-  //           value: 'кафетерий льгот и различные тимбилдинги',
-  //         },
-  //       ],
-  //     },
-  //     respond: {
-  //       city: 'Душанбе',
-  //       money: '2000 смн',
-  //       schedule: 'Полный день'
-  //     }
-  //   },
-  // ],
   ContactForm: [
     {
       id: 1,
@@ -804,61 +188,6 @@ const initialState: defSliceType = {
       name: 'subjectRequest',
     },
   ],
-  // ActivityPage: {
-  //   mainActivity: {
-  //     describe: 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sint quidem fugit provident quibusdam voluptatum neque, voluptatem praesentium cumque doloremque distinctio',
-  //   },
-  //   activityBlocks: [
-  //     {
-  //       id: 1,
-  //       name: 'Электронное правительство',
-  //       describe: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus odio laborum quod ipsa aliquam magnam laudantium reprehenderit accusamus esse quae.',
-  //       blockIcon: '/img/electroIconActivity.svg'
-  //     },
-  //     {
-  //       id: 2,
-  //       name: 'Электронное правительство',
-  //       describe: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus odio laborum quod ipsa aliquam magnam laudantium reprehenderit accusamus esse quae.',
-  //       imgBlocks: {
-  //         img_1: '/ActivityImage/img_1.svg',
-  //         img_2: '/ActivityImage/img_2.svg',
-  //         img_3: '/ActivityImage/img_3.svg',
-  //       }
-  //     },
-  //     {
-  //       id: 3,
-  //       name: 'Электронное правительство',
-  //       describe: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus odio laborum quod ipsa aliquam magnam laudantium reprehenderit accusamus esse quae.',
-  //       blockIcon: '/img/electroIconActivity.svg'
-  //     },
-  //     {
-  //       id: 4,
-  //       name: 'Электронное правительство',
-  //       describe: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus odio laborum quod ipsa aliquam magnam laudantium reprehenderit accusamus esse quae.',
-  //       imgBlocks: {
-  //         img_1: '/ActivityImage/img_1.svg',
-  //         img_2: '/ActivityImage/img_2.svg',
-  //         img_3: '/ActivityImage/img_3.svg',
-  //       }
-  //     },
-  //     {
-  //       id: 5,
-  //       name: 'Электронное правительство',
-  //       describe: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus odio laborum quod ipsa aliquam magnam laudantium reprehenderit accusamus esse quae.',
-  //       blockIcon: '/img/electroIconActivity.svg'
-  //     },
-  //     {
-  //       id: 6,
-  //       name: 'Электронное правительство',
-  //       describe: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus odio laborum quod ipsa aliquam magnam laudantium reprehenderit accusamus esse quae.',
-  //       imgBlocks: {
-  //         img_1: '/ActivityImage/img_1.svg',
-  //         img_2: '/ActivityImage/img_2.svg',
-  //         img_3: '/ActivityImage/img_3.svg',
-  //       }
-  //     },
-  //   ]
-  // },
   PrivacyPolicyData: [
     {
       id: 1,
@@ -906,6 +235,46 @@ const initialState: defSliceType = {
       describe: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit architecto tempore ea qui dolores accusantium tempora est soluta quaerat consequatur doloribus obcaecati quo cumque odit harum fugit modi possimus veniam quae odio nam ipsam vel, quas voluptate. Odit, ipsam distinctio!',
     },
   ],
+  ActivityButtonData: [
+    {
+      id: 1,
+      name: "Проектное управление",
+      icon: '/img/doc-activity.svg',
+    },
+    {
+      id: 2,
+      name: "Телекоммуникации и связь",
+      icon: '/img/wifi-activity.svg',
+    },
+    {
+      id: 3,
+      name: "Электронная промышленность",
+      icon: '/img/chip-activity.svg',
+    },
+    {
+      id: 4,
+      name: "IT - отрасль",
+      icon: '/img/it-activity.svg',
+    },
+    {
+      id: 5,
+      name: "Электронное производство",
+      icon: '/img/setting-activity.svg',
+    },
+  ],
+  mainBlock_2: {
+    imgUrl: {
+      url: '/img/president_1.webp',
+      alt: 'president',
+    },
+    subtitle: 'Оффициальный сайт',
+    title: 'Основатель мира и национального единства - Лидер нации, Президент Республики Таджикистан уважаемый Эмомали Рахмон',
+    describe: 'Для перехода на официальный сайт президента Республики Таджикистан нажмите на кнопку “Перейти на сайт”',
+    Button: {
+      txt: 'Перейти на сайт',
+      link: 'https://president.tj/',
+    }
+  },
   urlHosting: 'http://ferma.ru.swtest.ru',
   Loading: false,
   DarkMode: Boolean(localStorage.getItem('DarkMode')),
