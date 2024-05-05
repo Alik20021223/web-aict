@@ -3,9 +3,10 @@ import './App.css'
 import { Footer } from './widgets/Footer'
 import { Header } from './widgets/Header/Header'
 import { ExtraQuestion } from './widgets/extraQuestion'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from './state/store'
 import { useEffect, useState } from 'react'
+import { handleDefaultLang } from './state/defState/defSlice'
 
 
 function App() {
@@ -13,6 +14,12 @@ function App() {
   const [DarkMode, setDarkMode] = useState<boolean>(false)
   const sizeText = useSelector((state: RootState) => state.aict.sizeText);
   const DarkModeState = useSelector((state: RootState) => state.aict.DarkMode)
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(handleDefaultLang())
+  }, [])
+  
 
   useEffect(() => {
     const localDarkMode = localStorage.getItem('DarkMode')

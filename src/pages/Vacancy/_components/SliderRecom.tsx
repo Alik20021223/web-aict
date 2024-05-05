@@ -1,14 +1,12 @@
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/navigation';
-import { PressBlock, PropsPress} from './MediaBlock';
 import { Autoplay } from 'swiper/modules';
+import { RecomBlockVacancy } from './recomBlockVacancy';
+import { VacancyApp } from './type';
 
-interface PropsSlider {
-    data: PropsPress[]
-}
 
-export const ProjectSlider = ({ data }: PropsSlider) => {
+export const RecomSlider = ({ data }: VacancyApp) => {
 
     return (
         <Swiper
@@ -22,8 +20,8 @@ export const ProjectSlider = ({ data }: PropsSlider) => {
 
         >
             {data.map((item) => (
-                <SwiperSlide key={item.imagePath || item.filePath}>
-                    <PressBlock data={item} />
+                <SwiperSlide key={item.id}>
+                    <RecomBlockVacancy data={item} />
                 </SwiperSlide>
             ))}
         </Swiper>

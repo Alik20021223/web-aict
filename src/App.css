@@ -16,6 +16,21 @@
     font-size: 16px;
     line-height: 20px;
   }
+
+  .blockDescribeVacancy p {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+    color: #374151;
+    margin-left: 8px;
+  }
+
+  .blockDescribeVacancy h1 {
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 20px;
+    margin-bottom: 20px;
+  }
 }
 
 @media screen and (min-width: 1024px) {
@@ -36,6 +51,25 @@
     font-size: 20px;
     line-height: 28px;
   }
+
+  .blockDescribeVacancy p {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    margin-left: 8px;
+  }
+
+  .blockDescribeVacancy h1 {
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 24px;
+    margin-bottom: 20px;
+  }
+}
+
+
+.dark .blockDescribeVacancy {
+  color: white;
 }
 
 @media screen and (max-width: 768px) {

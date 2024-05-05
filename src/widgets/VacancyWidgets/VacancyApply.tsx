@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { VacancyApplyBlock } from '../../pages/Vacancy/_components/vacancyPage/vacancyApplyBlock';
+import { VacancyApplyBlock } from '../../pages/Vacancy/_components/vacancyApplyBlock';
 import { SuccessPage } from '../../core/SuccessPage';
 
 export const ParentApplyVacancy = () => {

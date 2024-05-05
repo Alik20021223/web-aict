@@ -1,10 +1,6 @@
-import { SearchInput } from "../../core/searchInput"
-
 import { useSelector } from "react-redux"
 import { RootState } from "../../state/store"
-
 import { useTranslation } from "react-i18next"
-
 import { Key, useEffect, useState } from "react"
 import api from "../../api"
 import { useResize } from "../../hook/useWidthSize"
@@ -12,6 +8,7 @@ import { Tab, Tabs } from "@nextui-org/react"
 import { useSearchParams } from "react-router-dom"
 import { CategoryType, documentBlockType } from "./_components/types"
 import { DocAll } from "./_components/docAll"
+import SearchInput from "../../widgets/search/searchInput"
 
 
 
@@ -79,7 +76,7 @@ export const Documents = () => {
         <div className="container m-auto space-y-[50px] sm:px-5 max-sm:px-5">
             <h1 className="font-bold text-4xl">{t('Documents')}</h1>
             <div className="w-full">
-                <SearchInput txt="searchDocuments" />
+                <SearchInput placeholder="searchDocuments" type="document"/>
             </div>
             {isLoading ? <div>Loading</div> :
                 <div className="space-y-10">

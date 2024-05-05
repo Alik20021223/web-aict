@@ -24,7 +24,6 @@ const DocumentBlock: React.FC<DocumentBlockApp> = ({ data }) => {
 
     const handleDowland = () => {
         const aTag = document.createElement('a')
-        
         aTag.href = `${urlHosting}/${filePath}`
         aTag.setAttribute("dowland", title),
         aTag.click();

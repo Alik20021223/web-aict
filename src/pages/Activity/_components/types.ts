@@ -16,9 +16,7 @@ export type blockActivity = {
   descriptionRu: string,
   descriptionEn: string,
   iconPath: string,
-  imagePath1: string,
-  imagePath2: string,
-  imagePath3: string,
   created_at: string,
   updated_at: string,
+  [key: string]: any;
 };

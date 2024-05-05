@@ -1,13 +1,13 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Button, Input, Textarea } from "@nextui-org/react";
-import { DownloadIcon } from "../../../../core/icons/download";
+import { DownloadIcon } from "../../../core/icons/download";
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../../../state/store';
-import { handleChangeLoading } from '../../../../state/defState/defSlice';
-import { LoadingOverlay } from '../../../../core/Loading';
+import { RootState } from '../../../state/store';
+import { handleChangeLoading } from '../../../state/defState/defSlice';
+import { LoadingOverlay } from '../../../core/Loading';
 import { useTranslation } from 'react-i18next';
 
-interface Props {
+interface PropsBlock {
   onSubmit: () => void;
 }
 
@@ -19,7 +19,7 @@ export interface FormFieldsVacancy {
   selectedFile: string
 }
 
-export const VacancyApplyBlock: React.FC<Props> = ({ onSubmit }) => {
+export const VacancyApplyBlock: React.FC<PropsBlock> = ({ onSubmit }) => {
   const [formData, setFormData] = useState<FormFieldsVacancy>({
     name: '',
     phone: '',
@@ -38,7 +38,7 @@ export const VacancyApplyBlock: React.FC<Props> = ({ onSubmit }) => {
 
   useEffect(() => validateForm(), [formData])
 
-  const {t} = useTranslation()
+  const { t } = useTranslation()
 
   // функия при добавления file
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -109,7 +109,7 @@ export const VacancyApplyBlock: React.FC<Props> = ({ onSubmit }) => {
 
   return (
     <div className="container m-auto max-sm:px-5 sm:px-5">
-      <div className="md:bg-white md:shadow-md max-md:bg-transparent md:rounded-xl ">
+      <div className="md:bg-white md:dark:bg-dark md:shadow-md max-md:bg-transparent md:rounded-xl ">
         <div className="flex w-full flex-col items-center justify-center py-[50px]">
           <h1 className="font-bold text-2xl mb-[50px]">{t('ApplyVacancy')}</h1>
           <form onSubmit={handleSubmit} className="space-y-[30px] lg:w-1/3 2xl:w-1/4 max-lg:w-1/2 max-md:w-full">

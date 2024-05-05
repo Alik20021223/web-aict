@@ -12,7 +12,7 @@ export const ProjectsCom = () => {
     const ProjectData = useSelector((state: RootState) => state.aict.ProjectData)
 
     return (
-        <div className='pt-16 w-full pb-16'>
+        <div className='w-full'>
             <div className='flex justify-between'>
                 <h1 className='font-bold xl:text-4xl 2xl:text-5xl lg:text-2xl md:text-xl text-foreground'>
                     {t("realizeProject")}

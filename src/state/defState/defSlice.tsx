@@ -3,7 +3,7 @@ import { PropsPress } from "../../pages/Main/_components/mainPage/MediaBlock.js"
 import { PropsProject } from "../../pages/Main/_components/mainPage/projectBlock.js";
 import { PropsMainBlock, PropsMainBlock_2, PropsPresident } from "../../pages/Main/_components/mainPage/mainBlock/types.js";
 import { Tabs } from "../../widgets/Header/types.js";
-import {  defaultType } from "../../pages/Vacancy/_components/vacancyPage/type.js";
+import { defaultType, FilterVacancy, FormDataEmpty } from "../../pages/Vacancy/_components/type.js";
 // import { ContactBlock } from "../../core/Contacts/type.js";
 // import { documentBlockType } from "../../pages/Documents/_components/types.js";
 // import { activityApp } from "../../pages/Activity/_components/types.js";
@@ -48,7 +48,6 @@ export interface defSliceType {
   mainBlock_2: PropsPresident;
   HeaderLink: Tabs[],
   // VacancyBlock: BlockVacancy[],
-  // filterVacancy: FilterVacancy[],
   ContactForm: defaultType[],
   // ActivityPage: activityApp,
   PrivacyPolicyData: blockPrivacy[]
@@ -58,6 +57,9 @@ export interface defSliceType {
   languages: lang[],
   DarkMode: boolean,
   sizeText: SliderValue,
+  FormDataNumber: FormDataEmpty,
+  formDataSubmit: boolean
+  formDataClean: boolean,
 }
 
 const initialState: defSliceType = {
@@ -79,7 +81,7 @@ const initialState: defSliceType = {
     {
       name: "Вакансии",
       values: [
-        { txt: "ActualVacancy", link: "vacancy" },
+        { txt: "ActualVacancy", link: "vacancies" },
       ],
     },
     {
@@ -345,7 +347,7 @@ const initialState: defSliceType = {
     {
       name: 'Вакансии',
       key: 'vacancy',
-      link: '/vacancy',
+      link: '/vacancies',
     },
     {
       name: 'Контакты',
@@ -760,76 +762,6 @@ const initialState: defSliceType = {
   //     }
   //   },
   // ],
-  // filterVacancy: [
-  //   {
-  //     id: 1,
-  //     label: 'Город',
-  //     value: 'city',
-  //     placeholder: 'selectCity',
-  //     items: [
-  //       {
-  //         id: 1,
-  //         value: 'Душанбе',
-  //       },
-  //       {
-  //         id: 2,
-  //         value: 'Худжанд',
-  //       },
-  //     ]
-  //   },
-  //   {
-  //     id: 2,
-  //     label: 'Опыт',
-  //     value: 'experience',
-  //     placeholder: 'SelectExperiense',
-  //     items: [
-  //       {
-  //         id: 1,
-  //         value: 'Без опыта',
-  //       },
-  //       {
-  //         id: 2,
-  //         value: 'Год',
-  //       },
-  //       {
-  //         id: 3,
-  //         value: '2 года и более',
-  //       },
-  //     ]
-  //   },
-  //   {
-  //     id: 3,
-  //     label: 'График работы',
-  //     value: 'graphic',
-  //     placeholder: 'SelectGraphic',
-  //     items: [
-  //       {
-  //         id: 1,
-  //         value: 'Полный день',
-  //       },
-  //       {
-  //         id: 2,
-  //         value: 'Удаленно',
-  //       },
-  //     ]
-  //   },
-  //   {
-  //     id: 4,
-  //     label: 'Отрасль',
-  //     value: 'activity',
-  //     placeholder: 'SelectType',
-  //     items: [
-  //       {
-  //         id: 1,
-  //         value: 'Финансы',
-  //       },
-  //       {
-  //         id: 2,
-  //         value: 'It - специалисты',
-  //       },
-  //     ]
-  //   },
-  // ],
   ContactForm: [
     {
       id: 1,
@@ -977,17 +909,23 @@ const initialState: defSliceType = {
   urlHosting: 'http://ferma.ru.swtest.ru',
   Loading: false,
   DarkMode: Boolean(localStorage.getItem('DarkMode')),
+  formDataSubmit: false,
+  formDataClean: false,
   sizeText: 0,
+  FormDataNumber: {
+    cityId: null,
+    experienceId: null,
+    scheduleId: null,
+    industryId: null,
+    salaryFrom: 0,
+    salaryTo: 0,
+  },
   languages: [
     { code: "en", name: "English", flag: "https://flagcdn.com/gb.svg" },
     { code: "ru", name: "Русский", flag: "https://flagcdn.com/ru.svg" },
     { code: "tj", name: "Тоҷикӣ", flag: "https://flagcdn.com/tj.svg" },
   ],
-  currentLang: {
-    code: 'ru',
-    name: 'Русский',
-    flag: 'https://flagcdn.com/ru.svg'
-  },
+  currentLang: { code: "ru", name: "Русский", flag: "https://flagcdn.com/ru.svg" },
 };
 
 const defSlice = createSlice({
@@ -1010,16 +948,43 @@ const defSlice = createSlice({
       console.log(action.payload);
       state.sizeText = action.payload
     },
+    handleDefaultLang: (state) => {
+      const defaultLang = state.languages.filter(lang => lang.code === localStorage.getItem('i18nextLng'))
+      if (defaultLang.length != 0) {
+        state.currentLang = defaultLang[0]
+      }
+    },
     handleChangeLang: (state, action) => {
       const selectedLang = state.languages.find(lang => lang.code === action.payload.code);
       if (selectedLang) {
         state.currentLang = selectedLang;
         localStorage.setItem("i18nextLng", selectedLang.code);
       }
+    },
+    handleCleanFilter: (state) => {
+      state.formDataClean = true
+      state.formDataSubmit = false
+    },
+    handleChangeFilter: (state, action) => {
+      state.formDataSubmit = true;
+      state.FormDataNumber = { ...action.payload };
+
+      Object.keys(state.FormDataNumber).forEach((key) => {
+        const fieldValue = state.FormDataNumber[key as keyof FormDataEmpty];
+
+        // Если значение равно 0, устанавливаем его в null
+        if (fieldValue === 0) {
+          delete state.FormDataNumber[key as keyof FormDataEmpty];
+        } else {
+          // В противном случае, преобразуем значение в число
+          state.FormDataNumber[key as keyof FormDataEmpty] = Number(fieldValue);
+        }
+      });
     }
+
   },
 });
 
-export const { toggleCount, handleChangeLoading, handleChangeLang, handleChangeBg, handleChangeText } = defSlice.actions;
+export const { toggleCount, handleChangeLoading, handleChangeLang, handleChangeBg, handleChangeText, handleChangeFilter, handleCleanFilter, handleDefaultLang } = defSlice.actions;
 
 export default defSlice.reducer;

@@ -8,7 +8,7 @@ export const AictMainBlock = () => {
 
 
     return (
-        <div className='mb-8'>
+        <div className=''>
             <MainBlock_1 data={mainBlockData_1} />
         </div>
     )

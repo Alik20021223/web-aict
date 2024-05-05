@@ -16,12 +16,12 @@ export const DescribeBlock = ({ data }: EventsBlockApp) => {
 
     return (
         <>
-            <div className="space-y-10 max-lg:space-y-6">
+            <div className="space-y-10 max-lg:space-y-6 text-foreground">
                 <h1 className="font-bold text-4xl max-xl:text-3xl max-lg:text-2xl max-md:text-2xl">{title}</h1>
                 <div className="rounded-lg overflow-hidden w-full h-full">
                     <img src={`${urlHosting}/${data.imagePath}`} alt={`${data.imagePath}-img`} className="object-cover w-full h-full" />
                 </div>
-                <div className="space-y-10 max-lg:space-y-6 blockDescribe" dangerouslySetInnerHTML={{ __html: description }}></div>
+                <div className="space-y-10 max-lg:space-y-6 blockDescribe " dangerouslySetInnerHTML={{ __html: description }}></div>
             </div>
         </>
     );

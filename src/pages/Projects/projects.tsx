@@ -50,8 +50,6 @@ export const Projects = () => {
         apiUrl = `/projects/per-page/${pageAdaptive}/${selected}?page=${pageParam}`;
         break;
     }
-
-    console.log(apiUrl);
     
 
     api

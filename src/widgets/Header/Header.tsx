@@ -1,9 +1,9 @@
 import { NavbarCom } from './Navbar'
 import { HeaderMobile } from './HeaderMobile'
-import { SearchInput } from '../../core/searchInput'
 import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
 import { VisibleBtn } from '../../core/VisibleBtn'
+import SearchInput from '../search/searchInput'
 
 
 export const Header = () => {
@@ -35,7 +35,7 @@ export const Header = () => {
                     </div>
                 </div>
                 <div className='my-5'>
-                    <SearchInput txt='SearchForSite' />
+                    <SearchInput placeholder='SearchForSite' />
                 </div>
                 <div className=''>
                     <NavbarCom />

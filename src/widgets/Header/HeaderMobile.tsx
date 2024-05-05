@@ -2,10 +2,10 @@ import React from 'react'
 import { Navbar, NavbarBrand, NavbarContent, NavbarMenuToggle, NavbarMenu, NavbarMenuItem, Link } from "@nextui-org/react";
 import { useSelector } from 'react-redux';
 import { RootState } from '../../state/store';
-import { SearchInput } from '../../core/searchInput';
 import { useTranslation } from 'react-i18next';
 import { ExpandLess } from '@mui/icons-material';
 import ModalVisibleBtn from '../../core/ModalVisibleBtn';
+import SearchInput from '../search/searchInput';
 
 export const HeaderMobile = () => {
 
@@ -89,7 +89,7 @@ export const HeaderMobile = () => {
 
             </Navbar>
             <div className='my-2 hidden'>
-                <SearchInput txt='SearchForSite' />
+                <SearchInput placeholder='SearchForSite' />
             </div>
         </div>
     )

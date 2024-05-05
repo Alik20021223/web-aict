@@ -69,7 +69,7 @@ export const ProjectDescribe = () => {
         <div className="container m-auto sm:px-5 max-sm:px-5">
             <div className="bg-white rounded-xl shadow-md">
                 <div className='xl:px-28  xl:py-12 max-xl:px-12 max-xl:py-6 max-lg:px-8 max-lg:py-4 max-md:px-5 max-md:py-5'>
-                    <div className="flex space-x-1 mb-5">
+                    <div className="flex space-x-1 mb-5 text-foreground">
                         <Link to='/events'>{t('ourProjects')}</Link>
                         <span>-</span>
                         <NavLink to={`/events?filter=${time}&page=1`}>{time}</NavLink>

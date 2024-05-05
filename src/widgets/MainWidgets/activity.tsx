@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 export const Activity = () => {
   return (
-    <div className="pt-16 lg:pt-14  w-full pb-16 lg:pb-14">
+    <div className="w-full ">
       <div className="flex justify-between">
         <h1 className="font-bold xl:text-4xl 2xl:text-5xl max-sm:text-lg text-foreground lg:text-2xl">{t("activityAIDT")}</h1>
         <Link to="#" className="text-primary  font-semibold">
