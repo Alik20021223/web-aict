@@ -13,7 +13,7 @@ export const ErrorBlock = () => {
 
     return (
         <div className="bg-white">
-            <div className="container m-auto flex flex-col justify-center  items-center">
+            <div className="container mx-auto flex flex-col justify-center  items-center">
                 <div className=" max-lg:space-y-5 space-y-10 w-[50%] flex flex-col items-center">
                     <div className="overflow-hidden max-lg:w-[350px] max-lg:h-[350px] w-[550px] h-[550px]">
                         <img src="/img/errorImg.svg" alt="error-404" className="object-cover w-full h-full" />

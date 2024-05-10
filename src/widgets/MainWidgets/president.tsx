@@ -2,28 +2,15 @@ import { useSelector } from 'react-redux'
 import { RootState } from '../../state/store'
 import { MainBlock_2 } from '../../pages/Main/_components/mainPage/mainBlock/mainBlock_2'
 import { MainBlock_3 } from '../../pages/Main/_components/mainPage/mainBlock/mainBlock_3'
-import { useEffect, useState } from 'react'
-import api from '../../api'
-import { PropsMainBlock_2 } from '../../pages/Main/_components/mainPage/mainBlock/types'
+import React from 'react'
+import { PropsApp } from '../../pages/Main/_components/mainPage/mainBlock/types'
 
-export const PresidentBlock = () => {
+export const PresidentBlock: React.FC<PropsApp> = ({data}) => {
 
     const blockData_2 = useSelector((state: RootState) => state.aict.mainBlock_2)
 
-    const [data, setData] = useState<PropsMainBlock_2 | undefined>()
+    const mainBlockData = data[0]
 
-    useEffect(() => {
-        api.get('articles/per-page/1')
-            .then((res => {
-                setData(res.data.data[0])
-            }))
-            .catch(err => console.log(err))
-    }, [])
-
-    
-
-    
-    
 
     return (
         <>
@@ -32,7 +19,7 @@ export const PresidentBlock = () => {
                     <MainBlock_2 data={blockData_2} />
                 </div>
                 <div className='w-[37%] sm:hidden max-sm:hidden lg:block'>
-                    {data && <MainBlock_3 data={data} />}
+                    <MainBlock_3 data={mainBlockData} />
                 </div>
             </div>
         </>

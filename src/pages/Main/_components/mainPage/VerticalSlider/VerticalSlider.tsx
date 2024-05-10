@@ -30,7 +30,7 @@ export const VerticalSlider: FC<TVerticalSliderProps> = ({ currentPoint, sliders
               </div>
               <div className="self-baseline">
                 <Link to='/activity'>
-                  <ButtonCom>{t('learnMore')}</ButtonCom>
+                  <ButtonCom>{t('more')}</ButtonCom>
                 </Link>
               </div>
             </div>

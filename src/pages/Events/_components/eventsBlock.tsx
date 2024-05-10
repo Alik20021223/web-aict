@@ -24,6 +24,9 @@ export const EventsBlock: React.FC<EventsBlockApp> = ({ data }) => {
 
     const title = currentLang.code === 'ru' ? data.titleRu : currentLang.code === 'en' ? data.titleEn : data.titleTj;
     const description = currentLang.code === 'ru' ? data.descriptionRu : currentLang.code === 'en' ? data.descriptionEn : data.descriptionTj;
+    // console.log('description', description);
+    console.log('title', title);
+    
 
     const descriptionWithoutH5 = description.split(/<h5\b[^>]*>/)[0];
 

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button } from "@nextui-org/react";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../../state/store";
@@ -6,24 +6,20 @@ import { VerticalSlider } from "./VerticalSlider/VerticalSlider";
 import { ExpandLess, } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
 import { useResize } from "../../../../hook/useWidthSize";
-import api from "../../../../api";
 import { activity } from "./VerticalSlider/types";
 
-export const ActivityBlock = () => {
+interface ActivityBlockApp {
+  data: activity[]
+}
+
+export const ActivityBlock: React.FC<ActivityBlockApp> = ({data}) => {
   const ActivityButtonData = useSelector(
     (state: RootState) => state.aict.ActivityButtonData
   );
   const currentLang = useSelector((state: RootState) => state.aict.currentLang)
-  const [data, setData] = useState<activity[]>([])
   const [isActive, setActive] = useState<string>(ActivityButtonData[0].name);
   const [currentPoint, setCurrentPoint] = useState<number>(0);
   
-
-  useEffect(() => {
-    api.get('activities').then(res => {
-      setData(res.data.data.slice(0, 5))
-    }).catch(err => console.log(err))
-  }, [])
 
 
   const newData = data.map((item, index) => {

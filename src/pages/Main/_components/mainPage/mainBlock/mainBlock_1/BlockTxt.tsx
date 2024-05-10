@@ -46,7 +46,7 @@ export const BlockTxt: React.FC<BlockAppTxt> = ({ data, currentPoint }) => {
 
     return (
         <div className='overflow-hidden'>
-            <div className={`transition-all duration-200 min-h-full flex flex-col gap-6 h-[300px] max-xl:h-[270px] max-md:h-[250px] max-sm:h-[220px]`} style={{ transform: `translateY(${md ? currentPoint * -250 : xl ? currentPoint * -275 : sm ? currentPoint * -220 : lg ? currentPoint * -265 :currentPoint * -300}px)` }}>
+            <div className={`transition-all duration-200 min-h-full flex flex-col gap-6 h-[300px] max-xl:h-[270px] max-md:h-[250px] max-sm:h-[220px]`} style={{ transform: `translateY(${md ? currentPoint * -250 : xl ? currentPoint * -275 : sm ? currentPoint * -220 : lg ? currentPoint * -265 : currentPoint * -285}px)` }}>
                 {data.map((item, i) => (
                     <div className="w-[95%] mb-[50px]" key={i}>
                         <p className="font-medium xl:text-base lg:text-sm max-md:text-base max-sm:text-sm max-sm:mb-[15px]  mb-[25px] 2xl:mb-[40px] text-foreground">{formatDate(item.time)}</p>

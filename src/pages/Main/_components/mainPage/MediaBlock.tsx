@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 
 import { useSelector } from 'react-redux'
 import { RootState } from '../../../../state/store'
+import { useTranslation } from 'react-i18next'
 
 export type PropsPress = {
     category?: string;
@@ -28,6 +29,8 @@ export const PressBlock: React.FC<PressApp> = ({ data }) => {
     const currentLang = useSelector((state: RootState) => state.aict.currentLang)
     const urlHosting = useSelector((state: RootState) => state.aict.urlHosting)
 
+    const {t} = useTranslation()
+
     const formatDate = (dateString: string) => {
         const date = new Date(dateString);
         const day = date.getDate().toString().padStart(2, '0');
@@ -47,9 +50,9 @@ export const PressBlock: React.FC<PressApp> = ({ data }) => {
                 </div>
                 <div className='xl:p-6 md:p-4 max-md:p-6 2xl:p-7 lg:p-4 space-y-5  flex flex-col  text-textBlackAict dark:text-foreground rounded-b-xl'>
                     {data.category && <div className='rounded-[5px] py-2.5 md:py-2 px-4 md:px-3 w-fit bg-grayAict dark:bg-darkBg'>
-                        <p className='font-normal max-sm:text-sm max-md:text-lg text-foreground xl:text-sm md:text-xs lg:text-xs 2xl:text-xl'>{data.category}</p>
+                        <p className='font-normal max-sm:text-sm max-md:text-lg text-foreground xl:text-sm md:text-xs lg:text-xs 2xl:text-xl'>{t(`${data.category}Filter`)}</p>
                     </div>}
-                    <h1 className={`font-bold  2xl:text-4xl max-sm:text-lg text-wrap xl:text-xl max-md:text-xl lg:text-xl md:text-base line-clamp-3`}>
+                    <h1 className={`font-bold  2xl:text-2xl max-sm:text-lg text-wrap xl:text-xl max-md:text-xl lg:text-xl md:text-base line-clamp-3`}>
                         {title}
                     </h1>
                     {data.addressEn &&

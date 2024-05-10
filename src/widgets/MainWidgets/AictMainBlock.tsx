@@ -16,7 +16,7 @@ export const AictMainBlock = () => {
 
     return (
         <div className=''>
-            <MainBlock_1 data={data} />
+            
         </div>
     )
 }

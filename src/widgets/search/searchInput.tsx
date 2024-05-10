@@ -6,7 +6,7 @@ import api from "../../api";
 import ListboxWrapper from "./listBoxWrapper";
 import { RootState } from "../../state/store";
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 interface SearchInputProps {
     placeholder: string;
@@ -46,16 +46,31 @@ const SearchInput: React.FC<SearchInputProps> = ({ placeholder, type }) => {
     const [dataVacancy, setDataVacancy] = useState<VacancyApp>({ vacancies: [] });
     const [dataDocuments, setDataDocuments] = useState<DocumentApp>({ documents: [] });
     const [clear, setClear] = useState<boolean>(false);
+    const [locationChanged, setLocationChanged] = useState<boolean>(false);
+    const location = useLocation()
+    const [prevLocation, setPrevLocation] = useState(location);
 
 
     useEffect(() => {
-        console.log(type);
-        
+        if (prevLocation !== location) {
+            setPrevLocation(location);
+            setLocationChanged(true)
+        }
+    }, [location, prevLocation]);
+
+
+
+
+
+
+
+    useEffect(() => {
+
         const fetchData = async () => {
             try {
                 const res = await api.get(`search?q=${value}`);
                 const responseData = res.data;
-                if (value && !clear) {
+                if (value !== '') {
                     const filteredData: { [key: string]: FindBlock[] } = {};
                     Object.keys(responseData).forEach(key => {
                         if (Array.isArray(responseData[key]) && responseData[key].length > 0) {
@@ -64,33 +79,58 @@ const SearchInput: React.FC<SearchInputProps> = ({ placeholder, type }) => {
                                 ...item,
                                 arrayName: arrayName,
                             }));
+                            setData(filteredData)
                         }
                     });
-                    setData(filteredData);
+
                     if (type === 'vacancy') {
+
                         if (Array.isArray(responseData.vacancies) && responseData.vacancies.length > 0) {
                             setDataVacancy({ vacancies: responseData.vacancies.map((item: FindBlock) => ({ ...item, arrayName: 'vacancies' })) });
                         }
                     } else if (type === 'document') {
-                        
+
                         if (Array.isArray(responseData.documents) && responseData.documents.length > 0) {
                             setDataDocuments({ documents: responseData.documents.map((item: FindBlock) => ({ ...item, arrayName: 'documents' })) });
                         }
                     }
-                } else {
-                    setData({});
-                    setDataVacancy({ vacancies: [] });
-                    setDataDocuments({ documents: [] });
                 }
             } catch (error) {
                 console.log(error);
             }
         };
-        if(value) {
-            fetchData();
+
+        if (type === 'vacancy' && clear) {
+            setDataVacancy({ vacancies: [] })
+        } else if (type === 'document' && clear) {
+            setDataDocuments({ documents: [] })
+        } else if (clear) {
+            setData({})
         }
-        
-    }, [value, clear, type]);
+
+
+
+
+        if (value && !locationChanged) {
+            // Логика для выполнения запроса данных
+            setClear(false)
+            fetchData();
+        } else if (locationChanged) {
+            // Логика для выполнения действий при изменении location
+            setData({});
+            setDataVacancy({ vacancies: [] });
+            setDataDocuments({ documents: [] });
+            setValue('');
+            setLocationChanged(false);
+        } else {
+            // Логика для других случаев
+            setDataVacancy({ vacancies: [] });
+            setDataDocuments({ documents: [] });
+            setData({});
+        }
+
+    }, [value, clear, type, locationChanged]);
+
 
     const handleDownload = (filePath: string, title: string) => {
         const downloadLink = document.createElement('a');
@@ -99,9 +139,6 @@ const SearchInput: React.FC<SearchInputProps> = ({ placeholder, type }) => {
         downloadLink.click();
         downloadLink.remove();
     };
-
-    // console.log(dataDocuments);
-    
 
     const getValueByLanguage = (field: string) => {
         switch (currentLang.code) {

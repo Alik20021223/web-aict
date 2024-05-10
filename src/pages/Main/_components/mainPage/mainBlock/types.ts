@@ -41,5 +41,5 @@ export type PropsMainBlock_2 = {
 };
 
 export type PropsApp = {
-  data: PropsMainBlock_2;
+  data: PropsMainBlock_2[];
 };

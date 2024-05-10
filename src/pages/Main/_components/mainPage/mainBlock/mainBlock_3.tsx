@@ -1,14 +1,21 @@
 import { ExpandLess } from '@mui/icons-material'
 import React from 'react'
-import { PropsApp } from './types'
+import { PropsMainBlock_2 } from './types'
 import { Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { useSelector } from 'react-redux'
 import { RootState } from '../../../../../state/store'
 
+interface MainBlock_3App {
+  data: PropsMainBlock_2;
+}
 
 
-export const MainBlock_3: React.FC<PropsApp> = ({ data }) => {
+export const MainBlock_3: React.FC<MainBlock_3App> = ({ data }) => {
+
+  console.log(data);
+  
+
   const currentLang = useSelector((state: RootState) => state.aict.currentLang);
 
   const { t } = useTranslation()

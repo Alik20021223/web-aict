@@ -33,7 +33,6 @@ export interface defSliceType {
   iconsFooter: footerItem[];
   dataFooter: footerState[];
   ActivityButtonData: ActivityState[];
-  value: number;
   HeaderLink: Tabs[],
   ContactForm: defaultType[],
   mainBlock_2: PropsPresident,
@@ -47,6 +46,8 @@ export interface defSliceType {
   FormDataNumber: FormDataEmpty,
   formDataSubmit: boolean
   formDataClean: boolean,
+  loadingPage: boolean,
+  techPage: boolean,
 }
 
 const initialState: defSliceType = {
@@ -103,7 +104,6 @@ const initialState: defSliceType = {
       alt: "email",
     },
   ],
-  value: 0,
   HeaderLink: [
     {
       name: 'Главная',
@@ -123,7 +123,7 @@ const initialState: defSliceType = {
     {
       name: 'Документы',
       key: 'Documents',
-      link: '/document',
+      link: '/documents',
     },
     {
       name: 'Проекты',
@@ -277,7 +277,7 @@ const initialState: defSliceType = {
   },
   urlHosting: 'http://ferma.ru.swtest.ru',
   Loading: false,
-  DarkMode: Boolean(localStorage.getItem('DarkMode')),
+  DarkMode: false,
   formDataSubmit: false,
   formDataClean: false,
   sizeText: 0,
@@ -295,17 +295,19 @@ const initialState: defSliceType = {
     { code: "tj", name: "Тоҷикӣ", flag: "https://flagcdn.com/tj.svg" },
   ],
   currentLang: { code: "ru", name: "Русский", flag: "https://flagcdn.com/ru.svg" },
+  loadingPage: false,
+  techPage: false,
 };
 
 const defSlice = createSlice({
   name: "aict",
   initialState,
   reducers: {
-    toggleCount: (state) => {
-      state.value += 1;
+    handleLoadingPage: (state, action) => {
+      console.log(action.payload);
+      state.loadingPage = action.payload
     },
     handleChangeLoading: (state) => {
-      console.log('lox')
       state.Loading = !state.Loading
     },
     handleChangeBg: (state) => {
@@ -316,6 +318,12 @@ const defSlice = createSlice({
     handleChangeText: (state, action) => {
       console.log(action.payload);
       state.sizeText = action.payload
+    },
+    handleDefaultMode: (state) => {
+      const defaultMode = Boolean(localStorage.getItem('DarkMode'))
+      if (defaultMode !== undefined) {
+        state.DarkMode = defaultMode
+      }
     },
     handleDefaultLang: (state) => {
       const defaultLang = state.languages.filter(lang => lang.code === localStorage.getItem('i18nextLng'))
@@ -354,6 +362,16 @@ const defSlice = createSlice({
   },
 });
 
-export const { toggleCount, handleChangeLoading, handleChangeLang, handleChangeBg, handleChangeText, handleChangeFilter, handleCleanFilter, handleDefaultLang } = defSlice.actions;
+export const {
+  handleChangeLoading,
+  handleChangeLang,
+  handleChangeBg,
+  handleChangeText,
+  handleChangeFilter,
+  handleCleanFilter,
+  handleDefaultLang,
+  handleDefaultMode,
+  handleLoadingPage,
+} = defSlice.actions;
 
 export default defSlice.reducer;

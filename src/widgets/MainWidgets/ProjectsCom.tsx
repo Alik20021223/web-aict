@@ -1,21 +1,18 @@
 import { ProjectBlock, PropsProject } from '../../pages/Main/_components/mainPage/projectBlock'
 import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
-import { useEffect, useState } from 'react'
-import api from '../../api'
+import React from 'react'
+
+interface ProjectsComApp {
+    data: PropsProject[],
+}
 
 
-export const ProjectsCom = () => {
+export const ProjectsCom: React.FC<ProjectsComApp> = ({data}) => {
 
-    const [data, setData] = useState<PropsProject[]>([])
+    
 
     const {t} = useTranslation()
-
-    useEffect(() => {
-        api.get('projects/per-page/3').then(res => {
-            setData(res.data.data)
-        }).catch((err) => console.log(err))
-    }, [])
 
     return (
         <div className='w-full'>

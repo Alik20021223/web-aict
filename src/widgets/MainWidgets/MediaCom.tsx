@@ -25,7 +25,7 @@ export const MediaCom = ({ data, name, link, linkTxt }: Block) => {
             </div>
             <div className='grid md:grid-cols-3 gap-5 max-lg:hidden  justify-between mt-[40px] h-full w-full'>
                 {data.map((item) => (
-                    <PressBlock data={item} />
+                    <PressBlock key={item.id} data={item} />
                 ))}
             </div>
             <div className='max-lg:flex hidden mt-6'>
