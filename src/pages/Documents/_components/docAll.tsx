@@ -11,7 +11,7 @@ interface docLawApp {
 
 export const DocAll: React.FC<docLawApp> = ({ data, currentPage, total, handleChangePage }) => {
 
-    console.log(data);
+
 
 
     return (

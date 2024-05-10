@@ -5,6 +5,8 @@ import React, { Key, useEffect, useState } from "react";
 import { BlogAll } from "./_components/blogAll";
 import { useResize } from "../../hook/useWidthSize";
 import api from "../../api";
+import { useDispatch } from "react-redux";
+import { handleLoadingPage } from "../../state/defState/defSlice";
 
 export const Blog = () => {
   const { t } = useTranslation();
@@ -20,10 +22,11 @@ export const Blog = () => {
   const maxLg = width < 1280 && width > 768;
   const maxMd = width < 768;
 
+  const dispatch = useDispatch();
 
   const pageAdaptive = maxLg ? 6 : (maxMd ? 4 : 9)
 
-  
+
 
 
 
@@ -45,11 +48,14 @@ export const Blog = () => {
     api
       .get(`${apiUrl}/per-page/${pageAdaptive}?page=${pageParam}`)
       .then((res) => {
+        // dispatch(handleLoadingPage(true));
         setData(res.data.data);
         setTotalPage(res.data.last_page)
       })
       .catch((err) => {
         console.log(err);
+      }).finally(() => {
+        // dispatch(handleLoadingPage(false)); // Показать индикатор загрузки в блоке finally
       });
   }, [currentPage, searchParams, selected]);
 

@@ -2,8 +2,11 @@ import React from 'react';
 import { BlockAppTxt } from './types';
 import { ExpandLess, ExpandMore } from '@mui/icons-material';
 import { Button } from '@nextui-org/react';
+import { RootState } from '../../../../../../state/store';
+import { useSelector } from 'react-redux';
 
 export const ImageSlider: React.FC<BlockAppTxt> = ({ data, currentPoint, handleNextClick, handlePrevClick }) => {
+  const urlHosting = useSelector((state: RootState) => state.aict.urlHosting)
   const sliderHeight = 350;
 
   return (
@@ -32,8 +35,8 @@ export const ImageSlider: React.FC<BlockAppTxt> = ({ data, currentPoint, handleN
               style={{ height: `${sliderHeight}px` }}
             >
               <img
-                src={item.imgUrl.url}
-                alt={item.imgUrl.alt}
+                src={`${urlHosting}/${item.imagePath}`}
+                alt={item.slug}
                 className="w-full h-full rounded-xl max-w-full object-cover"
               />
             </div>

@@ -1,7 +1,5 @@
-import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App.tsx'
-import './index.css'
 import { NextUIProvider } from "@nextui-org/react";
 import { Provider } from 'react-redux';
 import { store } from './state/store.ts';
@@ -13,7 +11,6 @@ import { ParentApplyVacancy } from './widgets/VacancyWidgets/VacancyApply.tsx';
 import { Contacts } from './pages/Contacts/contacts.tsx';
 import { ParentContactForm } from './widgets/ContactsWidgets/ParentContactForm.tsx';
 import NextTopLoader from 'nextjs-toploader';
-import './i18n.ts'
 import { AboutUs } from './pages/AboutUs/aboutUs.tsx';
 import { Documents } from './pages/Documents/documents.tsx';
 import { Activity } from './pages/Activity/activity.tsx';
@@ -29,8 +26,9 @@ import { Questions } from './pages/Questions/questions.tsx';
 import { EventDescribe } from './pages/Events/EventDescribe.tsx';
 import { Gallery } from './pages/PhotoAndVideo/PhotoAndVideo.tsx';
 
-
-
+import './i18n.ts'
+import './index.css'
+import { LoadingPage } from './core/LoadingPage.tsx';
 
 const router = createBrowserRouter([
   {
@@ -39,7 +37,7 @@ const router = createBrowserRouter([
     // errorElement: <ErrorBlock />,
     children: [
       {
-        path: '/',
+        path: '',
         element: <Main />
       },
       {
@@ -67,7 +65,7 @@ const router = createBrowserRouter([
         element: <AboutUs />
       },
       {
-        path: 'document',
+        path: 'documents',
         element: <Documents />
       },
       {
@@ -119,22 +117,22 @@ const router = createBrowserRouter([
 ]);
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
-  <React.StrictMode>
-    <NextUIProvider>
-      <Provider store={store}>
-        <NextTopLoader
-          color="#00AF66"
-          initialPosition={0.08}
-          crawlSpeed={10}
-          height={3}
-          showSpinner={true}
-          easing="ease"
-          speed={500}
-          shadow="0 0 10px #2299DD,0 0 5px #2299DD"
-        />
+  <NextUIProvider>
+    <Provider store={store}>
+      <NextTopLoader
+        color="#00AF66"
+        initialPosition={0.08}
+        crawlSpeed={10}
+        height={3}
+        showSpinner={true}
+        easing="ease"
+        speed={500}
+        shadow="0 0 10px #2299DD,0 0 5px #2299DD"
+      />
+      <LoadingPage>
         <RouterProvider router={router}></RouterProvider>
-      </Provider>
-    </NextUIProvider >
-  </React.StrictMode>,
+      </LoadingPage>
+    </Provider>
+  </NextUIProvider>,
 )
 

@@ -82,7 +82,7 @@ export const RespondBlock: React.FC<Props> = ({ city, schedules, experiences, mo
                     </div>
                 </div>
                 <div>
-                    <Link to={`/vacancy/${slug}/apply`}>
+                    <Link to={`/vacancies/${slug}/apply`}>
                         <ButtonCom>{t('Reply')}</ButtonCom>
                     </Link>
                 </div>

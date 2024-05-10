@@ -1,3 +1,5 @@
+import { SwiperTxt } from "./mainBlock_1/types";
+
 export type PropsPresident = {
   imgUrl: {
     url: string;
@@ -16,31 +18,28 @@ export type PresidentApp = {
   data: PropsPresident;
 };
 
-type imgUrlType = {
-    url: string;
-    alt: string;
-}
 
-export type PropsMainBlock = {
-  id: number;
-  date: string;
-  name: string;
-  link: string;
-  describe: string;
-  imgUrl: imgUrlType
-};
+
+
 
 export type PropsMainApp = {
-    data: PropsMainBlock[];
-  };
+  data: SwiperTxt[];
+};
 
 export type PropsMainBlock_2 = {
-  link: string;
-  date: string;
-  name: string;
-  describe: string;
+  category: string;
+  id: number;
+  titleTj: string;
+  titleRu: string;
+  titleEn: string;
+  descriptionTj: string;
+  descriptionRu: string;
+  descriptionEn: string;
+  slug: string;
+  imagePath: string;
+  created_at: string;
 };
 
 export type PropsApp = {
-  data: PropsMainBlock_2;
+  data: PropsMainBlock_2[];
 };

@@ -1,10 +1,8 @@
-import { useSelector } from "react-redux"
 import { useParams } from "react-router-dom"
-import { RootState } from "../../state/store"
 import { RespondBlock } from "../../widgets/VacancyWidgets/respondBlock";
 import { DescribeVacancy } from "../../widgets/VacancyWidgets/describeVacancy";
 import { RecomVacancy } from "../../widgets/VacancyWidgets/recomVacancy";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import api from "../../api";
 import { BlockVacancyType } from "./_components/type";

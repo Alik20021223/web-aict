@@ -53,7 +53,7 @@ export const HeaderMobile = () => {
                     <div className='mx-auto  container sm:px-5 max-sm:px-5'>
                         <NavbarMenuItem className='mb-5'>
                             <div className='my-2'>
-                                <SearchInput txt='SearchForSite' />
+                                <SearchInput placeholder='SearchForSite' />
                             </div>
                             <div className='w-full'>
                                 <ModalVisibleBtn />

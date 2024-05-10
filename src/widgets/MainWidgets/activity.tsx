@@ -1,8 +1,14 @@
 import { t } from "i18next";
 import { ActivityBlock } from "../../pages/Main/_components/mainPage/activityBlock";
 import { Link } from "react-router-dom";
+import { activity } from "../../pages/Main/_components/mainPage/VerticalSlider/types";
+import React from "react";
 
-export const Activity = () => {
+interface ActivityApp {
+  data: activity[];
+}
+
+export const Activity: React.FC<ActivityApp> = ({ data }) => {
   return (
     <div className="w-full ">
       <div className="flex justify-between">
@@ -12,7 +18,7 @@ export const Activity = () => {
           <span className="max-sm:block hidden sm font-Manrope">{t("more")}</span>
         </Link>
       </div>
-      <ActivityBlock />
+      <ActivityBlock data={data} />
     </div>
   );
 };

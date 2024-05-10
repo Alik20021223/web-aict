@@ -13,10 +13,7 @@ interface SliderPersonalApp {
     data: personalAgency[]
 }
 
-export const SliderPersonal: React.FC<SliderPersonalApp> = ({ data }) => {
-
-    console.log(data.length);
-    
+export const SliderPersonal: React.FC<SliderPersonalApp> = ({ data }) => {   
 
     const { width } = useResize()
 

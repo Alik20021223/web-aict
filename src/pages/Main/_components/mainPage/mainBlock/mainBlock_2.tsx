@@ -22,9 +22,9 @@ export const MainBlock_2: React.FC<PresidentApp> = ({ data }) => {
                 </div>
                 <div className='flex w-[53%] max-md:w-full  flex-col justify-between'>
                     <div className='flex  flex-col items-start max-md:mb-8'>
-                        <p className='text-describe max-md:text-lg max-sm:text-sm 2xl:text-lg max-md:mb-5  lg:text-sm  text-foreground  xl:mb-[25px] lg:mb-[15px]'>{data.subtitle}</p>
+                        <p className='text-describe max-md:text-lg max-sm:text-sm 2xl:text-lg max-md:mb-5  lg:text-sm  text-foreground  xl:mb-[25px] lg:mb-[15px]'>{t('officialSite')}</p>
                         <h1 className='font-bold max-md:text-2xl max-sm:text-lg  2xl:text-2xl max-md:mb-5 xl:mb-5 2xl:mb-8 text-foreground   lg:mb-[10px] xl:text-lg lg:text-base'>{data.title}</h1>
-                        <p className='text-describe max-md:text-lg max-sm:text-sm 2xl:text-2xl lg:text-sm  text-foreground xl:mb-[60px] lg:mb-10'>{data.describe}</p>
+                        <p className='text-describe max-md:text-lg max-sm:text-sm 2xl:text-lg lg:text-sm  text-foreground xl:mb-[60px] lg:mb-10'>{data.describe}</p>
                     </div>
                     <Link className='w-full' to={data.Button.link}>
                         <ButtonCom>{t("learnMore")}</ButtonCom>

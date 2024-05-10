@@ -46,7 +46,7 @@ export const BlockVacancy: React.FC<VacancyApp> = ({ data, currentPage, total, h
                 </div>
                 {data.map((item) => (
                     <div className="bg-white shadow-md last:mb-0 rounded-xl" key={item.id}>
-                        <Link to={`/vacancy/${item.slug}`}>
+                        <Link to={`/vacancies/${item.slug}`}>
                             <div className="p-6 flex flex-col items-start">
                                 <h1 className="lg:text-2xl font-bold max-sm:text-lg sm:text-lg md:text-xl">{item[getValueByLanguage("title")]}</h1>
                                 <p className="lg:text-base text-[#777B80] my-6 font-normal max-sm:text-xs sm:text-xs md:text-sm">{item[getValueByLanguage("content")].split(/<h5\b[^>]*>/)[0]}</p>

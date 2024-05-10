@@ -21,7 +21,7 @@ export const DescribeBlock = ({ data }: EventsBlockApp) => {
                 <div className="rounded-lg overflow-hidden w-full h-full">
                     <img src={`${urlHosting}/${data.imagePath}`} alt={`${data.imagePath}-img`} className="object-cover w-full h-full" />
                 </div>
-                <div className="space-y-10 max-lg:space-y-6 blockDescribe " dangerouslySetInnerHTML={{ __html: description }}></div>
+                <div className="space-y-12 max-lg:space-y-6" dangerouslySetInnerHTML={{ __html: description }}></div>
             </div>
         </>
     );

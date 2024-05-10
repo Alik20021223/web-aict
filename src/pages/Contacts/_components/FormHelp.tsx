@@ -138,7 +138,7 @@ export const FormHelp: React.FC<Props> = ({ onSubmit }) => {
                                         variant="bordered"
                                         color="primary"
                                         classNames={{ trigger: 'bg-white' }}
-                                        className="max-w-full !bg-white tex-black"
+                                        className="max-w-full tex-black"
                                         key={item.name}
                                         onChange={handleChange}
                                     >
