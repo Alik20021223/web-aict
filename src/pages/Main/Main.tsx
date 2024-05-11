@@ -37,22 +37,22 @@ export const Main = () => {
                 // Имитация запросов с задержкой 1 секунда
                 // await new Promise(resolve => setTimeout(resolve, 1000));
 
-                // Здесь должны быть ваши вызовы API
-                // const blogRes = await api.get('blog/per-page/3');
-                // const galleriesRes = await api.get('galleries/per-page/9');
-                // const eventsRes = await api.get('events/per-page/3');
-                // const articlesRes = await api.get('articles/per-page/1');
-                // const activitiesRes = await api.get('activities');
-                // const projectsRes = await api.get('projects/per-page/3');
+                
+                const blogRes = await api.get('blog/per-page/3');
+                const galleriesRes = await api.get('galleries/per-page/9');
+                const eventsRes = await api.get('events/per-page/3');
+                const articlesRes = await api.get('articles/per-page/1');
+                const activitiesRes = await api.get('activities');
+                const projectsRes = await api.get('projects/per-page/3');
 
-                // Установка данных состояния, используя полученные данные
-                // setBlogData(blogRes.data.data);
-                // const filteredGalleries = galleriesRes.data.data.filter((gallery: PropsPress) => gallery.type !== 'video').slice(0, 3);
-                // setGallery(filteredGalleries);
-                // setDataMain(eventsRes.data.data);
-                // setArticle(articlesRes.data.data);
-                // setDataActivity(activitiesRes.data.data.slice(0, 5));
-                // setDataProject(projectsRes.data.data);
+                
+                setBlogData(blogRes.data.data);
+                const filteredGalleries = galleriesRes.data.data.filter((gallery: PropsPress) => gallery.type !== 'video').slice(0, 3);
+                setGallery(filteredGalleries);
+                setDataMain(eventsRes.data.data);
+                setArticle(articlesRes.data.data);
+                setDataActivity(activitiesRes.data.data.slice(0, 5));
+                setDataProject(projectsRes.data.data);
             } catch (err) {
                 console.log(err);
             } finally {

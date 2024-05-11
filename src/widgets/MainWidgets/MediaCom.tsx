@@ -23,7 +23,7 @@ export const MediaCom = ({ data, name, link, linkTxt }: Block) => {
                 </h1>
                 <Link to={link} className='text-primary max-sm:text-sm xl:text-[18px] lg:text-base 2xl:text-2xl font-Manrope font-semibold'>{t(linkTxt)}</Link>
             </div>
-            <div className='grid md:grid-cols-3 gap-5 max-md:hidden mt-[40px] h-full w-full'>
+            <div className='grid md:grid-cols-3 gap-5 max-lg:hidden  justify-between mt-[40px] h-full w-full'>
                 {data.map((item) => (
                     <PressBlock key={item.id} data={item} />
                 ))}
