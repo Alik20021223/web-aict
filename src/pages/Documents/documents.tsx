@@ -104,7 +104,7 @@ export const Documents = () => {
                 <SearchInput placeholder="searchDocuments" type="document" />
             </div>
             <div className="space-y-10">
-                <div>
+                <div className="overflow-auto">
                     <Tabs
                         key="light"
                         color="primary"
@@ -127,7 +127,7 @@ export const Documents = () => {
                     <DocAll data={data} currentPage={currentPage} total={totalPage} handleChangePage={handleChangePage} />
                 </div>
             </div>
-        </div>a
+        </div>
     )
 
 
