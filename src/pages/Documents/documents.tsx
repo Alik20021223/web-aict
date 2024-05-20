@@ -112,9 +112,7 @@ export const Documents = () => {
                         radius="full"
                         variant="light"
                         size="lg"
-                        classNames={{ tab: ["!bg-[#FFFFFF]", "py-5", "px-8", "2xl:py-8", "2xl:px-10", "2xl:text-2xl",], tabList: ['flex', 
-                        'overflow-x-auto', 
-                        'whitespace-nowrap',] }}
+                        classNames={{ tab: ["!bg-[#FFFFFF]", "py-5", "px-8", "2xl:py-8", "2xl:px-10", "2xl:text-2xl",] }}
                         aria-label="Tabs variants"
                         onSelectionChange={handleSelectionChange}
                     >
