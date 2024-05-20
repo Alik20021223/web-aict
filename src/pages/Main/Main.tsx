@@ -32,16 +32,16 @@ export const Main = () => {
     const { data: projectData } = useMain('projects/per-page/3');
     const { data: partnersData } = useMain('partners/per-page/9');
 
-    // useEffect(() => {
-    //     setBlogData(blogDataFromApi);
-    //     setGalleryData(galleryDataFromApi);
-    //     setDataMain(eventData);
-    //     setDataArticle(articleData);
-    //     const slicedActivityData = activityData.slice(0, 5);
-    //     setDataActivity(slicedActivityData);
-    //     setDataProject(projectData);
-    //     setDataPartners(partnersData)
-    // }, []);
+    useEffect(() => {
+        setBlogData(blogDataFromApi);
+        setGalleryData(galleryDataFromApi);
+        setDataMain(eventData);
+        setDataArticle(articleData);
+        const slicedActivityData = activityData.slice(0, 5);
+        setDataActivity(slicedActivityData);
+        setDataProject(projectData);
+        setDataPartners(partnersData)
+    }, []);
 
     useEffect(() => {
         setBlogData(blogDataFromApi);
