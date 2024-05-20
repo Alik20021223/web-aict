@@ -1,7 +1,5 @@
-import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App.tsx'
-import './index.css'
 import { NextUIProvider } from "@nextui-org/react";
 import { Provider } from 'react-redux';
 import { store } from './state/store.ts';
@@ -13,7 +11,6 @@ import { ParentApplyVacancy } from './widgets/VacancyWidgets/VacancyApply.tsx';
 import { Contacts } from './pages/Contacts/contacts.tsx';
 import { ParentContactForm } from './widgets/ContactsWidgets/ParentContactForm.tsx';
 import NextTopLoader from 'nextjs-toploader';
-import './i18n.ts'
 import { AboutUs } from './pages/AboutUs/aboutUs.tsx';
 import { Documents } from './pages/Documents/documents.tsx';
 import { Activity } from './pages/Activity/activity.tsx';
@@ -23,13 +20,15 @@ import { Projects } from './pages/Projects/projects.tsx';
 import { Events } from './pages/Events/Events.tsx';
 import { BlogDescribe } from './widgets/Blog/BlogDescribe.tsx';
 import { ProjectDescribe } from './pages/Projects/_components/projectDescribe.tsx';
-// import { ErrorBlock } from './core/Error.tsx';
+import { ErrorBlock } from './core/Error.tsx';
 import { Partners } from './pages/Partners/partners.tsx';
 import { Questions } from './pages/Questions/questions.tsx';
 import { EventDescribe } from './pages/Events/EventDescribe.tsx';
 import { Gallery } from './pages/PhotoAndVideo/PhotoAndVideo.tsx';
-
-
+import './i18n.ts'
+import './index.css'
+import { PhotoDescribe } from './pages/PhotoAndVideo/PhotoDescribe.tsx';
+import { Personal } from './pages/Personal/personal.tsx';
 
 
 const router = createBrowserRouter([
@@ -39,102 +38,129 @@ const router = createBrowserRouter([
     // errorElement: <ErrorBlock />,
     children: [
       {
-        path: '/',
-        element: <Main />
+        path: '',
+        element: <Main />,
+        errorElement: <ErrorBlock />,
       },
       {
         path: 'vacancies',
         element: <Vacancy />,
+        errorElement: <ErrorBlock />,
       },
       {
         path: 'vacancies/:slug',
         element: <VacancyDescribe />,
+        errorElement: <ErrorBlock />,
       },
       {
         path: 'vacancies/:slug/apply',
-        element: <ParentApplyVacancy />
+        element: <ParentApplyVacancy />,
+        errorElement: <ErrorBlock />,
       },
       {
         path: 'contact',
-        element: <Contacts />
+        element: <Contacts />,
+        errorElement: <ErrorBlock />,
       },
       {
         path: 'contact/form-help',
-        element: <ParentContactForm />
+        element: <ParentContactForm />,
+        errorElement: <ErrorBlock />,
       },
       {
         path: 'about',
-        element: <AboutUs />
+        element: <AboutUs />,
+        errorElement: <ErrorBlock />,
+      },
+      {
+        path: 'about/personals/:personId',
+        element: <Personal />,
+        errorElement: <ErrorBlock />,
       },
       {
         path: 'documents',
-        element: <Documents />
+        element: <Documents />,
+        errorElement: <ErrorBlock />,
       },
       {
         path: 'activity',
-        element: <Activity />
+        element: <Activity />,
+        errorElement: <ErrorBlock />,
       },
       {
         path: 'PrivacyPolicy',
         element: <Policy />,
+        errorElement: <ErrorBlock />,
       },
       {
         path: 'blog',
         element: <Blog />,
+        errorElement: <ErrorBlock />,
       },
       {
         path: 'blog/:category/:slug',
-        element: <BlogDescribe />
+        element: <BlogDescribe />,
+        errorElement: <ErrorBlock />,
       },
       {
         path: 'projects/:time/:slug',
-        element: <ProjectDescribe />
+        element: <ProjectDescribe />,
+        errorElement: <ErrorBlock />,
       },
       {
         path: 'projects',
-        element: <Projects />
+        element: <Projects />,
+        errorElement: <ErrorBlock />,
       },
       {
         path: 'partners',
-        element: <Partners />
+        element: <Partners />,
+        errorElement: <ErrorBlock />,
       },
       {
         path: 'questions',
         element: <Questions />,
+        errorElement: <ErrorBlock />,
       },
       {
         path: 'events',
-        element: <Events />
+        element: <Events />,
+        errorElement: <ErrorBlock />,
       },
       {
         path: 'events/:time/:slug',
-        element: <EventDescribe />
+        element: <EventDescribe />,
+        errorElement: <ErrorBlock />,
       },
       {
         path: 'gallery',
-        element: <Gallery/>
+        element: <Gallery />,
+        errorElement: <ErrorBlock />,
+      },
+      {
+        path: 'gallery/:category/:slug',
+        element: <PhotoDescribe />,
+        errorElement: <ErrorBlock />,
       },
     ]
   }
 ]);
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
-  <React.StrictMode>
-    <NextUIProvider>
-      <Provider store={store}>
-        <NextTopLoader
-          color="#00AF66"
-          initialPosition={0.08}
-          crawlSpeed={10}
-          height={3}
-          showSpinner={true}
-          easing="ease"
-          speed={500}
-          shadow="0 0 10px #2299DD,0 0 5px #2299DD"
-        />
-        <RouterProvider router={router}></RouterProvider>
-      </Provider>
-    </NextUIProvider >
-  </React.StrictMode>,
+  <NextUIProvider>
+    <Provider store={store}>
+      <NextTopLoader
+        color="#00AF66"
+        initialPosition={0.08}
+        crawlSpeed={10}
+        height={3}
+        showSpinner={true}
+        easing="ease"
+        speed={500}
+        shadow="0 0 10px #2299DD,0 0 5px #2299DD"
+      />
+      <RouterProvider router={router}></RouterProvider>
+    </Provider>
+  </NextUIProvider>,
 )
 

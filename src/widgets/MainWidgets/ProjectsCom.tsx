@@ -1,4 +1,4 @@
-import { ProjectBlock, PropsProject } from '../../pages/Main/_components/mainPage/projectBlock'
+import { ProjectBlock, PropsProject } from '../../pages/Main/_components/projectBlock'
 import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
 import React from 'react'
@@ -8,19 +8,19 @@ interface ProjectsComApp {
 }
 
 
-export const ProjectsCom: React.FC<ProjectsComApp> = ({data}) => {
+export const ProjectsCom: React.FC<ProjectsComApp> = ({ data }) => {
 
-    
 
-    const {t} = useTranslation()
+
+    const { t } = useTranslation()
 
     return (
         <div className='w-full'>
             <div className='flex justify-between'>
-                <h1 className='font-bold xl:text-4xl 2xl:text-5xl lg:text-2xl md:text-xl text-foreground'>
+                <h1 className='font-bold xl:text-4xl 2xl:text-5xl max-sm:text-lg max-lg:text-2xl max-md:text-xl text-foreground lg:text-3xl'>
                     {t("realizeProject")}
                 </h1>
-                <Link to="/projects" className='text-primary 2xl:text-2xl xl:text-[18px] lg:text-base font-semibold md:text-base'>
+                <Link to="/projects" className='text-primary 2xl:text-2xl xl:text-[18px] max-lg:text-base font-semibold md:text-base'>
                     <span className="max-sm:hidden font-Manrope">{t('moreInfo')}</span>
                     <span className="max-sm:block hidden font-Manrope">{t('more')}</span>
                 </Link>

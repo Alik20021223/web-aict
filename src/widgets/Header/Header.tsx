@@ -17,30 +17,27 @@ export const Header = () => {
                 <div className='max-lg:hidden  py-5 flex items-center justify-between'>
                     <div className='flex items-start'>
                         <Link to='/'>
-                            <div className='flex  items-center'>
-                                <div className='border-r-2 2xl:border-r-4 pr-[15px] 2xl:pr-[30px]'>
-                                    <img src='/img/simbal.svg' className='2xl:scale-150' alt="gerb" />
+                            <div className='flex items-center'>
+                                <img src='/img/simbal.svg' className='2xl:scale-150' alt="gerb" />
+                                <div className='px-4 2xl:px-7 text-xs font-semibold'>
+                                    <h1 className='2xl:text-xl lg:text-sm xl:text-base text-foreground'>{t(`companyName1`).toUpperCase()}</h1>
+                                    <h1 className='2xl:text-xl lg:text-sm xl:text-base text-foreground'>{t(`companyName2`).toUpperCase()}</h1>
                                 </div>
-                                <div className='flex pl-[15px] 2xl:pl-[30px]'>
-                                    <img src="/img/logo.svg" className='2xl:scale-150' alt="logo" />
-                                    <div className='ml-[20px] lg:w-[52%] 2xl:ml-[40px] text-xs font-semibold text-wrap'>
-                                        <h1 className='2xl:text-xl lg:text-sm xl:text-base text-foreground'>{t(`companyName`).toUpperCase()}</h1>
-                                    </div>
-                                </div>
+                                <img src="/img/logo.svg" className='2xl:scale-150' alt="logo" />
                             </div>
                         </Link>
                     </div>
                     <div className='max-lg:hidden'>
                         <VisibleBtn />
                     </div>
-                </div>
+                </div >
                 <div className='my-5'>
                     <SearchInput placeholder='SearchForSite' />
                 </div>
                 <div className=''>
                     <NavbarCom />
                 </div>
-            </div>
+            </div >
         </>
     )
 }

@@ -3,9 +3,13 @@ import { useTranslation } from "react-i18next";
 import { useEffect, useState } from "react";
 import api from "../../api";
 import { ContactBlock } from "../../core/Contacts/type";
+import { useDispatch } from "react-redux";
+import { setLoadingPage } from "../../state/pagesSlice";
 
 
 export const OurContacts = () => {
+
+  const dispatch = useDispatch()
 
   const { t } = useTranslation();
   const [data, setData] = useState<ContactBlock>({
@@ -29,7 +33,12 @@ export const OurContacts = () => {
 
 
   useEffect(() => {
-    api.get('contacts').then(res => setData(res.data)).catch(err => console.log(err))
+    api.get('contacts').then(res => {
+      dispatch(setLoadingPage(true))
+      setData(res.data)
+    }).catch(err => console.log(err)).finally(() => {
+      dispatch(setLoadingPage(false))
+    })
   }, [])
 
   return (

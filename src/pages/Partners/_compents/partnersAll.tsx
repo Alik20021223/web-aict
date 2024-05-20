@@ -17,7 +17,7 @@ export const PartnersAll: React.FC<PartnersAllApp> = ({ data, total, currentPage
     return (
 
         <div className="flex items-center flex-col space-y-10">
-            <div className="grid xl:grid-cols-3 max-xl:grid-cols-2 xl:gap-10 max-xl:gap-8 max-md:gap-0 max-md:grid-cols-1 max-md:space-y-6 w-full">
+            <div className="grid xl:grid-cols-3 max-xl:grid-cols-2 xl:gap-10 max-xl:gap-8 max-md:gap-0 max-md:grid-cols-1 max-md:gap-6 w-full">
                 {data.map((item) => (
                     <div key={item.id} className="h-full ">
                         <PartnersBlock data={item} />

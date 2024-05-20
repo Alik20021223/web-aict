@@ -5,6 +5,7 @@ import { useSearchParams } from "react-router-dom"
 import React, { Key, useEffect, useState } from "react"
 import { useResize } from "../../hook/useWidthSize"
 import api from "../../api"
+import { ErrorBlock } from "../../core/Error"
 
 
 
@@ -17,6 +18,7 @@ export const Projects = () => {
   const [data, setData] = React.useState([]);
   const [currentPage, setCurrentPage] = React.useState<number>(1);
   const [totalPage, setTotalPage] = React.useState<number>(1);
+  const [errorPage, setError] = useState<boolean>(false);
 
   const { width } = useResize();
   const maxLg = width < 1280 && width > 768;
@@ -50,7 +52,7 @@ export const Projects = () => {
         apiUrl = `/projects/per-page/${pageAdaptive}/${selected}?page=${pageParam}`;
         break;
     }
-    
+
 
     api
       .get(apiUrl)
@@ -58,8 +60,8 @@ export const Projects = () => {
         setData(res.data.data);
         setTotalPage(res.data.last_page)
       })
-      .catch((err) => {
-        console.log(err);
+      .catch(() => {
+        setError(true)
       });
   }, [currentPage, searchParams, selected]);
 
@@ -82,7 +84,7 @@ export const Projects = () => {
   };
 
   return (
-    <div className="container m-auto sm:px-5 max-sm:px-5 mt-11">
+    errorPage ? <ErrorBlock /> : <div className="container m-auto sm:px-5 max-sm:px-5 mt-11">
       <div className="space-y-10">
         <h1 className="font-bold text-4xl 2xl:text-5xl">{t("ourProjects")}</h1>
         <div>
@@ -104,7 +106,7 @@ export const Projects = () => {
           </Tabs>
         </div>
         <ProjectsAll data={data} total={totalPage} currentPage={currentPage} handleChangePage={handleChangePage} />
-      </div>
-    </div>
+      </div >
+    </div >
   )
 }

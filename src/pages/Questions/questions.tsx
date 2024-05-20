@@ -7,6 +7,7 @@ import { AccordionOpen } from "../../core/icons/AccordionOpen"
 import { Recommendation } from "../../widgets/ContactsWidgets/Recomendation"
 import { useSelector } from "react-redux"
 import { RootState } from "../../state/store"
+import { ErrorBlock } from "../../core/Error"
 
 
 
@@ -14,14 +15,15 @@ export const Questions = () => {
     const [IsData, setData] = useState<QuesType[]>([])
     const currentLang = useSelector((state: RootState) => state.aict.currentLang)
     const DarkMode = useSelector((state: RootState) => state.aict.DarkMode)
+    const [errorPage, setError] = useState<boolean>(false);
 
     const { t } = useTranslation()
 
     useEffect(() => {
         api.get('questions/per-page/10').then(res => {
             setData(res.data.data)
-        }).catch(err => {
-            console.log(err);
+        }).catch(() => {
+            setError(true)
         })
     }, [])
 
@@ -33,7 +35,7 @@ export const Questions = () => {
     }));
 
     return (
-        <div className="container m-auto sm:px-5 max-sm:px-5">
+        errorPage ? <ErrorBlock /> : <div className="container m-auto sm:px-5 max-sm:px-5">
             <div className="px-16 py-14 max-lg:px-8 max-lg:py-7 max-md:px-5 max-md:py-6 bg-white rounded-xl shadow-md max-md:space-y-8">
                 <div className="flex justify-between items-start">
                     <div className="space-y-4">

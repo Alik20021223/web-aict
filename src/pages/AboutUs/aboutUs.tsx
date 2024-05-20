@@ -8,8 +8,11 @@ import { StructureAgency } from "./_components/structureAgency"
 import { PersonalAgency } from "./_components/personalAgency"
 import { useEffect, useState } from "react"
 import { AboutAgencyType, AboutAgencyTypeLang } from "./_components/types"
-import { useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { RootState } from "../../state/store"
+import { setLoadingPage } from "../../state/pagesSlice"
+import { ErrorBlock } from "../../core/Error"
+
 
 
 
@@ -25,14 +28,19 @@ export const AboutUs = () => {
         }
     );
     const [isDataPerson, setPersonData] = useState([]);
+    const [errorPage, setError] = useState<boolean>(false);
     const currentLang = useSelector((state: RootState) => state.aict.currentLang);
-    const [isLoading, setLoading] = useState<boolean>(false);
+
+    const dispatch = useDispatch()
+
+
 
     useEffect(() => {
         const fetchData = async () => {
             try {
+                dispatch(setLoadingPage(true))
                 const aboutResponse = await api.get('about');
-                const personalsResponse = await api.get('personals');
+                const personalsResponse = await api.get('personals')
 
                 const aboutData = aboutResponse.data;
                 const personalsData = personalsResponse.data;
@@ -40,10 +48,10 @@ export const AboutUs = () => {
 
                 setData(about);
                 setPersonData(personalsData);
-                setLoading(false);
             } catch (error) {
-                console.error("Error fetching data:", error);
-                setLoading(false);
+                setError(true);
+            } finally {
+                dispatch(setLoadingPage(false))
             }
         };
 
@@ -64,7 +72,7 @@ export const AboutUs = () => {
     };
 
     return (
-        isLoading ? (<div>Loading...</div>) : (<div className="container space-y-[88px] m-auto sm:px-5 max-sm:px-5">
+        errorPage ? <ErrorBlock /> : (<div className="container space-y-[88px] m-auto sm:px-5 max-sm:px-5">
             <AboutAgency data={isData.about} />
             <HistoryAgency data={isData.history} />
             <PowerAgency data={isData.power} />

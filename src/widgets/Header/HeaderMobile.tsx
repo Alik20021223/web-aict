@@ -1,25 +1,34 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Navbar, NavbarBrand, NavbarContent, NavbarMenuToggle, NavbarMenu, NavbarMenuItem, Link } from "@nextui-org/react";
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../state/store';
 import { useTranslation } from 'react-i18next';
 import { ExpandLess } from '@mui/icons-material';
 import ModalVisibleBtn from '../../core/ModalVisibleBtn';
 import SearchInput from '../search/searchInput';
+import { lang } from '../../core/langSelect';
+import { handleChangeLang } from '../../state/defState/defSlice';
 
 export const HeaderMobile = () => {
 
     const { t, i18n } = useTranslation()
-
-    const [isMenuOpen, setIsMenuOpen] = React.useState<boolean>(false);
-    const [language, setLanguage] = React.useState<string>('ru');
     const data = useSelector((state: RootState) => state.aict.HeaderLink)
+    const languages = useSelector((state: RootState) => state.aict.languages)
+    const currentLangState = useSelector((state: RootState) => state.aict.currentLang)
+    const [isMenuOpen, setIsMenuOpen] = React.useState<boolean>(false);
+    const currentLangLocal = languages.find((item) => item.code === localStorage.getItem('i18nextLng'))
+    const [currentLang, setCurrentLang] = useState<lang>(
+        currentLangLocal ? currentLangLocal : currentLangState
+    )
 
-    const handleChangeLang = (lang: string) => {
+    const dispatch = useDispatch()
 
-        i18n.changeLanguage(lang)
-        setLanguage(lang)
+    
 
+    const handleChangeLanguage = (lang: lang) => {
+        i18n.changeLanguage(lang.code)
+        dispatch(handleChangeLang(lang))
+        setCurrentLang(lang)
     }
 
 
@@ -75,12 +84,12 @@ export const HeaderMobile = () => {
                         ))}
                         <div className='border-b-2 pt-2'></div>
                         <div className='pt-[25px]'>
-                            <h1 className='font-normal text-xl text-[#73787D]'>Выбор языка</h1>
+                            <h1 className='font-normal text-xl text-[#73787D]'>{t('Selectlang')}</h1>
                             <div className='border-2 mt-5 rounded-xl bg-white  w-full'>
                                 <div className='p-1 flex justify-between w-full'>
-                                    <div onClick={() => handleChangeLang('ru')} className={`w-full transition-all text-center px-6 py-2.5 ${language === 'ru' ? 'bg-primary text-white' : 'dark:text-white'} rounded-xl`}>Русский</div>
-                                    <div onClick={() => handleChangeLang('tj')} className={`w-full transition-all text-center px-6 py-2.5 ${language === 'tj' ? 'bg-primary text-white' : 'dark:text-white'} rounded-xl`}>Тоҷикӣ</div>
-                                    <div onClick={() => handleChangeLang('en')} className={`w-full transition-all text-center px-6 py-2.5 ${language === 'en' ? 'bg-primary text-white' : 'dark:text-white'} rounded-xl`}>English</div>
+                                    {languages.map((item) => (
+                                        <div key={item.code} onClick={() => handleChangeLanguage(item)} className={`w-full transition-all text-center px-6 py-2.5 ${currentLang.code === item.code ? 'bg-primary text-white' : 'dark:text-white'} rounded-xl`}>{item.name}</div>
+                                    ))}
                                 </div>
                             </div>
                         </div>

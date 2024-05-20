@@ -19,7 +19,7 @@ export const DocAll: React.FC<docLawApp> = ({ data, currentPage, total, handleCh
             <div className="rounded-xl shadow-md bg-white">
                 <div className="lg:p-[77px] max-lg:p-12 ">
                     <div className="w-full">
-                        <div className="grid lg:grid-cols-3 max-lg:grid-cols-2 max-md:grid-cols-1 lg:mb-12 max-lg:mb-10 gap-4 h-full w-full">
+                        <div className="grid lg:grid-cols-3 max-lg:grid-cols-2 max-md:grid-cols-1 max-md:gap-6 lg:mb-12 max-lg:mb-10 gap-4 h-full w-full">
                             {data && data.map((item) => (
                                 <div key={item.id} className="h-full">
                                     <DocumentBlock data={item} />

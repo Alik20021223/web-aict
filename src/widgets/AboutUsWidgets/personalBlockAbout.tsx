@@ -1,6 +1,7 @@
 import { useSelector } from "react-redux";
 import { RootState } from "../../state/store";
 import { personalAgency } from "../../pages/AboutUs/_components/types";
+import { Link } from "react-router-dom";
 
 interface PersonalBlockApp {
   data: personalAgency;
@@ -21,16 +22,16 @@ export const PersonalBlockAbout: React.FC<PersonalBlockApp> = ({ data }) => {
   const { fullName, position } = getDataByLanguage(data);
 
   return (
-    <div>
+    <Link to={`personals/${data.id}`}>
       <div className="flex max-md:bg-white rounded-xl max-md:p-4 md:border-2">
         <div className="overflow-hidden rounded-l-xl max-md:rounded-xl">
-          <img src={`${urlHosting}/${data.imagePath}`} alt={fullName} className="object-cover rounded-l-xl w-full h-full max-w-full" />
+          <img src={`${urlHosting}/${data.imagePath ? data.imagePath : 'files/images/1715854216_6645db8836f44.png'}`} alt={fullName} className="object-cover rounded-l-xl w-full h-full max-w-full" />
         </div>
         <div className="flex-col py-[46px] pl-[30px] flex space-y-5">
           <h1 className="font-semibold text-2xl">{fullName}</h1>
           <p className="font-normal text-[#8F8F8F] text-base">{position}</p>
         </div>
       </div>
-    </div>
+    </Link>
   );
 };

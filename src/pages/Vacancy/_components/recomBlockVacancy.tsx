@@ -30,7 +30,7 @@ export const RecomBlockVacancy: React.FC<RecomApp> = ({ data }) => {
             <Link to={`/vacancy/${data.slug}`}>
                 <div className="p-6 flex flex-col items-start">
                     <h1 className="lg:text-2xl font-bold max-sm:text-lg sm:text-lg md:text-xl">{data[getValueByLanguage("title")]}</h1>
-                    <p className="lg:text-base text-[#777B80] my-6 font-normal max-sm:text-xs sm:text-xs md:text-sm">{data[getValueByLanguage("content")].split(/<h5\b[^>]*>/)[0]}</p>
+                    <div className="lg:text-base text-[#777B80] my-6 font-normal max-sm:text-xs sm:text-xs md:text-sm" dangerouslySetInnerHTML={{__html: data[getValueByLanguage("content")]}}></div>
                     <div className="flex space-y-4 flex-col justify-between">
                         <div className="flex">
                             <img src='/icons/town.svg' alt="city" />

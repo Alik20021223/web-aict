@@ -28,8 +28,6 @@ export const EventsBlock: React.FC<EventsBlockApp> = ({ data }) => {
     console.log('title', title);
     
 
-    const descriptionWithoutH5 = description.split(/<h5\b[^>]*>/)[0];
-
     return (
         <Link to={`${time}/${data.slug}`}>
             <div className="bg-white rounded-xl shadow-md border-1 border-[#D3D8E3] h-full">
@@ -40,7 +38,7 @@ export const EventsBlock: React.FC<EventsBlockApp> = ({ data }) => {
                         </div>
                         <p className="font-normal text-sm">{formatDate(data.created_at)}</p>
                         <h1 className="font-semibold text-base">{title}</h1>
-                        <p className="font-normal text-sm overflow-hidden whitespace-normal line-clamp-3" >{descriptionWithoutH5}</p>
+                        <div className="font-normal text-sm overflow-hidden whitespace-normal line-clamp-3" dangerouslySetInnerHTML={{__html: description}}></div>
                     </div>
                 </div>
             </div>

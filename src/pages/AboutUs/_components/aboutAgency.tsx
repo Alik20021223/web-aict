@@ -18,7 +18,7 @@ export const AboutAgency: React.FC<AboutAgencyApp> = ({ data }) => {
             <div className="flex max-lg:pt-10 max-md:pt-5  max-lg:flex-col w-full max-xl:items-center justify-between">
                 <div className="xl:pl-[110px] max-xl:px-10 max-md:px-[25px]  xl:py-[110px] max-lg:w-full xl:w-[50%]">
                     <h1 className="xl:text-4xl 2xl:text-5xl max-lg:mb-10 mb-12 font-bold text-2xl">{t('aboutUsh1')}</h1>
-                    <p className="text-lg 2xl:text-2xl leading-10 font-normal dark:text-foreground text-[#53585E]">{data}</p>
+                    <div className="text-lg 2xl:text-2xl leading-10 font-normal dark:text-foreground text-[#53585E]" dangerouslySetInnerHTML={{__html: data}}></div>
                 </div>
                 <div className="w-[50%] max-lg:w-full relative">
                     <div className="z-10 relative max-lg:flex max-lg:justify-end max-lg:right-[140px] lg:right-[120px]  max-xl:bottom-0 2xl:left-[170px] xl:left-[70px]">

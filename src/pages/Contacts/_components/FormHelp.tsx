@@ -2,17 +2,19 @@ import { Button, Input } from "@nextui-org/react"
 import React, { useEffect, useRef, useState } from "react"
 import { DownloadIcon } from "../../../core/icons/download";
 import { Textarea } from "@nextui-org/react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../../state/store";
 import { countries } from 'country-list-json';
 import { Select, SelectItem, } from "@nextui-org/react";
 import { LoadingOverlay } from "../../../core/Loading";
 import { useTranslation } from "react-i18next";
+import { handleChangeLoading } from "../../../state/defState/defSlice";
+import { FormDataType } from "./types";
+import axios from "axios";
 
 interface Props {
-    onSubmit: () => void;
+    handleFormData: (data: FormDataType) => void;
 }
-
 
 interface formDataFields {
     fullName: string;
@@ -24,11 +26,11 @@ interface formDataFields {
     address: string;
     request: string;
     subjectRequest: string;
-    file?: string;
+    file: File | null;
 }
 
 
-export const FormHelp: React.FC<Props> = ({ onSubmit }) => {
+export const FormHelp: React.FC<Props> = ({ handleFormData }) => {
 
     const [formData, setFormData] = useState<formDataFields>({
         fullName: '',
@@ -40,16 +42,18 @@ export const FormHelp: React.FC<Props> = ({ onSubmit }) => {
         address: '',
         request: '',
         subjectRequest: '',
+        file: null,
     })
 
     const ContactForm = useSelector((state: RootState) => state.aict.ContactForm)
+    const loading = useSelector((state: RootState) => state.aict.Loading)
     const [selectedFile, setSelectedFile] = useState<File>();
-    const [loading, setLoading] = useState<boolean>(false);
     const [isButtonDisabled, setIsButtonDisabled] = useState(true);
+    const dispatch = useDispatch()
 
     const fileInputRef = useRef<HTMLInputElement>(null);
 
-    const {t} = useTranslation();
+    const { t } = useTranslation();
 
     useEffect(() => {
         if (Object.values(formData).every(value => value !== '' && value !== null)) {
@@ -59,17 +63,53 @@ export const FormHelp: React.FC<Props> = ({ onSubmit }) => {
 
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+        dispatch(handleChangeLoading())
         e.preventDefault();
-        setLoading(true)
-        setTimeout(() => {
-            setLoading(false)
-            onSubmit();
-        }, 3000)
-        console.log(formData)
+        const formDataFile = new FormData();
+
+        console.log(formData);
+        
+
+        if (selectedFile) {
+            formDataFile.append('file', selectedFile);
+        }
+        formDataFile.append('fullName', formData.fullName);
+        formDataFile.append('phone', formData.phone);
+        formDataFile.append('email', formData.email);
+        formDataFile.append('workPlace', formData.job);
+        formDataFile.append('country', formData.country);
+        formDataFile.append('city', formData.city);
+        formDataFile.append('street', formData.address);
+        formDataFile.append('theme', formData.request);
+        formDataFile.append('description', formData.subjectRequest)
+
+
+        axios.post('http://ferma.ru.swtest.ru/api/appeals', formDataFile, {
+            headers: {
+                'Content-Type': 'multipart/form-data',
+            },
+        }).then(res => {
+            console.log(res.data);
+
+            handleFormData(res.data)
+        })
+
+        setFormData({
+            fullName: '',
+            job: '',
+            country: '',
+            city: '',
+            phone: '',
+            email: '',
+            address: '',
+            request: '',
+            subjectRequest: '',
+            file: null,
+        });
+        setSelectedFile(undefined);
     }
 
     const validateForm = () => {
-
         const isFormValid = Object.values(formData).every(value => value !== '' && value !== null) && validateEmail(formData.email);
         setIsButtonDisabled(!isFormValid);
     };
@@ -77,10 +117,13 @@ export const FormHelp: React.FC<Props> = ({ onSubmit }) => {
 
     const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         if (event.target.files && event.target.files[0]) {
-            setSelectedFile(event.target.files[0]);
-            setFormData({ ...formData, file: URL.createObjectURL(event.target.files[0]) });
+            const fileExtra = event.target.files[0];
+            setSelectedFile(fileExtra);
+            setFormData({ ...formData, file: fileExtra });
         }
     };
+
+
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
         const { name, value } = e.target;
@@ -110,6 +153,11 @@ export const FormHelp: React.FC<Props> = ({ onSubmit }) => {
 
     const validateEmail = (email: string) => email.match(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i);
 
+    const isInvalidEmail = React.useMemo(() => {
+        if (formData.email === "") return false;
+
+        return validateEmail(formData.email) ? false : true;
+    }, [formData.email]);
 
     return (
         <div className="m-auto container sm:px-5 max-sm:px-5">
@@ -119,13 +167,24 @@ export const FormHelp: React.FC<Props> = ({ onSubmit }) => {
                     <div className="flex w-1/3 mt-[50px] space-y-[30px] flex-col">
                         <form action="submit" onSubmit={handleSubmit} className="space-y-[30px]">
                             {ContactForm.map((item) =>
-                                item.id !== 3 ? (
+                                item.name === 'email' ? (<Input
+                                    aria-label={item.name}
+                                    key={item.name}
+                                    type="text"
+                                    variant="bordered"
+                                    color={isInvalidEmail ? "danger" : "primary"}
+                                    onChange={handleChange}
+                                    name={item.name}
+                                    placeholder={t(item.value)}
+                                    errorMessage={(isInvalidEmail || formData.email === "") && "Please enter a valid email"}
+                                />) :
+                                (item.id !== 3 && item.name !== 'email' )? (
                                     <Input
                                         aria-label={item.name}
                                         key={item.name}
                                         type="text"
                                         variant="bordered"
-                                        color='primary'
+                                        color={"primary"}
                                         onChange={handleChange}
                                         name={item.name}
                                         placeholder={t(item.value)}

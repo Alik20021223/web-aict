@@ -21,6 +21,9 @@ const DocumentBlock: React.FC<DocumentBlockApp> = ({ data }) => {
         return `${day}.${month}.${year}`;
     };
 
+    console.log(data.activeFrom);
+    
+
 
     const handleDowland = () => {
         const aTag = document.createElement('a')

@@ -27,7 +27,6 @@ export const SliderPersonal: React.FC<SliderPersonalApp> = ({ data }) => {
             <Swiper
                 spaceBetween={50}
                 slidesPerView={mobileWidth ? 1 : 2}
-
                 modules={[Autoplay]}
                 className="!flex md:flex-col-reverse max-md:flex-col"
             >

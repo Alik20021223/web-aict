@@ -14,7 +14,7 @@ export const NavbarCom = () => {
 
     const data = useSelector((state: RootState) => state.aict.HeaderLink);
 
-    const {t} = useTranslation();
+    const { t } = useTranslation();
 
     React.useEffect(() => {
         const currentItem = data.find((item: Tabs) => item.link === location.pathname);
@@ -58,8 +58,8 @@ export const NavbarCom = () => {
         >
             <NavbarContent className="hidden sm:flex gap-4" justify="center">
                 {data.map((item) => (
-                    <Link  key={item.key} className="text-foreground " to={item.link}>
-                        <NavbarItem className="2xl:text-xl text-base" isActive={activeItem === item.key}  onClick={() => handleItemClick(item.key)}>
+                    <Link key={item.key} className="text-foreground " to={item.link}>
+                        <NavbarItem className="2xl:text-xl text-base" isActive={activeItem === item.key} onClick={() => handleItemClick(item.key)}>
                             {t(item.key)}
                         </NavbarItem>
                     </Link>

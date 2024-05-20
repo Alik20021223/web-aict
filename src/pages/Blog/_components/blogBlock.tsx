@@ -29,7 +29,6 @@ export const BlogBlock: React.FC<blogBlockApp> = ({ data }) => {
     const title = currentLang.code === 'ru' ? data.titleRu : currentLang.code === 'en' ? data.titleEn : data.titleTj;
     const description = currentLang.code === 'ru' ? data.descriptionRu : currentLang.code === 'en' ? data.descriptionEn : data.descriptionTj;
 
-    const descriptionWithoutH5 = description.split(/<h5\b[^>]*>/)[0];
 
     return (
         <Link to={`${data.category}/${data.slug}`}>
@@ -41,7 +40,7 @@ export const BlogBlock: React.FC<blogBlockApp> = ({ data }) => {
                         </div>
                         <p className="font-normal text-sm">{formatDate(created_at)}</p>
                         <h1 className="font-semibold text-base">{title}</h1>
-                        <p className="font-normal text-sm overflow-hidden whitespace-normal line-clamp-3" >{descriptionWithoutH5}</p>
+                        <div className="font-normal text-sm overflow-hidden whitespace-normal line-clamp-3" dangerouslySetInnerHTML={{__html: description}}></div>
                     </div>
                 </div>
             </div>

@@ -30,6 +30,15 @@ export type BlockTypeOffer = {
   [key: string]: any;
 };
 
+export type VacancyTg = {
+  vacancyId: number;
+  fullName: string;
+  phone: string;
+  email: string;
+  message?: string;
+  cvPath: string
+  vacancy: string;
+};
 
 export type BlockRespond = {
   cityId: BlockTypeOffer;

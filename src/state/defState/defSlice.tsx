@@ -1,10 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { Tabs } from "../../widgets/Header/types.js";
-import { defaultType, FormDataEmpty } from "../../pages/Vacancy/_components/type.js";
-import { blockPrivacy } from "../../pages/PrivacyPolicy/types.js";
+import { defaultType, FormDataEmpty } from "../../pages/Vacancy/_components/type.ts";
+import { blockPrivacy } from "../../pages/PrivacyPolicy/types.ts";
 import { lang } from "../../core/langSelect.js";
 import { SliderValue } from "@nextui-org/react";
-import { PropsPresident } from "../../pages/Main/_components/mainPage/mainBlock/types.js";
+import { PropsPresident } from "../../pages/Main/_components/mainBlock/types.ts";
 
 
 
@@ -57,7 +57,7 @@ const initialState: defSliceType = {
   },
   dataFooter: [
     {
-      name: "АИЦТ",
+      name: "companyNameShort",
       values: [
         { txt: "aboutUsh1", link: "/about" },
         { txt: "activity", link: "/activity" },
@@ -67,13 +67,13 @@ const initialState: defSliceType = {
       ],
     },
     {
-      name: "Вакансии",
+      name: "vacancy",
       values: [
         { txt: "ActualVacancy", link: "vacancies" },
       ],
     },
     {
-      name: "Оффициальные ресурсы",
+      name: "recourses",
       values: [
         { txt: "Президент РТ", link: "#" },
         { txt: "BlogH1", link: "/blog" },
@@ -134,6 +134,11 @@ const initialState: defSliceType = {
       name: 'События',
       key: 'events',
       link: '/events',
+    },
+    {
+      key: "BlogH1",
+      name: 'Блог',
+      link: "/blog"
     },
     {
       name: 'Вакансии',
@@ -277,7 +282,8 @@ const initialState: defSliceType = {
   },
   urlHosting: 'http://ferma.ru.swtest.ru',
   Loading: false,
-  DarkMode: false,
+  DarkMode: localStorage.getItem('DarkMode') ? JSON.parse(localStorage.getItem('DarkMode')!) : false,
+
   formDataSubmit: false,
   formDataClean: false,
   sizeText: 0,
@@ -312,18 +318,16 @@ const defSlice = createSlice({
     },
     handleChangeBg: (state) => {
       const selectMode = !state.DarkMode;
+      // console.log(selectMode);
+
       state.DarkMode = selectMode;
+
       localStorage.setItem("DarkMode", JSON.stringify(selectMode));
+      // console.log(Boolean(localStorage.getItem('DarkMode')));
     },
     handleChangeText: (state, action) => {
       console.log(action.payload);
       state.sizeText = action.payload
-    },
-    handleDefaultMode: (state) => {
-      const defaultMode = Boolean(localStorage.getItem('DarkMode'))
-      if (defaultMode !== undefined) {
-        state.DarkMode = defaultMode
-      }
     },
     handleDefaultLang: (state) => {
       const defaultLang = state.languages.filter(lang => lang.code === localStorage.getItem('i18nextLng'))
@@ -370,7 +374,6 @@ export const {
   handleChangeFilter,
   handleCleanFilter,
   handleDefaultLang,
-  handleDefaultMode,
   handleLoadingPage,
 } = defSlice.actions;
 

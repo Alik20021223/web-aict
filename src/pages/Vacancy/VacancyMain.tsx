@@ -1,6 +1,5 @@
-// import { useSelector } from "react-redux"
+
 import { BlockVacancy } from "../../widgets/VacancyWidgets/blockVacancy"
-// import { RootState } from "../../state/store"
 import { FilterCom } from "../../widgets/VacancyWidgets/filterCom"
 import { Button, useDisclosure } from "@nextui-org/react"
 import { ModalFilter } from "../../widgets/VacancyWidgets/ModalFilter"
@@ -10,7 +9,9 @@ import api from "../../api"
 import { BlockTypeOffer, BlockVacancyType } from "./_components/type"
 import { useSearchParams } from "react-router-dom"
 import { RootState } from "../../state/store"
-import { useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
+import { ErrorBlock } from "../../core/Error"
+import { setLoadingPage } from "../../state/pagesSlice"
 
 
 
@@ -27,18 +28,26 @@ const Vacancy = () => {
   const formData = useSelector((state: RootState) => state.aict.FormDataNumber);
   const formDataSubmit = useSelector((state: RootState) => state.aict.formDataSubmit);
   const cleanFilter = useSelector((state: RootState) => state.aict.formDataClean);
+  const [errorPage, setError] = useState<boolean>(false);
+
+  const dispatch = useDispatch()
 
 
 
+  useEffect(() => {
+    const timer = async () => {
+      try {
+        dispatch(setLoadingPage(true));
+        await new Promise(resolve => setTimeout(resolve, 750));
+      } finally {
+        dispatch(setLoadingPage(false));
+      }
+    };
 
-  // const formData = {
-  //   city: 1,
-  //   experience: 2,
-  //   graphic: 3,
-  //   activity: 4,
-  //   salaryFrom: 0,
-  //   salaryTo: 20000,
-  // }
+    timer();
+  }, []);
+
+
 
   useEffect(() => {
     if (formDataSubmit) {
@@ -76,8 +85,9 @@ const Vacancy = () => {
         setData(res.data.data);
         setTotalPage(res.data.last_page)
       })
-      .catch((err) => {
-        console.log(err);
+      .catch(() => {
+        
+        setError(true)
       });
     api.get('/cities').then(res => setCity(res.data)).catch(err => console.log(err))
     api.get('/industries').then(res => setIndustries(res.data)).catch(err => console.log(err))
@@ -95,7 +105,7 @@ const Vacancy = () => {
 
 
   return (
-    <div className='m-auto container sm:px-5 max-sm:px-5 w-full'>
+    errorPage ? <ErrorBlock /> : <div className='m-auto container sm:px-5 max-sm:px-5 w-full'>
       <div className="flex max-lg:flex-col max-lg:space-y-8 justify-between items-start">
         <div className="w-[35%] max-lg:hidden">
           <FilterCom city={cities} industries={industries} schedules={schedules} experiences={experiences} />

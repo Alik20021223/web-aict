@@ -20,7 +20,7 @@ export default function ModalVisibleBtn() {
             <Button
                 startContent={<SettingIcon />}
                 variant='light'
-                className="w-full dark:bg-darkBorder bg-[#f7f7f7]"
+                className="w-full dark:bg-darkBorder bg-[#f7f7f7] border-2"
                 onPress={onOpen}
             >
                 {t('settingWeb')}

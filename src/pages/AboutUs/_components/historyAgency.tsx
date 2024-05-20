@@ -21,7 +21,7 @@ export const HistoryAgency: React.FC<AboutAgencyApp> = ({ data }) => {
                 </div>
                 <div className="pl-[110px] max-xl:py-[40px] max-lg:py-[20px] max-lg:pl-0 py-[110px] w-[50%] max-lg:w-full">
                     <h1 className="xl:text-4xl sm:text-2xl max-sm:text-2xl 2xl:text-5xl max-lg:mb-[30px] mb-[50px] font-bold lg:text-2xl">{t('historyAgencyh1')}</h1>
-                    <p className="text-xl 2xl:text-2xl leading-10 font-normal dark:text-foreground text-[#53585E]">{data}</p>
+                    <div className="text-lg 2xl:text-2xl leading-10 font-normal dark:text-foreground text-[#53585E]" dangerouslySetInnerHTML={{__html: data}}></div>
                 </div>
             </div>
         </div>

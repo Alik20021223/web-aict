@@ -24,18 +24,17 @@ export const VacancyDescribe = () => {
                 const res = await api.get(`vacancies/${slug}`);
                 setData(res.data);
 
-                const formData = {
-                    cityId: null,
-                    experienceId: null,
-                    scheduleId: null,
-                    industryId: res.data.industryId,
-                };
-
-                console.log();
+                console.log(res.data.industryId);
                 
 
+                const formData = {
+                    industryId: res.data.industryId,
+                };                
+
                 const response = await api.post(`/vacancies/per-page/20/filter`, formData);
+
                 console.log(response);
+                
                 
                 setRecom(response.data.data);
             } catch (error) {
@@ -46,7 +45,7 @@ export const VacancyDescribe = () => {
         fetchData();
     }, []);
 
-
+    
 
     const { t } = useTranslation();
 

@@ -6,34 +6,56 @@ import { RootState } from '../../../state/store';
 import { handleChangeLoading } from '../../../state/defState/defSlice';
 import { LoadingOverlay } from '../../../core/Loading';
 import { useTranslation } from 'react-i18next';
+import api from '../../../api';
+import { useParams } from 'react-router-dom';
+import axios from 'axios';
+import { VacancyTg } from './type';
 
 interface PropsBlock {
-  onSubmit: () => void;
+  handleFormData: (data: VacancyTg) => void;
 }
 
 export interface FormFieldsVacancy {
-  name: string,
+  vacancyId: number,
+  fullName: string,
   phone: string,
   email: string,
   message?: string,
-  selectedFile: string
+  cv: File | null,
 }
 
-export const VacancyApplyBlock: React.FC<PropsBlock> = ({ onSubmit }) => {
-  const [formData, setFormData] = useState<FormFieldsVacancy>({
-    name: '',
-    phone: '',
-    email: '',
-    message: '',
-    selectedFile: ''
-  });
-
+export const VacancyApplyBlock: React.FC<PropsBlock> = ({ handleFormData }) => {
+  const { slug } = useParams();
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
   const [isFormInvalid, setIsFormInvalid] = useState(false);
-  const [selectedFile, setSelectedFile] = useState<File>(); // Add type undefined to selectedFile state
+  const [selectedFile, setSelectedFile] = useState<File>();
+  
   const fileInputRef = useRef<HTMLInputElement>(null);
   const loading = useSelector((state: RootState) => state.aict.Loading);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await api.get(`vacancies/${slug}`);
+      setFormData(prevFormData => ({
+        ...prevFormData,
+        vacancyId: response.data.id,
+      }));
+    };
+
+    fetchData();
+  }, []);
+
+  const [formData, setFormData] = useState<FormFieldsVacancy>({
+    vacancyId: 0,
+    fullName: '',
+    phone: '',
+    email: '',
+    message: '',
+    cv: null,
+  });
+
+
   const { email } = formData;
 
   useEffect(() => validateForm(), [formData])
@@ -43,10 +65,12 @@ export const VacancyApplyBlock: React.FC<PropsBlock> = ({ onSubmit }) => {
   // функия при добавления file
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files && event.target.files[0]) {
-      setSelectedFile(event.target.files[0]);
-      setFormData({ ...formData, selectedFile: URL.createObjectURL(event.target.files[0]) });
+      const file = event.target.files[0];
+      setSelectedFile(file);
+      setFormData({ ...formData, cv: file });
     }
   };
+
 
   // функия при изменении input and textArea
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -60,12 +84,17 @@ export const VacancyApplyBlock: React.FC<PropsBlock> = ({ onSubmit }) => {
     const gap = { ...formData }
     if (gap.message === '') {
       delete gap.message;
+      // delete gap.vacancyId;
     }
     setIsButtonDisabled(!Object.values(gap).every(Boolean) || !validateEmail(formData.email) || !selectedFile);
   }
 
+
+
   // функия нажатия submit
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    
+    dispatch(handleChangeLoading())
     e.preventDefault();
 
     if (isButtonDisabled) {
@@ -73,20 +102,37 @@ export const VacancyApplyBlock: React.FC<PropsBlock> = ({ onSubmit }) => {
       return;
     }
 
+    if (!selectedFile) {
+      console.error('Файл не выбран');
+      return;
+    }
+
+    const formDataFile = new FormData();
+    formDataFile.append('cv', selectedFile);
+    formDataFile.append('fullName', formData.fullName);
+    formDataFile.append('phone', formData.phone);
+    formDataFile.append('email', formData.email);
+    formDataFile.append('vacancyId', formData.vacancyId.toString());
+    {formData.message && formDataFile.append('message', formData.message)}
+    
+
+    axios.post('http://ferma.ru.swtest.ru/api/applyings', formDataFile, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    }).then(res => {
+      handleFormData(res.data)
+    })
+
     setFormData({
-      name: '',
+      vacancyId: 0,
+      fullName: '',
       phone: '',
       email: '',
       message: '',
-      selectedFile: '',
+      cv: null,
     });
     setSelectedFile(undefined);
-
-    dispatch(handleChangeLoading())
-    setTimeout(() => {
-      dispatch(handleChangeLoading())
-      onSubmit()
-    }, 3000)
   };
 
   //Функция для открытия формы для выбора файла
@@ -114,17 +160,17 @@ export const VacancyApplyBlock: React.FC<PropsBlock> = ({ onSubmit }) => {
           <h1 className="font-bold text-2xl mb-[50px]">{t('ApplyVacancy')}</h1>
           <form onSubmit={handleSubmit} className="space-y-[30px] lg:w-1/3 2xl:w-1/4 max-lg:w-1/2 max-md:w-full">
             <Input
-              name="name"
+              name="fullName"
               type="text"
               variant="bordered"
               color="primary"
               size="lg"
               placeholder={t('urFio')}
               radius="lg"
-              value={formData.name}
+              value={formData.fullName}
               onChange={handleInputChange}
-              isInvalid={isFormInvalid && formData.name === ""}
-              errorMessage={isFormInvalid && formData.name === "" && "Please enter your name"}
+              isInvalid={isFormInvalid && formData.fullName === ""}
+              errorMessage={isFormInvalid && formData.fullName === "" && "Please enter your name"}
             />
             <Input
               name="phone"

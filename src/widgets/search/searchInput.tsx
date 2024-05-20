@@ -84,7 +84,6 @@ const SearchInput: React.FC<SearchInputProps> = ({ placeholder, type }) => {
                     });
 
                     if (type === 'vacancy') {
-
                         if (Array.isArray(responseData.vacancies) && responseData.vacancies.length > 0) {
                             setDataVacancy({ vacancies: responseData.vacancies.map((item: FindBlock) => ({ ...item, arrayName: 'vacancies' })) });
                         }
@@ -173,7 +172,7 @@ const SearchInput: React.FC<SearchInputProps> = ({ placeholder, type }) => {
                 }}
                 startContent={<SearchIcon />}
             />
-            {(type !== 'vacancy' && type !== 'document') && Object.keys(data).length > 0 && (
+            {(type !== 'vacancy' && type !== 'document') && Object.keys(data).length > 0 ? (
                 <ListboxWrapper>
                     <Listbox aria-label="Actions">
                         {Object.keys(data).flatMap((key) => (
@@ -187,8 +186,14 @@ const SearchInput: React.FC<SearchInputProps> = ({ placeholder, type }) => {
                         ))}
                     </Listbox>
                 </ListboxWrapper>
-            )}
-            {type === 'vacancy' && dataVacancy.vacancies.length > 0 && (
+            ) : (value && Object.keys(data).length === 0 && !type) && <ListboxWrapper>
+                <Listbox aria-label="Actions">
+                    <ListboxItem key='nothing' color="primary">
+                        <h4 className="text-black dark:text-white">{t('nothingFind')}</h4>
+                    </ListboxItem>
+                </Listbox>
+            </ListboxWrapper>}
+            {type === 'vacancy' && dataVacancy.vacancies.length > 0 ? (
                 <ListboxWrapper>
                     <Listbox aria-label="Actions">
                         {dataVacancy.vacancies.map((item) => (
@@ -200,8 +205,14 @@ const SearchInput: React.FC<SearchInputProps> = ({ placeholder, type }) => {
                         ))}
                     </Listbox>
                 </ListboxWrapper>
-            )}
-            {type === 'document' && dataDocuments.documents.length > 0 && (
+            ) : (value && dataVacancy.vacancies.length === 0 && type === 'vacancy') && <ListboxWrapper>
+                <Listbox aria-label="Actions">
+                    <ListboxItem key='nothing' color="primary">
+                        <h4 className="text-black dark:text-white">{t('nothingFindVacancy')}</h4>
+                    </ListboxItem>
+                </Listbox>
+            </ListboxWrapper>}
+            {type === 'document' && dataDocuments.documents.length > 0 ? (
                 <ListboxWrapper>
                     <Listbox aria-label="Actions">
                         {dataDocuments.documents.map((item) => (
@@ -213,7 +224,13 @@ const SearchInput: React.FC<SearchInputProps> = ({ placeholder, type }) => {
                         ))}
                     </Listbox>
                 </ListboxWrapper>
-            )}
+            ) : (value && Object.keys(dataDocuments).length === 0) && <ListboxWrapper>
+                <Listbox aria-label="Actions">
+                    <ListboxItem key='nothing' color="primary">
+                        <h4 className="text-black dark:text-white">{t('nothingFindDocuments')}</h4>
+                    </ListboxItem>
+                </Listbox>
+            </ListboxWrapper>}
         </div>
     );
 };

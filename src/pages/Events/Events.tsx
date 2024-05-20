@@ -5,6 +5,9 @@ import React, { Key, useEffect, useState } from "react";
 import { useResize } from "../../hook/useWidthSize";
 import api from "../../api";
 import { EventsAll } from "./_components/eventsAll";
+import { ErrorBlock } from "../../core/Error";
+import { useDispatch } from "react-redux";
+import { setLoadingPage } from "../../state/pagesSlice";
 
 export const Events = () => {
   const { t } = useTranslation();
@@ -13,30 +16,41 @@ export const Events = () => {
   const [selected, setSelected] = React.useState(searchParams.get('filter') || 'all');
   const [data, setData] = useState([]);
   const [currentPage, setCurrentPage] = React.useState<number>(1);
+  const [errorPage, setError] = useState<boolean>(false);
   const [totalPage, setTotalPage] = React.useState<number>(1);
+
 
 
   const { width } = useResize();
   const maxLg = width < 1280 && width > 768;
   const maxMd = width < 768;
 
+  const dispatch = useDispatch()
+
 
   const pageAdaptive = maxLg ? 6 : (maxMd ? 4 : 9)
 
   useEffect(() => {
-    api.get('events/years').then((res) => {
-      setCategories(res.data)
-    }).catch(err => console.log(err))
-  }, [])
+    dispatch(setLoadingPage(true));
+
+    api.get('events/years')
+      .then((res) => {
+        setCategories(res.data);
+      })
+      .catch(err => console.log(err))
+      .finally(() => {
+        dispatch(setLoadingPage(false));
+      });
+  }, []);
 
 
 
   useEffect(() => {
     const pageParam = searchParams.get("page") || 1;
     setCurrentPage(Number(pageParam));
-  
+
     let apiUrl = "";
-  
+
     switch (selected) {
       case "all":
         apiUrl = `/events/per-page/${pageAdaptive}?page=${pageParam}`;
@@ -45,18 +59,18 @@ export const Events = () => {
         apiUrl = `/events/per-page/${pageAdaptive}/${selected}?page=${pageParam}`;
         break;
     }
-  
+
     api
       .get(apiUrl)
       .then((res) => {
         setData(res.data.data);
         setTotalPage(res.data.last_page)
       })
-      .catch((err) => {
-        console.log(err);
+      .catch(() => {
+        setError(true);
       });
   }, [currentPage, searchParams, selected]);
-  
+
 
   const handleSelectionChange = (key: Key) => {
     setSelected(key as string);
@@ -78,7 +92,7 @@ export const Events = () => {
 
 
   return (
-    <div className="container m-auto sm:px-5 max-sm:px-5 mt-11">
+    errorPage ? <ErrorBlock /> : <div className="container m-auto sm:px-5 max-sm:px-5 mt-11">
       <div className="space-y-10">
         <h1 className="font-bold text-4xl 2xl:text-5xl">{t("events")}</h1>
         <div>
@@ -89,7 +103,7 @@ export const Events = () => {
             radius="full"
             variant="light"
             size="lg"
-            classNames={{ tab: ["!bg-[#FFFFFF]", "py-5", "px-8", "2xl:py-8", "2xl:px-10", "2xl:text-2xl"] }}
+            classNames={{ tab: ["!bg-[#FFFFFF]", "py-5", "px-8", "2xl:py-8", "2xl:px-10", "2xl:text-2xl"], tabList: ['max-md:grid', 'max-md:grid-cols-2', 'max-md:overflow-x-visible'] }}
             aria-label="Tabs variants"
             onSelectionChange={handleSelectionChange}
           >
@@ -99,9 +113,9 @@ export const Events = () => {
             ))}
           </Tabs>
         </div>
-        <EventsAll data={data} total={totalPage} currentPage={currentPage} handleChangePage={handleChangePage}/>
-      </div>
-    </div>
+        <EventsAll data={data} total={totalPage} currentPage={currentPage} handleChangePage={handleChangePage} />
+      </div >
+    </div >
   );
 };
 

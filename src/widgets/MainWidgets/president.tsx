@@ -1,14 +1,13 @@
 import { useSelector } from 'react-redux'
 import { RootState } from '../../state/store'
-import { MainBlock_2 } from '../../pages/Main/_components/mainPage/mainBlock/mainBlock_2'
-import { MainBlock_3 } from '../../pages/Main/_components/mainPage/mainBlock/mainBlock_3'
+import { MainBlock_2 } from '../../pages/Main/_components/mainBlock/mainBlock_2'
+import { MainBlock_3 } from '../../pages/Main/_components/mainBlock/mainBlock_3'
 import React from 'react'
-import { PropsApp } from '../../pages/Main/_components/mainPage/mainBlock/types'
+import { PropsApp } from '../../pages/Main/_components/mainBlock/types'
 
-export const PresidentBlock: React.FC<PropsApp> = ({data}) => {
+export const PresidentBlock: React.FC<PropsApp> = ({ data }) => {
 
     const blockData_2 = useSelector((state: RootState) => state.aict.mainBlock_2)
-
     const mainBlockData = data[0]
 
 
