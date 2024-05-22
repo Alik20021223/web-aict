@@ -49,7 +49,7 @@ export const BlockVacancy: React.FC<VacancyApp> = ({ data, currentPage, total, h
                         <Link to={`/vacancies/${item.slug}`}>
                             <div className="p-6 flex flex-col items-start">
                                 <h1 className="lg:text-2xl font-bold max-sm:text-lg sm:text-lg md:text-xl">{item[getValueByLanguage("title")]}</h1>
-                                <div className="lg:text-base text-[#777B80] my-6 font-normal max-sm:text-xs sm:text-xs md:text-sm line-clamp-4" dangerouslySetInnerHTML={{__html: item[getValueByLanguage("content")]}}></div>
+                                <div className="lg:text-base text-[#777B80] my-6 font-normal max-sm:text-xs sm:text-xs md:text-sm text-foreground line-clamp-4" dangerouslySetInnerHTML={{__html: item[getValueByLanguage("content")]}}></div>
                                 <div className="flex w-full max-lg:space-y-4 max-lg:flex-col space-x-5 max-lg:space-x-0">
                                     <div className="flex">
                                         <img src='/icons/town.svg' alt="city" />

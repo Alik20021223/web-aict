@@ -36,7 +36,7 @@ export const PartnersBlock = ({ data }: PartnersBlockApp) => {
                         </div>
                         <div>
                             <h3 className="text-lg text-foreground max-md:text-base opacity-25 font-light">{t('phoneH3')}</h3>
-                            <a href={`tel:${data.phone}`} className="text-lg max-md:text-xl">{data.phone}</a>
+                            <a href={`tel:${data.phone}`} className="text-lg max-md:text-xl text-foreground">{data.phone}</a>
                         </div>
                     </div>
                 </div>

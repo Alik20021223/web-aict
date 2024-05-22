@@ -35,7 +35,7 @@ export const ProjectBlock = ({ data }: ProjectBlockApp) => {
                         </div>
                         <p className="font-normal text-sm">{formatDate(data.created_at)}</p>
                         <h1 className="font-semibold text-base">{title}</h1>
-                        <div className="font-normal text-sm overflow-hidden whitespace-normal line-clamp-3" dangerouslySetInnerHTML={{ __html: description }}></div>
+                        <div className="font-normal text-sm overflow-hidden whitespace-normal text-foreground line-clamp-3" dangerouslySetInnerHTML={{ __html: description }}></div>
                     </div>
                 </div>
             </div>
