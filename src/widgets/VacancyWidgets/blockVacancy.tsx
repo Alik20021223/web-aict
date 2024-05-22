@@ -64,7 +64,7 @@ export const BlockVacancy: React.FC<VacancyApp> = ({ data, currentPage, total, h
                                         <p className="font-normal text-base ml-2.5">{item.schedule[getValueByLanguage("title")]}</p>
                                     </div>
                                     <div className="flex">
-                                        <img width="20" height="20" src="/icons/experience.png" alt="experience" />
+                                        <img width="20" height="20" src="/icons/experience.svg" alt="experience" />
                                         <p className="font-normal text-base ml-2.5">{item.experience[getValueByLanguage("title")]}</p>
                                     </div>
                                 </div>
@@ -72,7 +72,7 @@ export const BlockVacancy: React.FC<VacancyApp> = ({ data, currentPage, total, h
                         </Link>
                     </div>
                 ))}
-                <Pagination
+                {total > 1 ? <Pagination
                     classNames={{ item: ["bg-white"], prev: ["bg-white"], next: "bg-white" }}
                     showShadow
                     size="lg"
@@ -83,7 +83,7 @@ export const BlockVacancy: React.FC<VacancyApp> = ({ data, currentPage, total, h
                     page={currentPage}
                     total={total}
                     onChange={(page) => handleChangePage(page)}
-                />
+                /> : null}
             </div >
                 : <h1 className="font-bold text-xl">{t('emptyVacancy')}</h1>
             }

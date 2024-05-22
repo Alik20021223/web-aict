@@ -77,7 +77,7 @@ export const RespondBlock: React.FC<Props> = ({ city, schedules, experiences, mo
                         <p className="font-normal max-lg:text-sm 2xl:text-xl text-base ml-2.5">{foundSchedule?.[getValueByLanguage('title')]}</p>
                     </div>
                     <div className="flex">
-                        <img width="20" height="20" src="/icons/experience.png" alt="experience" />
+                        <img width="20" height="20" src="/icons/experience.svg" alt="experience" />
                         <p className="font-normal text-base ml-2.5">{foundExperience?.[getValueByLanguage("title")]}</p>
                     </div>
                 </div>

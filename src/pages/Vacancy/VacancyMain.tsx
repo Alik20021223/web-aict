@@ -107,7 +107,7 @@ const Vacancy = () => {
   return (
     errorPage ? <ErrorBlock /> : <div className='m-auto container sm:px-5 max-sm:px-5 w-full'>
       <div className="flex max-lg:flex-col max-lg:space-y-8 justify-between items-start">
-        <div className="w-[35%] max-lg:hidden">
+        <div className="w-[38%] max-lg:hidden">
           <FilterCom city={cities} industries={industries} schedules={schedules} experiences={experiences} />
         </div>
         <div className="max-lg:block hidden w-full">

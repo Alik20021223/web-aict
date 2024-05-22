@@ -24,19 +24,15 @@ export const VacancyDescribe = () => {
                 const res = await api.get(`vacancies/${slug}`);
                 setData(res.data);
 
-                console.log(res.data.industryId);
-                
-
                 const formData = {
                     industryId: res.data.industryId,
                 };                
 
                 const response = await api.post(`/vacancies/per-page/20/filter`, formData);
 
-                console.log(response);
+                const recom  = response.data.data.filter((item: BlockVacancyType) => item.slug != slug)
                 
-                
-                setRecom(response.data.data);
+                setRecom(recom);
             } catch (error) {
                 console.error('There was an error!', error);
             }

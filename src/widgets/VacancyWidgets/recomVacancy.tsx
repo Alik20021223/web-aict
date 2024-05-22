@@ -25,7 +25,7 @@ export const RecomVacancy: React.FC<VacancyApp> = ({ data }) => {
 
     return (
         data.length > 0 ? <div>
-            <div className="md:flex max-md:hidden space-x-8 max-xl:space-x-6 max-lg:space-x-4 w-full h-full">
+            <div className="md:flex max-md:hidden space-x-8 max-xl:space-x-6 max-lg:space-x-4 w-full h-[370px]">
                 {randomData.map((item) => (
                     <div key={item.id} className="w-full h-full">
                         <RecomBlockVacancy data={item} />
