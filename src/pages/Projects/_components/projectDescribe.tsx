@@ -3,6 +3,8 @@ import { DescribeBlock } from "../../../widgets/DescribeBlock"
 import { useTranslation } from "react-i18next";
 import { Link, NavLink, useParams } from "react-router-dom";
 import api from "../../../api";
+import { setLoadingPage } from "../../../state/pagesSlice";
+import { useDispatch } from "react-redux";
 
 
 interface ProjectDescribeApp {
@@ -39,19 +41,22 @@ export const ProjectDescribe = () => {
     const { t } = useTranslation()
 
     const { time, slug } = useParams();
-    console.log(time, slug);
 
     const [data, setData] = useState<ProjectDescribeApp>(
         initialData
     );
 
+    const dispatch = useDispatch()
 
     useEffect(() => {
+        dispatch(setLoadingPage(true))
         api.get(`projects/get/${slug}`).then(res => {
 
             setData(res.data)
         }).catch(err => {
             console.log(err);
+        }).finally(() => {
+            dispatch(setLoadingPage(false))
         })
     }, [time, slug])
 

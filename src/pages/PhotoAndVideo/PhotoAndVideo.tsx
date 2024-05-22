@@ -76,7 +76,7 @@ export const Gallery = () => {
         errorPage ? <ErrorBlock /> : <div className="container m-auto sm:px-5 max-sm:px-5 mt-10">
             <div className="space-y-10">
                 <h1 className="font-bold text-4xl">{t('Gallery')}</h1>
-                <div>
+                <div className="overflow-auto">
                     <Tabs
                         key="light"
                         color="primary"

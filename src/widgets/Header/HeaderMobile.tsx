@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Navbar, NavbarBrand, NavbarContent, NavbarMenuToggle, NavbarMenu, NavbarMenuItem, Link } from "@nextui-org/react";
+import { Navbar, NavbarBrand, NavbarContent, NavbarMenuToggle, NavbarMenu, NavbarMenuItem, Link, Dropdown, NavbarItem, DropdownTrigger, Button, DropdownMenu, DropdownItem } from "@nextui-org/react";
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../state/store';
 import { useTranslation } from 'react-i18next';
@@ -8,6 +8,10 @@ import ModalVisibleBtn from '../../core/ModalVisibleBtn';
 import SearchInput from '../search/searchInput';
 import { lang } from '../../core/langSelect';
 import { handleChangeLang } from '../../state/defState/defSlice';
+import { setLoadingPage } from '../../state/pagesSlice';
+import api from '../../api';
+import { CategoryType } from '../../pages/Documents/_components/types';
+import { ErrorBlock } from '../../core/Error';
 
 export const HeaderMobile = () => {
 
@@ -15,6 +19,8 @@ export const HeaderMobile = () => {
     const data = useSelector((state: RootState) => state.aict.HeaderLink)
     const languages = useSelector((state: RootState) => state.aict.languages)
     const currentLangState = useSelector((state: RootState) => state.aict.currentLang)
+    const [categories, setCategories] = React.useState<CategoryType[]>([]);
+    const [errorPage, setError] = React.useState<boolean>(false);
     const [isMenuOpen, setIsMenuOpen] = React.useState<boolean>(false);
     const currentLangLocal = languages.find((item) => item.code === localStorage.getItem('i18nextLng'))
     const [currentLang, setCurrentLang] = useState<lang>(
@@ -23,12 +29,47 @@ export const HeaderMobile = () => {
 
     const dispatch = useDispatch()
 
-    
+    React.useEffect(() => {
+        const fetchCategories = async () => {
+            try {
+                dispatch(setLoadingPage(false));
+                const categoriesResponse = await api.get('documents/categories');
+                setCategories(categoriesResponse.data);
+
+            } catch (error) {
+                setError(true);
+            } finally {
+                dispatch(setLoadingPage(false));
+            }
+        };
+
+        fetchCategories();
+    }, []);
+
+    const getValueByLanguage = (field: string) => {
+        switch (currentLang.code) {
+            case "ru":
+                return field + "Ru";
+            case "en":
+                return field + "En";
+            case "tj":
+                return field + "Tj";
+            default:
+                return field + "En";
+        }
+    };
 
     const handleChangeLanguage = (lang: lang) => {
         i18n.changeLanguage(lang.code)
         dispatch(handleChangeLang(lang))
         setCurrentLang(lang)
+    }
+
+    if (errorPage) {
+
+        return (
+            <ErrorBlock/>
+        )
     }
 
 
@@ -69,7 +110,7 @@ export const HeaderMobile = () => {
                             </div>
                         </NavbarMenuItem>
                         {data.map((item, index) => (
-                            <NavbarMenuItem key={`${item}-${index}`}>
+                            item.key !== 'Documents' ? <NavbarMenuItem key={`${item}-${index}`}>
                                 <Link
                                     color="foreground"
                                     className={`w-full flex justify-between`}
@@ -80,7 +121,43 @@ export const HeaderMobile = () => {
                                     {t(item.key)}
                                     <ExpandLess className='rotate-90 font-normal' />
                                 </Link>
-                            </NavbarMenuItem>
+                            </NavbarMenuItem> : <Dropdown classNames={{ content: 'bg-darkBg' }} key={item.key}>
+                                <NavbarItem >
+                                    <DropdownTrigger>
+                                        <Button
+                                            disableRipple
+                                            className={`p-0 bg-transparent flex justify-between 2xl:text-xl w-full text-base font-light data-[hover=true]:bg-transparent gap-unit-0`}
+                                            endContent={<ExpandLess className='rotate-90 font-normal' />}
+                                            radius="none"
+                                            variant="light"
+
+                                        >
+                                            {t(item.key)}
+                                        </Button>
+                                    </DropdownTrigger>
+                                </NavbarItem>
+                                <DropdownMenu
+
+                                    aria-label="ACME features"
+                                    className="w-[340px]"
+                                    itemClasses={{
+                                        base: "gap-4",
+                                    }}
+                                >
+                                    {categories.map((item) => (
+                                        <DropdownItem
+                                            key={item.id}
+                                            href={`documents?filter=${item.id}&page=1`}
+                                            className="text-foreground"
+                                        >
+                                            {/* <Link to={`documents?filter=${item.id}&page=1`}> */}
+                                            {item[getValueByLanguage('title')]}
+                                            {/* </Link> */}
+                                        </DropdownItem>
+
+                                    ))}
+                                </DropdownMenu>
+                            </Dropdown>
                         ))}
                         <div className='border-b-2 pt-2'></div>
                         <div className='pt-[25px]'>

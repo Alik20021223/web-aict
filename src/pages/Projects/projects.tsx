@@ -6,6 +6,8 @@ import React, { Key, useEffect, useState } from "react"
 import { useResize } from "../../hook/useWidthSize"
 import api from "../../api"
 import { ErrorBlock } from "../../core/Error"
+import { useDispatch } from "react-redux"
+import { setLoadingPage } from "../../state/pagesSlice"
 
 
 
@@ -21,6 +23,7 @@ export const Projects = () => {
   const [errorPage, setError] = useState<boolean>(false);
 
   const { width } = useResize();
+  const dispatch = useDispatch()
   const maxLg = width < 1280 && width > 768;
   const maxMd = width < 768;
 
@@ -31,11 +34,14 @@ export const Projects = () => {
     api
       .get('http://ferma.ru.swtest.ru/api/projects/years')
       .then((res) => {
+        dispatch(setLoadingPage(true));
         setCategories((res.data))
       })
       .catch((err) => {
         console.log(err);
-      });
+      }).finally(() => {
+        dispatch(setLoadingPage(false));
+      })
   }, [])
 
   useEffect(() => {

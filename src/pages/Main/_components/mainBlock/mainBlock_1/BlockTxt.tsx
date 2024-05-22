@@ -37,7 +37,7 @@ export const BlockTxt: React.FC<BlockAppTxt> = ({ data, currentPoint }) => {
                     <div className="w-full h-[300px]" key={i}>
                         <p className="font-medium xl:text-base lg:text-sm max-lg:text-base max-sm:text-sm max-sm:mb-[15px]  mb-[25px] 2xl:mb-[40px] text-foreground">{formatDate(item.time)}</p>
                         <h1 className="font-bold xl:text-3xl lg:text-2xl max-lg:text-xl max-sm:text-lg text-foreground">{item[getValueByLanguage('title')]}</h1>
-                        <div className="font-normal 2xl:mt-[40px] max-sm:mt-[15px] mt-[25px] max-lg:text-base max-sm:text-sm  lg:text-sm xl:text-base" dangerouslySetInnerHTML={{ __html: item[getValueByLanguage('description')] }}></div>
+                        <div className="font-normal 2xl:mt-[40px] max-sm:mt-[15px] mt-[25px] max-lg:text-base max-sm:text-sm  text-foreground lg:text-sm xl:text-base" dangerouslySetInnerHTML={{ __html: item[getValueByLanguage('description')] }}></div>
                     </div>
                 ))}
             </div>

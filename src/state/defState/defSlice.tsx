@@ -135,11 +135,11 @@ const initialState: defSliceType = {
       key: 'events',
       link: '/events',
     },
-    {
-      key: "BlogH1",
-      name: 'Блог',
-      link: "/blog"
-    },
+    // {
+    //   key: "BlogH1",
+    //   name: 'Блог',
+    //   link: "/blog"
+    // },
     {
       name: 'Вакансии',
       key: 'vacancy',

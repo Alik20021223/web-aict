@@ -5,9 +5,11 @@ import { Accordion, AccordionItem } from "@nextui-org/react"
 import { QuesType } from "./types"
 import { AccordionOpen } from "../../core/icons/AccordionOpen"
 import { Recommendation } from "../../widgets/ContactsWidgets/Recomendation"
-import { useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { RootState } from "../../state/store"
 import { ErrorBlock } from "../../core/Error"
+import { setLoadingPage } from "../../state/pagesSlice"
+
 
 
 
@@ -18,12 +20,16 @@ export const Questions = () => {
     const [errorPage, setError] = useState<boolean>(false);
 
     const { t } = useTranslation()
+    const dispatch = useDispatch()
 
     useEffect(() => {
+        dispatch(setLoadingPage(true))
         api.get('questions/per-page/10').then(res => {
             setData(res.data.data)
         }).catch(() => {
             setError(true)
+        }).finally(() => {
+            dispatch(setLoadingPage(false))
         })
     }, [])
 

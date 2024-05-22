@@ -3,6 +3,8 @@ import { DescribeBlock } from "../DescribeBlock"
 import { useEffect, useState } from "react"
 import api from "../../api"
 import { useTranslation } from "react-i18next";
+import { useDispatch } from "react-redux";
+import { setLoadingPage } from "../../state/pagesSlice";
 
 interface BlogDescribeApp {
     id: number;
@@ -48,13 +50,16 @@ export const BlogDescribe = () => {
 
     const { category, slug } = useParams();
     console.log(category);
+    const dispatch = useDispatch()
 
     useEffect(() => {
         api.get(`${category}/get/${slug}`).then(res => {
-
+            dispatch(setLoadingPage(true))
             setData(res.data)
         }).catch(err => {
             console.log(err);
+        }).finally(() => {
+            dispatch(setLoadingPage(false))
         })
     }, [category, slug])
 

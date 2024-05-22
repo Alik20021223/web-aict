@@ -3,6 +3,8 @@ import { useEffect, useState } from "react"
 import api from "../../api"
 import { useTranslation } from "react-i18next";
 import { DescribeBlock } from "../../widgets/DescribeBlock";
+import { useDispatch } from "react-redux";
+import { setLoadingPage } from "../../state/pagesSlice";
 
 interface EventDescribeApp {
   id: number;
@@ -45,14 +47,17 @@ export const EventDescribe = () => {
     const { t } = useTranslation()
 
     const { time, slug } = useParams();
-    console.log(time, slug);
+    
+    const dispatch = useDispatch()
 
     useEffect(() => {
         api.get(`events/get/${slug}`).then(res => {
-
+            dispatch(setLoadingPage(true))
             setData(res.data)
         }).catch(err => {
             console.log(err);
+        }).finally(() => {
+            dispatch(setLoadingPage(false))
         })
     }, [time, slug])
 
