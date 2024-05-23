@@ -26,7 +26,7 @@ export const VerticalSlider: FC<TVerticalSliderProps> = ({ currentPoint, sliders
             <div className="h-full flex flex-1 flex-col justify-center items-center">
               <div className="flex flex-col flex-1">
                 <h1 className="font-bold 2xl:text-4xl xl:text-2xl lg:text-xl lg:mb-3 text-foreground mb-5 2xl:mb-8">{slide[getValueByLanguage('title')]}</h1>
-                <p className="font-medium 2xl:text-2xl text-foreground">{slide[getValueByLanguage('description')].split(/<h5\b[^>]*>/)[0]}</p>
+                <div dangerouslySetInnerHTML={{__html: slide[getValueByLanguage('description')]}} className="font-medium 2xl:text-2xl text-foreground"></div>
               </div>
               <div className="self-baseline">
                 <Link to='/activity'>

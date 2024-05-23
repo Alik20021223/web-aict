@@ -36,12 +36,12 @@ export const ProjectBlock: React.FC<ProjectApp> = ({ data }) => {
     return (
         <div className='py-10 max-sm:py-5 lg:py-6 max-md:last:mb-0 shadow-md pl-7 max-lg:px-7 rounded-xl bg-white dark:bg-dark text-foreground flex flex-col items-start'>
             <Link to={`projects/${time}/${data.slug}`}>
-                <div>
-                    <img src={`${urlHosting}/${data.iconPath}`} className='2xl:scale-110' alt='icon-project' />
+                <div className='w-[50px] h-[50px]'>
+                    <img src={`${urlHosting}/${data.iconPath}`} className='w-full h-full object-cover' alt='icon-project' />
                 </div>
                 <div className='w-[80%] flex flex-col mt-6'>
                     <h2 className='font-semibold 2xl:mb-[20px] text-foreground mb-[10px] 2xl:text-2xl md:text-xl lg:text-sm xl:text-lg'>{title}</h2>
-                    <p className='font-normal md:text-lg xl:text-sm lg:text-xs 2xl:text-lg dark:text-foreground text-[#2E363E] line-clamp-3'>{description}</p>
+                    <div className='font-normal md:text-lg xl:text-sm lg:text-xs 2xl:text-lg dark:text-foreground text-[#2E363E] line-clamp-3' dangerouslySetInnerHTML={{__html: description}}></div>
                 </div>
             </Link>
         </div>

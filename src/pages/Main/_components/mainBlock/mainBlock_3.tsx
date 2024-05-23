@@ -36,7 +36,7 @@ export const MainBlock_3: React.FC<MainBlock_3App> = ({ data }) => {
       <div className='flex flex-col justify-between items-start text-foreground'>
         <p className='xl:mb-[25px] lg:mb-[15px] 2xl:text-lg xl:text-describe-xl dark:text-white lg:text-describe-lg'>{formatDate(data.created_at)}</p>
         <h1 className='font-semibold lg:mb-5 2xl:text-2xl xl:file:mb-[30px] lg:text-lg xl:text-xl'>{title}</h1>
-        <p className='xl:text-describe-xl 2xl:text-xl dark:text-white lg:text-describe-lg'>{description.split(/<h5\b[^>]*>/)[0]}</p>
+        <div dangerouslySetInnerHTML={{__html:description}} className='xl:text-describe-xl 2xl:text-xl dark:text-white lg:text-describe-lg'></div>
       </div>
       <Link to={`blog/articles/${data.slug}`} className='font-semibold 2xl:text-2xl  xl:text-base text-primary'>{t('more')}
         <ExpandLess className="rotate-90 !fill-primary" />

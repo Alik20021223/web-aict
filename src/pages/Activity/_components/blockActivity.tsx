@@ -12,6 +12,7 @@ interface BlockActivityApp {
 export const BlockActivity: React.FC<BlockActivityApp> = ({ data }) => {
 
     const currentLang = useSelector((state: RootState) => state.aict.currentLang);
+    const urlHosting = useSelector((state: RootState) => state.aict.urlHosting);
 
 
     const getValueByLanguage = (field: string) => {
@@ -27,6 +28,9 @@ export const BlockActivity: React.FC<BlockActivityApp> = ({ data }) => {
         }
     };
 
+    
+    
+
 
     return (
         <div>
@@ -37,7 +41,7 @@ export const BlockActivity: React.FC<BlockActivityApp> = ({ data }) => {
                         <div className="font-normal text-[#53585E] max-sm:text-base max-lg:text-base max-md:text-lg xl:text-xl 2xl:text-2xl" dangerouslySetInnerHTML={{__html: data[getValueByLanguage('description')]}}></div>
                     </div>
                     <div className="w-[38%] max-md:w-[50%] item max-md:h-[20%] flex justify-center items-center">
-                        <Image src={data.iconPath} className="max-w-full h-full object-cover" alt="icon" />
+                        <Image src={`${urlHosting}/${data.iconPath}`} className="max-w-full h-full object-cover" alt="icon" />
                     </div>
                 </div>
             </div>

@@ -122,7 +122,7 @@ export const NavbarCom = () => {
                         <NavbarItem className="2xl:text-xl text-base" isActive={activeItem === item.key} onClick={() => handleItemClick(item.key)}>
                             {t(item.key)}
                         </NavbarItem>
-                    </Link>) : <Dropdown classNames={{content: 'bg-darkBg'}} key={item.key}>
+                    </Link>) : <Dropdown classNames={{content: 'dark:bg-darkBg'}} key={item.key}>
                         <NavbarItem >
                             <DropdownTrigger>
                                 <Button

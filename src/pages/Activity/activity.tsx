@@ -53,7 +53,7 @@ export const Activity = () => {
                     <div className="flex items-start max-md:flex-col w-full h-full justify-between">
                         <div className="max-lg:p-14 xl:p-[110px] h-full max-md:w-full w-[60%] lg:p-20 xl:space-y-12 max-xl:space-y-8">
                             <h1 className="font-bold max-sm:text-2xl max-xl:text-3xl 2xl:text-5xl xl:text-4xl">{t('ourActivityH1')}</h1>
-                            <p className="font-normal max-sm:text-base 2xl:text-2xl lg:text-xl  max-lg:text-base text-[#53585E]">{description}</p>
+                            <div className="font-normal max-sm:text-base 2xl:text-2xl lg:text-xl  max-lg:text-base text-[#53585E]" dangerouslySetInnerHTML={{__html: description}}></div>
                         </div>
                         <div className="w-[40%] max-md:w-full py-14 max-md:py-8 max-md:pr-0 pr-16 flex justify-center">
                             <img src="/img/activityMain.svg" alt="activityMain" className="max-w-full h-auto max-md:max-w-[50%]" />
